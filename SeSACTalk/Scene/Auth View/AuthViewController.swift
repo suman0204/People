@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+
 
 class AuthViewController: BaseViewController {
     
@@ -43,6 +45,10 @@ class AuthViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    func bind() {
         
     }
     
