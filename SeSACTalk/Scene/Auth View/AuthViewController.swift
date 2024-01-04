@@ -11,6 +11,10 @@ import RxSwift
 
 class AuthViewController: BaseViewController {
     
+    let viewModel = AuthViewModel()
+    
+    let disposeBag = DisposeBag()
+    
     let appleLoginButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "AppleIDLogin"), for: .normal)
@@ -46,9 +50,13 @@ class AuthViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
     }
     
     func bind() {
+        let input = AuthViewModel.Input(kakaoLoginButtonClicked: kakaoLoginButton.rx.tap)
+        
+        let output = viewModel.transform(input: input)
         
     }
     

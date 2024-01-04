@@ -11,7 +11,7 @@ import RxCocoa
 import RxKakaoSDKUser
 import KakaoSDKUser
 
-class AuthViewModel: ViewModelType {
+final class AuthViewModel: ViewModelType {
     
     let disposeBag = DisposeBag()
     
@@ -20,13 +20,42 @@ class AuthViewModel: ViewModelType {
     }
     
     struct Output {
-        
+//        let token: PublishSubject<OauthToken>
     }
     
     func transform(input: Input) -> Output {
         
         input.kakaoLoginButtonClicked
+            .subscribe(with: self) { owner, _ in
+                if (UserApi.isKakaoTalkLoginAvailable()) {
+                    UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                        if let error = error {
+                            print(error)
+                        }
+                        else {
+                            print("loginWithKakaoTalk() success.")
+                            
+                            print(oauthToken)
+                            
+                            owner.getKakaoUserInfo()
+                        }
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
         
         return Output()
+    }
+    
+    func getKakaoUserInfo() {
+        UserApi.shared.me() { user,error in
+            if let error = error {
+                print(error)
+            } else {
+                print("me() success")
+                
+                print(user)
+            }
+        }
     }
 }

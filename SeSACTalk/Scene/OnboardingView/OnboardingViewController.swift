@@ -16,6 +16,8 @@ class OnboardingViewController: BaseViewController {
         label.font = .systemFont(ofSize: Typography.Title1.size, weight: Typography.Title1.weight)
         label.numberOfLines = 2
         label.textAlignment = .center
+        label.textColor = Colors.BrandColor.error
+        label.backgroundColor = Colors.BrandColor.green
         return label
     }()
     
@@ -31,6 +33,7 @@ class OnboardingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("OnboardingViewController")
     }
     
     override func configureView() {
