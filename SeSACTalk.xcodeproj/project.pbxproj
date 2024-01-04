@@ -181,8 +181,9 @@
 			children = (
 				8B3B6CFA2B43E53400B5B486 /* Base */,
 				8BAFF9A82B455C0A005713EA /* Custom View */,
-				8B3B6CFD2B43E59700B5B486 /* SplashView */,
+				8B3B6CFD2B43E59700B5B486 /* Splash View */,
 				8BAFF99A2B440A27005713EA /* OnboardingView */,
+				8B9506502B4670E700A353A0 /* Auth View */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -194,19 +195,26 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		8B3B6CFD2B43E59700B5B486 /* SplashView */ = {
+		8B3B6CFD2B43E59700B5B486 /* Splash View */ = {
 			isa = PBXGroup;
 			children = (
 				8B3B6D002B43E63900B5B486 /* SplashViewController.swift */,
 			);
-			path = SplashView;
+			path = "Splash View";
+			sourceTree = "<group>";
+		};
+		8B9506502B4670E700A353A0 /* Auth View */ = {
+			isa = PBXGroup;
+			children = (
+				8BAFF9AB2B459028005713EA /* AuthViewController.swift */,
+			);
+			path = "Auth View";
 			sourceTree = "<group>";
 		};
 		8BAFF99A2B440A27005713EA /* OnboardingView */ = {
 			isa = PBXGroup;
 			children = (
 				8BAFF99B2B440A3D005713EA /* OnboardingViewController.swift */,
-				8BAFF9AB2B459028005713EA /* AuthViewController.swift */,
 			);
 			path = OnboardingView;
 			sourceTree = "<group>";
