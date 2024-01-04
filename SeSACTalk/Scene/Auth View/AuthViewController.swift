@@ -29,7 +29,17 @@ class AuthViewController: BaseViewController {
         return button
     }()
     
-    let signUpButton = CustomButton(title: "새롭게 회원가입", setbackgroundColor: .blue)
+    let signUpButton = {
+        let title = "또는 새롭게 회원가입 하기"
+        let customTitle = NSMutableAttributedString(string: title)
+        customTitle.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 2))
+        let button = UIButton()
+        button.setTitleColor(Colors.BrandColor.green, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: Typography.Title2.size, weight: Typography.Title2.weight)
+        button.setAttributedTitle(customTitle, for: .normal)
+//        button.backgroundColor = .blue
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +77,7 @@ class AuthViewController: BaseViewController {
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(emailLoginButton.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(35)
-            make.height.equalTo(44)
+            make.height.equalTo(22)
         }
     }
     

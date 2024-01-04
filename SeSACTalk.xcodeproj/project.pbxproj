@@ -30,6 +30,7 @@
 		8B3B6D1C2B43EDA100B5B486 /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1B2B43EDA100B5B486 /* RxKakaoSDKAuth */; };
 		8B3B6D1E2B43EDA100B5B486 /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1D2B43EDA100B5B486 /* RxKakaoSDKCommon */; };
 		8B3B6D202B43EDA100B5B486 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1F2B43EDA100B5B486 /* RxKakaoSDKUser */; };
+		8B9506522B467A9F00A353A0 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9506512B467A9F00A353A0 /* AuthViewModel.swift */; };
 		8BAFF99C2B440A3D005713EA /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAFF99B2B440A3D005713EA /* OnboardingViewController.swift */; };
 		8BAFF9A12B4412ED005713EA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAFF9A02B4412ED005713EA /* Colors.swift */; };
 		8BAFF9A32B444845005713EA /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAFF9A22B444845005713EA /* Typography.swift */; };
@@ -70,6 +71,7 @@
 		8B3B6CC42B43D6CE00B5B486 /* SeSACTalkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTalkUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8B3B6CFE2B43E5E300B5B486 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8B3B6D002B43E63900B5B486 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		8B9506512B467A9F00A353A0 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8BAFF99B2B440A3D005713EA /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8BAFF9A02B4412ED005713EA /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8BAFF9A22B444845005713EA /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				8BAFF9AB2B459028005713EA /* AuthViewController.swift */,
+				8B9506512B467A9F00A353A0 /* AuthViewModel.swift */,
 			);
 			path = "Auth View";
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				8BAFF9A32B444845005713EA /* Typography.swift in Sources */,
 				8BAFF99C2B440A3D005713EA /* OnboardingViewController.swift in Sources */,
 				8B3B6CFF2B43E5E300B5B486 /* BaseViewController.swift in Sources */,
+				8B9506522B467A9F00A353A0 /* AuthViewModel.swift in Sources */,
 				8B3B6CA22B43D6CD00B5B486 /* AppDelegate.swift in Sources */,
 				8B3B6CA42B43D6CD00B5B486 /* SceneDelegate.swift in Sources */,
 				8B3B6D012B43E63900B5B486 /* SplashViewController.swift in Sources */,

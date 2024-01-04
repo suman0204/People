@@ -51,7 +51,7 @@ class OnboardingViewController: BaseViewController {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [
                 .custom(resolver: { context in
-                    return 290
+                    return 270
                 })
             ]
             
