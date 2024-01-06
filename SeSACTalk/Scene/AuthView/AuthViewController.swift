@@ -35,7 +35,7 @@ class AuthViewController: BaseViewController {
         return button
     }()
     
-    let signUpButton = {
+    lazy var signUpButton = {
         let title = "또는 새롭게 회원가입 하기"
         let customTitle = NSMutableAttributedString(string: title)
         customTitle.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 2))
@@ -43,7 +43,8 @@ class AuthViewController: BaseViewController {
         button.setTitleColor(Colors.BrandColor.green, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: Typography.Title2.size, weight: Typography.Title2.weight)
         button.setAttributedTitle(customTitle, for: .normal)
-//        button.backgroundColor = .blue
+
+        button.addTarget(self, action: #selector(signUpButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -60,6 +61,13 @@ class AuthViewController: BaseViewController {
         
     }
     
+    @objc
+    func signUpButtonClicked() {
+        let vc = SignUpViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
+    }
+    
     override func configureView() {
         view.backgroundColor = .white
         
@@ -72,25 +80,25 @@ class AuthViewController: BaseViewController {
         
         appleLoginButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(45)
-            make.horizontalEdges.equalToSuperview().inset(35)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(35)
             make.height.equalTo(44)
         }
         
         kakaoLoginButton.snp.makeConstraints { make in
             make.top.equalTo(appleLoginButton.snp.bottom).offset(16)
-            make.horizontalEdges.equalToSuperview().inset(35)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(35)
             make.height.equalTo(44)
         }
         
         emailLoginButton.snp.makeConstraints { make in
             make.top.equalTo(kakaoLoginButton.snp.bottom).offset(16)
-            make.horizontalEdges.equalToSuperview().inset(35)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(35)
             make.height.equalTo(44)
         }
         
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(emailLoginButton.snp.bottom).offset(16)
-            make.horizontalEdges.equalToSuperview().inset(35)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(35)
             make.height.equalTo(22)
         }
     }

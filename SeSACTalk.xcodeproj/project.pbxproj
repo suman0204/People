@@ -38,6 +38,9 @@
 		8BAFF9A32B444845005713EA /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAFF9A22B444845005713EA /* Typography.swift */; };
 		8BAFF9AA2B455C25005713EA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAFF9A92B455C25005713EA /* CustomButton.swift */; };
 		8BAFF9AC2B459028005713EA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAFF9AB2B459028005713EA /* AuthViewController.swift */; };
+		8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407BD2B494D4400F4C3D6 /* SignUpViewController.swift */; };
+		8BC407C02B495AD500F4C3D6 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407BF2B495AD500F4C3D6 /* BaseView.swift */; };
+		8BC407C22B495B0300F4C3D6 /* SignUpTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C12B495B0300F4C3D6 /* SignUpTextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,9 @@
 		8BAFF9A92B455C25005713EA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8BAFF9AB2B459028005713EA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8BC407BB2B494AAD00F4C3D6 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		8BC407BD2B494D4400F4C3D6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8BC407BF2B495AD500F4C3D6 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		8BC407C12B495B0300F4C3D6 /* SignUpTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				8B3B6CFE2B43E5E300B5B486 /* BaseViewController.swift */,
+				8BC407BF2B495AD500F4C3D6 /* BaseView.swift */,
 				8B9506552B4691FD00A353A0 /* ViewModelType.swift */,
 			);
 			path = Base;
@@ -189,10 +196,11 @@
 			isa = PBXGroup;
 			children = (
 				8B3B6CFA2B43E53400B5B486 /* Base */,
-				8BAFF9A82B455C0A005713EA /* Custom View */,
-				8B3B6CFD2B43E59700B5B486 /* Splash View */,
+				8BAFF9A82B455C0A005713EA /* CustomView */,
+				8B3B6CFD2B43E59700B5B486 /* SplashView */,
 				8BAFF99A2B440A27005713EA /* OnboardingView */,
-				8B9506502B4670E700A353A0 /* Auth View */,
+				8B9506502B4670E700A353A0 /* AuthView */,
+				8BC407BC2B494D1500F4C3D6 /* SignUpView */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -205,21 +213,21 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		8B3B6CFD2B43E59700B5B486 /* Splash View */ = {
+		8B3B6CFD2B43E59700B5B486 /* SplashView */ = {
 			isa = PBXGroup;
 			children = (
 				8B3B6D002B43E63900B5B486 /* SplashViewController.swift */,
 			);
-			path = "Splash View";
+			path = SplashView;
 			sourceTree = "<group>";
 		};
-		8B9506502B4670E700A353A0 /* Auth View */ = {
+		8B9506502B4670E700A353A0 /* AuthView */ = {
 			isa = PBXGroup;
 			children = (
 				8BAFF9AB2B459028005713EA /* AuthViewController.swift */,
 				8B9506512B467A9F00A353A0 /* AuthViewModel.swift */,
 			);
-			path = "Auth View";
+			path = AuthView;
 			sourceTree = "<group>";
 		};
 		8BAFF99A2B440A27005713EA /* OnboardingView */ = {
@@ -239,12 +247,21 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		8BAFF9A82B455C0A005713EA /* Custom View */ = {
+		8BAFF9A82B455C0A005713EA /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				8BAFF9A92B455C25005713EA /* CustomButton.swift */,
 			);
-			path = "Custom View";
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		8BC407BC2B494D1500F4C3D6 /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				8BC407BD2B494D4400F4C3D6 /* SignUpViewController.swift */,
+				8BC407C12B495B0300F4C3D6 /* SignUpTextFieldView.swift */,
+			);
+			path = SignUpView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,10 +426,13 @@
 				8BAFF99C2B440A3D005713EA /* OnboardingViewController.swift in Sources */,
 				8B3B6CFF2B43E5E300B5B486 /* BaseViewController.swift in Sources */,
 				8B9506522B467A9F00A353A0 /* AuthViewModel.swift in Sources */,
+				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
 				8B3B6CA22B43D6CD00B5B486 /* AppDelegate.swift in Sources */,
 				8B3B6CA42B43D6CD00B5B486 /* SceneDelegate.swift in Sources */,
 				8B9506542B467B0000A353A0 /* APIKey.swift in Sources */,
+				8BC407C02B495AD500F4C3D6 /* BaseView.swift in Sources */,
 				8B3B6D012B43E63900B5B486 /* SplashViewController.swift in Sources */,
+				8BC407C22B495B0300F4C3D6 /* SignUpTextFieldView.swift in Sources */,
 				8B9506562B4691FD00A353A0 /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

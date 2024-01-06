@@ -41,6 +41,8 @@ final class AuthViewModel: ViewModelType {
                         }
                     }
                 }
+                
+    
             }
             .disposed(by: disposeBag)
         
