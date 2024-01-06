@@ -34,6 +34,8 @@ class OnboardingViewController: BaseViewController {
         super.viewDidLoad()
         
         print("OnboardingViewController")
+        print(Colors.BrandColor.green)
+        
     }
     
     override func configureView() {
