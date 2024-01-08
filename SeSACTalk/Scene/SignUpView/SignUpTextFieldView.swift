@@ -81,7 +81,7 @@ class SignUpTextFieldView: UIView {
         return textField
     }()
     
-    let invalidButton = {
+    let validButton = {
         let button = CustomButton(title: "중복 확인", setbackgroundColor: Colors.BrandColor.inactive)
         return button
     }()
@@ -96,7 +96,7 @@ class SignUpTextFieldView: UIView {
             }
 
         case .withButton:
-            [titleLabel, inputTextField, invalidButton].forEach {
+            [titleLabel, inputTextField, validButton].forEach {
                 addSubview($0)
             }
         }
@@ -133,7 +133,7 @@ class SignUpTextFieldView: UIView {
                 make.height.equalTo(44)
             }
             
-            invalidButton.snp.makeConstraints { make in
+            validButton.snp.makeConstraints { make in
                 make.leading.equalTo(inputTextField.snp.trailing).offset(12)
                 make.width.lessThanOrEqualTo(100)
                 make.trailing.equalToSuperview()

@@ -41,6 +41,7 @@
 		8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407BD2B494D4400F4C3D6 /* SignUpViewController.swift */; };
 		8BC407C02B495AD500F4C3D6 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407BF2B495AD500F4C3D6 /* BaseView.swift */; };
 		8BC407C22B495B0300F4C3D6 /* SignUpTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C12B495B0300F4C3D6 /* SignUpTextFieldView.swift */; };
+		8BC407C42B4ADDA700F4C3D6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C32B4ADDA700F4C3D6 /* SignUpViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		8BC407BD2B494D4400F4C3D6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8BC407BF2B495AD500F4C3D6 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		8BC407C12B495B0300F4C3D6 /* SignUpTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldView.swift; sourceTree = "<group>"; };
+		8BC407C32B4ADDA700F4C3D6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				8BC407BD2B494D4400F4C3D6 /* SignUpViewController.swift */,
+				8BC407C32B4ADDA700F4C3D6 /* SignUpViewModel.swift */,
 				8BC407C12B495B0300F4C3D6 /* SignUpTextFieldView.swift */,
 			);
 			path = SignUpView;
@@ -419,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3B6CA62B43D6CD00B5B486 /* ViewController.swift in Sources */,
+				8BC407C42B4ADDA700F4C3D6 /* SignUpViewModel.swift in Sources */,
 				8BAFF9A12B4412ED005713EA /* Colors.swift in Sources */,
 				8BAFF9AC2B459028005713EA /* AuthViewController.swift in Sources */,
 				8BAFF9AA2B455C25005713EA /* CustomButton.swift in Sources */,

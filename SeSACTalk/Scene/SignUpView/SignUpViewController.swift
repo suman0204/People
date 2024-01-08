@@ -6,15 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class SignUpViewController: BaseViewController {
+final class SignUpViewController: BaseViewController {
+    
+    let viewModel = SignUpViewModel()
+    let disposeBag = DisposeBag()
     
     lazy var emailTextFieldView = {
         let view = SignUpTextFieldView(type: .withButton)
-//        view.type = .withButton
         view.type = .withButton
         view.labelText = "이메일"
         view.placeholder = "이메일을 입력하세요"
+        view.validButton.isEnabled = false
+
         return view
     }()
     
@@ -52,16 +58,59 @@ class SignUpViewController: BaseViewController {
     
     let signUpButton = CustomButton(title: "가입하기", setbackgroundColor: Colors.BrandColor.inactive)
     
+    //dismiss Button
+    lazy var dismissButton = {
+        let button = UIBarButtonItem(image: UIImage(named: "Xmark"), style: .plain, target: self, action: #selector(dismissButtonClicked))
+        button.tintColor = Colors.BrandColor.black
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailTextFieldView.type = .withButton
+        bind()
+    }
+    
+    func bind() {
+        
+        let input = SignUpViewModel.Input(email: emailTextFieldView.inputTextField.rx.text.orEmpty, nickname: nicknameTextFieldView.inputTextField.rx.text.orEmpty, contact: contactTextFieldView.inputTextField.rx.text.orEmpty, password: passwordTextFieldView.inputTextField.rx.text.orEmpty, checkPassword: checkPasswordTextFieldView.inputTextField.rx.text.orEmpty, validButtonClicked: emailTextFieldView.validButton.rx.tap, signUpButtonClicked: signUpButton.rx.tap)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.emailvalidation
+            .subscribe(with: self) { owner, bool in
+                let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
+                owner.emailTextFieldView.validButton.backgroundColor = color
+                owner.emailTextFieldView.validButton.isEnabled = bool
+            }
+            .disposed(by: disposeBag)
+        
+        emailTextFieldView.validButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                print("clicked")
+            }
+            .disposed(by: disposeBag)
+        
+        signUpButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                print("clicked")
+            }
+            .disposed(by: disposeBag)
+        
+        output.signUpButtonActive
+            .subscribe(with: self) { owner, bool in
+                let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
+                owner.signUpButton.backgroundColor = color
+                owner.signUpButton.isEnabled = bool
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureView() {
         view.backgroundColor = Colors.BackgroundColor.primary
         self.navigationController?.navigationBar.backgroundColor = Colors.BackgroundColor.secondary
-//        self.navigationController?.navigationBar.shadowImage = nil
+        
+        self.navigationItem.leftBarButtonItem = dismissButton
     
         self.title = "회원가입"
         
@@ -107,5 +156,13 @@ class SignUpViewController: BaseViewController {
             make.top.lessThanOrEqualTo(checkPasswordTextFieldView.snp.bottom).offset(147)
         }
         
+    }
+}
+
+extension SignUpViewController {
+    
+    @objc
+    func dismissButtonClicked() {
+        self.dismiss(animated: true)
     }
 }
