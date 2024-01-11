@@ -32,11 +32,12 @@ final class SignUpViewController: BaseViewController {
         return view
     }()
     
-    let contactTextFieldView = {
+    let phoneNumberTextFieldView = {
         let view = SignUpTextFieldView(type: .normal)
         view.type = .normal
         view.labelText = "연락처"
         view.placeholder = "연락처를 입력하세요"
+//        view.inputTextField.text = view.inputTextField.text?.formated(by: "###-####-####")
         return view
     }()
     
@@ -73,10 +74,11 @@ final class SignUpViewController: BaseViewController {
     
     func bind() {
         
-        let input = SignUpViewModel.Input(email: emailTextFieldView.inputTextField.rx.text.orEmpty, nickname: nicknameTextFieldView.inputTextField.rx.text.orEmpty, contact: contactTextFieldView.inputTextField.rx.text.orEmpty, password: passwordTextFieldView.inputTextField.rx.text.orEmpty, checkPassword: checkPasswordTextFieldView.inputTextField.rx.text.orEmpty, validButtonClicked: emailTextFieldView.validButton.rx.tap, signUpButtonClicked: signUpButton.rx.tap)
+        let input = SignUpViewModel.Input(email: emailTextFieldView.inputTextField.rx.text.orEmpty, nickname: nicknameTextFieldView.inputTextField.rx.text.orEmpty, phoneNumber: phoneNumberTextFieldView.inputTextField.rx.text.orEmpty, password: passwordTextFieldView.inputTextField.rx.text.orEmpty, checkPassword: checkPasswordTextFieldView.inputTextField.rx.text.orEmpty, validButtonClicked: emailTextFieldView.validButton.rx.tap, signUpButtonClicked: signUpButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
+        //중복확인버튼 배경색 및 활성화
         output.emailvalidation
             .subscribe(with: self) { owner, bool in
                 let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
@@ -84,6 +86,12 @@ final class SignUpViewController: BaseViewController {
                 owner.emailTextFieldView.validButton.isEnabled = bool
             }
             .disposed(by: disposeBag)
+        
+        //연락처 입력된 값 표기 형식
+        output.formattedPhoneNumber
+            .bind(to: phoneNumberTextFieldView.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
         
         emailTextFieldView.validButton.rx.tap
             .subscribe(with: self) { owner, _ in
@@ -97,6 +105,7 @@ final class SignUpViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        //가입버튼 배경색 및 활성화
         output.signUpButtonActive
             .subscribe(with: self) { owner, bool in
                 let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
@@ -104,6 +113,71 @@ final class SignUpViewController: BaseViewController {
                 owner.signUpButton.isEnabled = bool
             }
             .disposed(by: disposeBag)
+        
+        //가입버튼 클릭 시
+        let textFieldArray = [emailTextFieldView, nicknameTextFieldView, phoneNumberTextFieldView, passwordTextFieldView, checkPasswordTextFieldView]
+        
+        signUpButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                guard let invalidIndex = try? output.validationArray.value().firstIndex(of: false) else {
+                    textFieldArray.forEach {
+                        $0.titleLabel.textColor = Colors.BrandColor.black
+                    }
+                    return
+                }
+//                textFieldArray.forEach { $0.textColor = Colors.BrandColor.black }
+
+                for (index, bool) in try! output.validationArray.value().enumerated() {
+                    if bool == false {
+                        textFieldArray[index].titleLabel.textColor = Colors.BrandColor.error
+                    } else {
+                        textFieldArray[index].titleLabel.textColor = Colors.BrandColor.black
+                    }
+                }
+                    
+                textFieldArray[invalidIndex].inputTextField.becomeFirstResponder()
+            }
+            .disposed(by: disposeBag)
+        
+        output.validationArray
+            .subscribe(with: self) { owner, array in
+                print(array)
+            }
+            .disposed(by: disposeBag)
+//            .subscribe(with: self) { owner, _ in
+//                // output의 validationArray에서 false인 부분을 찾아서 처리
+//                guard let invalidIndex = try? output.validationArray.value().firstIndex(of: false) else {
+//                    return
+//                }
+//                
+//                // 타이틀 색을 초기화
+//                textFieldArray.forEach { $0.textColor = Colors.BrandColor.black }
+//                
+//                // 찾은 부분의 타이틀 색을 빨간색으로 변경하고 해당 텍스트필드에 포커스를 줌
+//                textFieldArray[invalidIndex].textColor = Colors.BrandColor.error
+//                textFieldArray[invalidIndex].becomeFirstResponder()
+//            }
+//            .disposed(by: disposeBag)
+        
+//        let valid = BehaviorSubject(value: [output.emailvalidation, output.nicknameValidation, output.phoneNumberValidation, output.passwordValidation, output.checkPaswordValidation])
+//        let validationArray = [output.emailvalidation, output.nicknameValidation, output.phoneNumberValidation, output.passwordValidation, output.checkPaswordValidation]
+//
+//        
+//        for (index, validation) in valid.enumerated() {
+//            if try! validation.value() == false {
+//                textFieldArray[index].textColor = Colors.BrandColor.error
+//            } else {
+//                textFieldArray[index].textColor = Colors.BrandColor.black
+//            }
+//        }
+//        Observable<BehaviorSubject<Bool>>.of(output.emailvalidation, output.nicknameValidation, output.phoneNumberValidation, output.passwordValidation, output.checkPaswordValidation)
+//            .subscribe(with: self) { owner, bool in
+//                if bool == false {
+//                    
+//                }
+//            }
+        
+        
     }
     
     override func configureView() {
@@ -114,7 +188,7 @@ final class SignUpViewController: BaseViewController {
     
         self.title = "회원가입"
         
-        [emailTextFieldView, nicknameTextFieldView, contactTextFieldView, passwordTextFieldView, checkPasswordTextFieldView, signUpButton].forEach {
+        [emailTextFieldView, nicknameTextFieldView, phoneNumberTextFieldView, passwordTextFieldView, checkPasswordTextFieldView, signUpButton].forEach {
             view.addSubview($0)
         }
     }
@@ -132,14 +206,14 @@ final class SignUpViewController: BaseViewController {
             make.height.equalTo(76)
         }
         
-        contactTextFieldView.snp.makeConstraints { make in
+        phoneNumberTextFieldView.snp.makeConstraints { make in
             make.top.equalTo(nicknameTextFieldView.snp.bottom).offset(24)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(76)
         }
         
         passwordTextFieldView.snp.makeConstraints { make in
-            make.top.equalTo(contactTextFieldView.snp.bottom).offset(24)
+            make.top.equalTo(phoneNumberTextFieldView.snp.bottom).offset(24)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(76)
         }
