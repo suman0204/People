@@ -36,7 +36,7 @@ final class SignUpViewModel: ViewModelType {
         let formattedPhoneNumber: BehaviorSubject<String>
         let signUpButtonActive: BehaviorSubject<Bool>
         let validationArray: BehaviorSubject<Array<Bool>>
-        let validations: Observable<(Bool, Bool, Bool, Bool, Bool)>
+//        let validations: Observable<(Bool, Bool, Bool, Bool, Bool)>
     }
     
     func transform(input: Input) -> Output {
@@ -75,6 +75,7 @@ final class SignUpViewModel: ViewModelType {
         }
         .disposed(by: disposeBag)
         
+        //닉네임 유효성 검증
         input.nickname
             .map {
                 $0.count > 1 && $0.count < 31
@@ -86,6 +87,7 @@ final class SignUpViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        //연락처 유효성 검증
         input.phoneNumber
             .map {
                 print("inputPhone", $0)
@@ -112,24 +114,8 @@ final class SignUpViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-//        input.phoneNumber
-//            .map {
-//                if $0.count == 12 {
-//                    print("12")
-//                    return $0.formated(by: "###-###-####")
-//                } else if $0.count == 13 {
-//                    print("13")
-//                    return $0.formated(by: "###-####-####")
-//                } else {
-//                    return $0
-//                }
-//                
-//            }
-//            .subscribe(with: self) { owner, formatted in
-//                formattedPhoneNumber.onNext(formatted)
-//            }
-//            .disposed(by: disposeBag)
         
+        //비밀번호 유효성 검증
         input.password
             .map {
                 $0.validatePassword()
@@ -141,6 +127,7 @@ final class SignUpViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        //비밀번호 확인 유효성 검즘
         Observable.combineLatest(input.password, input.checkPassword)
             .map { password, checkPassword in
                 password == checkPassword
@@ -152,7 +139,7 @@ final class SignUpViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-        
+        //각 유효성 검증 묶음
         Observable.combineLatest(emailValidation.asObservable(), nicknameValidation.asObservable(), phoneNumberValidation.asObservable(), passwordValidation.asObservable(), checkPaswordValidation.asObservable())
             .map { email, nickname, phoneNumber, password, checkPassword in
                 return [email, nickname, phoneNumber, password, checkPassword]
@@ -162,9 +149,9 @@ final class SignUpViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-        let validations = Observable.combineLatest(emailValidation, nicknameValidation, phoneNumberValidation, passwordValidation, checkPaswordValidation)
+//        let validations = Observable.combineLatest(emailValidation, nicknameValidation, phoneNumberValidation, passwordValidation, checkPaswordValidation)
 
         
-        return Output(emailvalidation: emailValidation, nicknameValidation: nicknameValidation, phoneNumberValidation: phoneNumberValidation, passwordValidation: passwordValidation, checkPaswordValidation: checkPaswordValidation, formattedPhoneNumber: formattedPhoneNumber, signUpButtonActive: signUpButtonActive, validationArray: validationArray, validations: validations)
+        return Output(emailvalidation: emailValidation, nicknameValidation: nicknameValidation, phoneNumberValidation: phoneNumberValidation, passwordValidation: passwordValidation, checkPaswordValidation: checkPaswordValidation, formattedPhoneNumber: formattedPhoneNumber, signUpButtonActive: signUpButtonActive, validationArray: validationArray/*, validations: validations*/)
     }
 }

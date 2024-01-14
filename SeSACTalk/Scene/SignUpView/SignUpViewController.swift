@@ -70,6 +70,59 @@ final class SignUpViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+        
+//        APIManager.shared.request(type: ErrorResponse.self, api: Router.emailValidation(model: EmailValidationRequest(email: "0204@0204.com"))) { response in
+//            switch response {
+//            case .success(let success):
+//                print("viewDidLoad Success")
+//                print(success)
+//            case .failure(let failure):
+//                print("viewDidLoad Faliure")
+//                print(failure)
+//            }
+//        }
+        
+        APIManager.shared.emailValidationRequest(api: Router.emailValidation(model: EmailValidationRequest(email: "0208@0204.com")))
+            .subscribe(with: self) { owner, response in
+                switch response {
+                case .success(let data):
+                    print(data)
+                case.failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+//        APIManager.shared.requestEmailDuplicate(api: Router.emailValidation(model: EmailValidationRequest(email: "0208@0204.com")))
+//            .subscribe(with: self) { owner, response in
+//                switch response {
+//                case .success(let data):
+//                    print(data)
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//            .disposed(by: disposeBag)
+        
+//        APIManager.shared.request(type: SignUpResponse.self, api: Router.signUp(model: SignUpRequest(email: "0207@0207.com", nickname: "0206", phoneNumber: "010-1234-1234", password: "Aa12341234!", deviceToken: ""))) { response in
+//            switch response {
+//            case .success(let success):
+//                print("viewdidload")
+//                print(success)
+//            case .failure(let failure):
+//                print("viewdidload")
+//                
+//                print(failure)
+//                print(failure.rawValue)
+//                guard let signUpError = SignUpError(rawValue: failure.rawValue) else {
+//                    print("NonSignUpError")
+//                    print(failure.description)
+//                    return
+//                }
+//                print("SignUpError")
+//                print(signUpError.description)
+//            }
+//        }
     }
     
     func bind() {
@@ -89,6 +142,7 @@ final class SignUpViewController: BaseViewController {
         
         //연락처 입력된 값 표기 형식
         output.formattedPhoneNumber
+            .distinctUntilChanged()
             .bind(to: phoneNumberTextFieldView.inputTextField.rx.text)
             .disposed(by: disposeBag)
         
@@ -102,6 +156,7 @@ final class SignUpViewController: BaseViewController {
         signUpButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 print("clicked")
+                owner.showToast(message: "사용 가능한 이메일입니다.")
             }
             .disposed(by: disposeBag)
         
