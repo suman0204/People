@@ -36,7 +36,7 @@ extension UIViewController {
         
         self.view.addSubview(label)
         
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 2.5, delay: 0.1, options: .curveEaseOut, animations: {
             label.alpha = 0.0
         }, completion: { _ in
             label.removeFromSuperview()

@@ -45,7 +45,7 @@ final class APIManager {
         }
     }
     
-    func reequest<T: Decodable>(type: T.Type, api: Router) -> Single<Result<T, CommonError>> {
+    func singleRequest<T: Decodable>(type: T.Type, api: Router) -> Single<Result<T, CommonError>> {
         return Single.create { [weak self] single in
             self?.request(type: T.self, api: api) { response in
                 switch response {

@@ -69,8 +69,6 @@ final class SignUpViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
-        
 //        APIManager.shared.request(type: ErrorResponse.self, api: Router.emailValidation(model: EmailValidationRequest(email: "0204@0204.com"))) { response in
 //            switch response {
 //            case .success(let success):
@@ -125,18 +123,25 @@ final class SignUpViewController: BaseViewController {
 //        }
     }
     
-    func bind() {
+    override func bind() {
         
         let input = SignUpViewModel.Input(email: emailTextFieldView.inputTextField.rx.text.orEmpty, nickname: nicknameTextFieldView.inputTextField.rx.text.orEmpty, phoneNumber: phoneNumberTextFieldView.inputTextField.rx.text.orEmpty, password: passwordTextFieldView.inputTextField.rx.text.orEmpty, checkPassword: checkPasswordTextFieldView.inputTextField.rx.text.orEmpty, validButtonClicked: emailTextFieldView.validButton.rx.tap, signUpButtonClicked: signUpButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
         //중복확인버튼 배경색 및 활성화
-        output.emailvalidation
+        output.emailValidateButtonActive
             .subscribe(with: self) { owner, bool in
                 let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
                 owner.emailTextFieldView.validButton.backgroundColor = color
                 owner.emailTextFieldView.validButton.isEnabled = bool
+            }
+            .disposed(by: disposeBag)
+        
+        output.emailValidState
+            .subscribe(with: self) { owner, state in
+                print(state.description)
+                owner.showToast(message: state.description)
             }
             .disposed(by: disposeBag)
         
@@ -153,12 +158,12 @@ final class SignUpViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        signUpButton.rx.tap
-            .subscribe(with: self) { owner, _ in
-                print("clicked")
-                owner.showToast(message: "사용 가능한 이메일입니다.")
-            }
-            .disposed(by: disposeBag)
+//        signUpButton.rx.tap
+//            .subscribe(with: self) { owner, _ in
+//                print("clicked")
+//                owner.showToast(message: "사용 가능한 이메일입니다.")
+//            }
+//            .disposed(by: disposeBag)
         
         //가입버튼 배경색 및 활성화
         output.signUpButtonActive
@@ -185,12 +190,15 @@ final class SignUpViewController: BaseViewController {
                 for (index, bool) in try! output.validationArray.value().enumerated() {
                     if bool == false {
                         textFieldArray[index].titleLabel.textColor = Colors.BrandColor.error
+//                        owner.showToast(message: SignUpState(rawValue: index)?.description ?? "")
                     } else {
                         textFieldArray[index].titleLabel.textColor = Colors.BrandColor.black
                     }
                 }
                     
                 textFieldArray[invalidIndex].inputTextField.becomeFirstResponder()
+                owner.showToast(message: SignUpState(rawValue: invalidIndex)?.description ?? "")
+
             }
             .disposed(by: disposeBag)
         

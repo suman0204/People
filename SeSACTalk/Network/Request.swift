@@ -14,7 +14,7 @@ struct EmailValidationRequest: Encodable {
 struct SignUpRequest: Encodable {
     let email: String
     let nickname: String
-    let phoneNumber: String?
+    let phone: String?
     let password: String
     let deviceToken: String?
 }

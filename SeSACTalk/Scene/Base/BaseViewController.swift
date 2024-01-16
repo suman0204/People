@@ -14,6 +14,11 @@ class BaseViewController: UIViewController {
         
         configureView()
         setConstraints()
+        bind()
+    }
+    
+    func bind() {
+        
     }
     
     func configureView() {

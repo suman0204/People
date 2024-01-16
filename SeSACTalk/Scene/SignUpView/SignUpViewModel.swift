@@ -35,6 +35,11 @@ final class SignUpViewModel: ViewModelType {
 
         let formattedPhoneNumber: BehaviorSubject<String>
         let signUpButtonActive: BehaviorSubject<Bool>
+        let emailValidateButtonActive: BehaviorSubject<Bool>
+        
+        let emailValidState: PublishSubject<EmailValidationState>
+        let signUpValidState: PublishSubject<SignUpState>
+        
         let validationArray: BehaviorSubject<Array<Bool>>
 //        let validations: Observable<(Bool, Bool, Bool, Bool, Bool)>
     }
@@ -48,17 +53,44 @@ final class SignUpViewModel: ViewModelType {
         let checkPaswordValidation = BehaviorSubject(value: false)
         
         let formattedPhoneNumber = BehaviorSubject(value: "")
+        let emailValidateButtonActive = BehaviorSubject(value: false)
         let signUpButtonActive = BehaviorSubject(value: false)
+        
+        let emailValidState = PublishSubject<EmailValidationState>()
+        let signUpState = PublishSubject<SignUpState>()
+        
         let validationArray: BehaviorSubject<Array<Bool>> = BehaviorSubject(value: [])
         
         
         //이메일 중복 확인 버튼 활성화 여부
         input.email
             .map {
-                $0.count > 0
+                $0.validateEmail()
             }
-            .bind(to: emailValidation)
+            .bind(to: emailValidateButtonActive)
             .disposed(by: disposeBag)
+        
+        //이메일 검증 버튼 클릭시 API 통신
+        input.validButtonClicked
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .withLatestFrom(input.email)
+            .flatMapLatest { email in
+                APIManager.shared.emailValidationRequest(api: .emailValidation(model: EmailValidationRequest(email: email)))
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case.success(_):
+                    print("EmailValidation Success")
+                    emailValidation.onNext(true)
+                    emailValidState.onNext(.isValid)
+                case .failure(let error):
+                    print("EmailValidation Error", error)
+                    emailValidation.onNext(false)
+                    emailValidState.onNext(.inValid)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         //가입 버튼 활성화 여부
         Observable.combineLatest(input.email.map { $0.count > 0 },
@@ -149,9 +181,34 @@ final class SignUpViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-//        let validations = Observable.combineLatest(emailValidation, nicknameValidation, phoneNumberValidation, passwordValidation, checkPaswordValidation)
-
         
-        return Output(emailvalidation: emailValidation, nicknameValidation: nicknameValidation, phoneNumberValidation: phoneNumberValidation, passwordValidation: passwordValidation, checkPaswordValidation: checkPaswordValidation, formattedPhoneNumber: formattedPhoneNumber, signUpButtonActive: signUpButtonActive, validationArray: validationArray/*, validations: validations*/)
+        let signUpData = Observable.combineLatest(input.email, input.nickname, input.phoneNumber, input.password)
+        
+        input.signUpButtonClicked
+            .withLatestFrom(validationArray)
+            .filter { validationArray in
+                return validationArray.allSatisfy { $0 == true }
+            }
+            .withLatestFrom(signUpData)
+            .debug()
+            .flatMapLatest { email, nickname, phoneNumber, password in
+                APIManager.shared.singleRequest(type: SignUpResponse.self, api: .signUp(model: SignUpRequest(email: email, nickname: nickname, phone: phoneNumber , password: password, deviceToken: "")))
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print(response)
+                    let token = response.token
+                    KeychainManager.shared.create(account: "token", value: response.token.accessToken)
+                    KeychainManager.shared.create(account: "token", value: response.token.refreshToken)
+
+                case .failure(let error):
+                    print(error)
+                    print(SignUpError(rawValue: error.rawValue)?.description)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(emailvalidation: emailValidation, nicknameValidation: nicknameValidation, phoneNumberValidation: phoneNumberValidation, passwordValidation: passwordValidation, checkPaswordValidation: checkPaswordValidation, formattedPhoneNumber: formattedPhoneNumber, signUpButtonActive: signUpButtonActive, emailValidateButtonActive: emailValidateButtonActive, emailValidState: emailValidState, signUpValidState: signUpState, validationArray: validationArray/*, validations: validations*/)
     }
 }

@@ -47,6 +47,13 @@ extension String {
         return String(formatted)
     }
     
+    func validateEmail() -> Bool {
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: self)
+    }
+    
     func validatePassword() -> Bool {
         let regEx = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+])[A-Za-z\\d!@#$%^&*()_+]{8,}$"
         
@@ -60,70 +67,6 @@ extension String {
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
         return phoneTest.evaluate(with: self)
     }
-//
-//    func formatPhoneNumber() -> String {
-//        var cleanedPhoneNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-//        
-//        // Check if the number starts with "0" and remove it
-//        var formattedNumber = cleanedPhoneNumber.hasPrefix("0") ? String(cleanedPhoneNumber.dropFirst()) : cleanedPhoneNumber
-//
-//        
-//        let length = cleanedPhoneNumber.count
-//        
-//        if length == 10 {
-//            let firstPart = formattedNumber.prefix(3)
-//            let secondPart = formattedNumber.dropFirst(3).prefix(3)
-//            let thirdPart = formattedNumber.dropFirst(6)
-//            return "\(firstPart)-\(secondPart)-\(thirdPart)"
-//        } else if length == 11 {
-//            let firstPart = formattedNumber.prefix(3)
-//            let secondPart = formattedNumber.dropFirst(3).prefix(4)
-//            let thirdPart = formattedNumber.dropFirst(7)
-//            return "\(firstPart)-\(secondPart)-\(thirdPart)"
-//        } else {
-//            // Return the original string if it doesn't match the expected length
-//            return self
-//        }
-//    }
-    // Updated phone number validation method
-//    func validatePhoneNumber() -> Bool {
-//        let phoneRegex = "^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$"
-//        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-//        return phoneTest.evaluate(with: self)
-//    }
 
-    // Updated phone number formatting method
-    func formatPhoneNumber() -> String {
-        let cleanedPhoneNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-
-        // Check if the number starts with "0" and remove it
-        let formattedNumber = cleanedPhoneNumber.hasPrefix("0") ? String(cleanedPhoneNumber.dropFirst()) : cleanedPhoneNumber
-
-        let length = formattedNumber.count
-
-        if length == 10 {
-            let firstPart = formattedNumber.prefix(3)
-            let secondPart = formattedNumber.dropFirst(3).prefix(3)
-            let thirdPart = formattedNumber.dropFirst(6)
-            return "\(firstPart)-\(secondPart)-\(thirdPart)"
-        } else if length == 11 {
-            let firstPart = formattedNumber.prefix(3)
-            let secondPart = formattedNumber.dropFirst(3).prefix(4)
-            let thirdPart = formattedNumber.dropFirst(7)
-            return "\(firstPart)-\(secondPart)-\(thirdPart)"
-        } else {
-            // Return the original string if it doesn't match the expected length
-            return self
-        }
-    }
-    
-//    func test() -> String {
-//        var stringWithHypen: String = self
-//        
-//        stringWithHypen.insert("-", at: stringWithHypen.index(stringWithHypen.startIndex, offsetBy: 3))
-//        stringWithHypen.insert("-", at: stringWithHypen.index(stringWithHypen.endIndex, offsetBy: -4))
-//        
-//        return stringWithHypen
-//    }
 
 }

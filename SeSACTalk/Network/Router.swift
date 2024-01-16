@@ -104,7 +104,7 @@ enum Router: URLRequestConvertible {
         case .emailValidation(let model):
             return ["email": model.email]
         case .signUp(let model):
-            return ["email": model.email, "nickname": model.nickname, "phoneNumber": model.phoneNumber ?? "","password": model.password]
+            return ["email": model.email, "nickname": model.nickname, "phone": model.phone ?? "","password": model.password]
         case .logIn(let model):
             return ["email": model.email, "password": model.password, "deviceToken": model.deviceToken]
         }

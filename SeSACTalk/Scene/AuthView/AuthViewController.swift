@@ -29,9 +29,10 @@ class AuthViewController: BaseViewController {
         return button
     }()
     
-    let emailLoginButton = {
+    lazy var emailLoginButton = {
         let button = CustomButton(title: nil, setbackgroundColor: nil)
         button.setImage(UIImage(named: "EmailLogin"), for: .normal)
+        button.addTarget(self, action: #selector(emailLogInButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -54,7 +55,7 @@ class AuthViewController: BaseViewController {
         bind()
     }
     
-    func bind() {
+    override func bind() {
         let input = AuthViewModel.Input(kakaoLoginButtonClicked: kakaoLoginButton.rx.tap)
         
         let output = viewModel.transform(input: input)
@@ -64,6 +65,22 @@ class AuthViewController: BaseViewController {
     @objc
     func signUpButtonClicked() {
         let vc = SignUpViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [
+                .large()
+            ]
+            
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(nav, animated: true)
+    }
+    
+    @objc
+    func emailLogInButtonClicked() {
+        let vc = LoginViewController()
         let nav = UINavigationController(rootViewController: vc)
         
         if let sheet = nav.sheetPresentationController {

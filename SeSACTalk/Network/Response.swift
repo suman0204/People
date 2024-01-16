@@ -31,7 +31,7 @@ struct Token: Decodable {
     let refreshToken: String
 }
 
-struct LoginResponse: Decodable {
+struct LogInResponse: Decodable {
     let user_id: Int
     let email: String
     let nickname: String
@@ -41,3 +41,5 @@ struct LoginResponse: Decodable {
     let createdAt: String
     let token: Token
 }
+
+
