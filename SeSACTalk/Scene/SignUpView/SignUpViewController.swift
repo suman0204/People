@@ -15,7 +15,7 @@ final class SignUpViewController: BaseViewController {
     let disposeBag = DisposeBag()
     
     lazy var emailTextFieldView = {
-        let view = SignUpTextFieldView(type: .withButton)
+        let view = CustomTextFieldView(type: .withButton)
         view.type = .withButton
         view.labelText = "이메일"
         view.placeholder = "이메일을 입력하세요"
@@ -25,7 +25,7 @@ final class SignUpViewController: BaseViewController {
     }()
     
     let nicknameTextFieldView = {
-        let view = SignUpTextFieldView(type: .normal)
+        let view = CustomTextFieldView(type: .normal)
         view.type = .normal
         view.labelText = "닉네임"
         view.placeholder = "닉네임을 입력하세요"
@@ -33,7 +33,7 @@ final class SignUpViewController: BaseViewController {
     }()
     
     let phoneNumberTextFieldView = {
-        let view = SignUpTextFieldView(type: .normal)
+        let view = CustomTextFieldView(type: .normal)
         view.type = .normal
         view.labelText = "연락처"
         view.placeholder = "연락처를 입력하세요"
@@ -42,7 +42,7 @@ final class SignUpViewController: BaseViewController {
     }()
     
     let passwordTextFieldView = {
-        let view = SignUpTextFieldView(type: .normal)
+        let view = CustomTextFieldView(type: .normal)
         view.type = .normal
         view.labelText = "비밀번호"
         view.placeholder = "비밀번호를 입력하세요"
@@ -50,7 +50,7 @@ final class SignUpViewController: BaseViewController {
     }()
     
     let checkPasswordTextFieldView = {
-        let view = SignUpTextFieldView(type: .normal)
+        let view = CustomTextFieldView(type: .normal)
         view.type = .normal
         view.labelText = "비밀번호 확인"
         view.placeholder = "비밀번호를 한 번 더 입력하세요"
@@ -248,9 +248,10 @@ final class SignUpViewController: BaseViewController {
         }
         
         signUpButton.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(44)
             make.top.lessThanOrEqualTo(checkPasswordTextFieldView.snp.bottom).offset(147)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-12)
         }
         
     }

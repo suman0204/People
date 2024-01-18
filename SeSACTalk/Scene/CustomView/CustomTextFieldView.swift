@@ -1,20 +1,20 @@
 //
-//  SignUpTextFieldView.swift
+//  CustomTextFieldView.swift
 //  SeSACTalk
 //
-//  Created by 홍수만 on 2024/01/06.
+//  Created by 홍수만 on 2024/01/18.
 //
 
 import UIKit
 
-enum SignUpViewType {
+enum textFieldViewType {
     case normal
     case withButton
 }
 
-class SignUpTextFieldView: UIView {
+class CustomTextFieldView: UIView {
     
-    init(type: SignUpViewType) {
+    init(type: textFieldViewType) {
         super.init(frame: .zero)
         self.type = type
         configureView()
@@ -25,7 +25,7 @@ class SignUpTextFieldView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var type: SignUpViewType?
+    var type: textFieldViewType?
     
     //제목 레이블
     var labelText: String? {
@@ -143,5 +143,3 @@ class SignUpTextFieldView: UIView {
         }
     }
 }
-
-

@@ -15,7 +15,7 @@ final class LoginViewController: BaseViewController {
     let disposeBag = DisposeBag()
     
     let emailTextFieldView = {
-        let view = SignUpTextFieldView(type: .normal)
+        let view = CustomTextFieldView(type: .normal)
         view.labelText = "이메일"
         view.placeholder = "이메일을 입력하세요"
         view.validButton.isEnabled = false
@@ -23,7 +23,7 @@ final class LoginViewController: BaseViewController {
     }()
     
     let passwordTextFieldView = {
-        let view = SignUpTextFieldView(type: .normal)
+        let view = CustomTextFieldView(type: .normal)
         view.labelText = "비밀번호"
         view.placeholder = "비밀번호를 입력하세요"
         view.validButton.isEnabled = false
@@ -123,9 +123,10 @@ final class LoginViewController: BaseViewController {
         }
         
         logInButton.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(44)
             make.top.lessThanOrEqualTo(passwordTextFieldView.snp.bottom).offset(447)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-12)
         }
     }
 }
