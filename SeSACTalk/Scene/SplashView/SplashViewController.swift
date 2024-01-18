@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplashViewController: BaseViewController {
+final class SplashViewController: BaseViewController {
     
     let splashTextLabel = {
         let label = UILabel()

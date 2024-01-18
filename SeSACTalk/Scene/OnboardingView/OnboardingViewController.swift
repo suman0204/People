@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingViewController: BaseViewController {
+final class OnboardingViewController: BaseViewController {
     
     // 뷰로 따로 빼기..
     let splashTextLabel = {

@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 
-class AuthViewController: BaseViewController {
+final class AuthViewController: BaseViewController {
     
     let viewModel = AuthViewModel()
     
