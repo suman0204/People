@@ -68,6 +68,7 @@ enum Router: URLRequestConvertible {
     case emailValidation(model: EmailValidationRequest)
     case signUp(model: SignUpRequest)
     case logIn(model: LogInRequest)
+    case addWorkspace(model: AddWorkspaceRequest)
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -81,6 +82,8 @@ enum Router: URLRequestConvertible {
             return "v1/users/join"
         case .logIn:
             return "v2/users/login"
+        case .addWorkspace:
+            return "v1/workspaces"
         }
     }
 
@@ -89,17 +92,21 @@ enum Router: URLRequestConvertible {
         case .emailValidation, .signUp, .logIn:
             return ["Content-Type" : "application/json",
                     "SesacKey": APIKey.SeSACKey]
+        case .addWorkspace:
+            return ["Content-Type" : "multipart/form-data",
+                    "Authorization": KeychainManager.shared.read(account: "token") ?? "",
+                    "SesacKey": APIKey.SeSACKey]
         }
     }
 
     private var method: HTTPMethod {
         switch self {
-        case .emailValidation, .signUp, .logIn:
+        case .emailValidation, .signUp, .logIn, .addWorkspace:
             return .post
         }
     }
     
-    private var paramters: Parameters {
+    private var paramters: Parameters? {
         switch self {
         case .emailValidation(let model):
             return ["email": model.email]
@@ -107,6 +114,8 @@ enum Router: URLRequestConvertible {
             return ["email": model.email, "nickname": model.nickname, "phone": model.phone ?? "","password": model.password]
         case .logIn(let model):
             return ["email": model.email, "password": model.password, "deviceToken": model.deviceToken]
+        default:
+            return nil
         }
     }
 
@@ -128,4 +137,26 @@ enum Router: URLRequestConvertible {
     }
 
 
+}
+
+extension Router {
+    var multipart: MultipartFormData {
+        switch self {
+        case .addWorkspace(let model):
+            let multipartFormData = MultipartFormData()
+            
+            let name = model.name.data(using: .utf8) ?? Data()
+            let description = model.description?.data(using: .utf8) ?? Data()
+            let image = model.image
+            
+            multipartFormData.append(name, withName: "name")
+            multipartFormData.append(description, withName: "description")
+            multipartFormData.append(image, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
+            
+            return multipartFormData
+            
+        default :
+            return MultipartFormData()
+        }
+    }
 }

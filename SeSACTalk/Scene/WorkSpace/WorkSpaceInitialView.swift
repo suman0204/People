@@ -37,8 +37,9 @@ final class WorkSpaceInitialView: BaseViewController {
         return imageView
     }()
     
-    let createWorkspaceButton = {
+    lazy var createWorkspaceButton = {
         let button = CustomButton(title: "워크스페이스 생성", setbackgroundColor: Colors.BrandColor.green)
+        button.addTarget(self, action: #selector(createWorkspaceButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -109,5 +110,21 @@ extension WorkSpaceInitialView {
     @objc
     func dismissButtonClicked() {
         self.dismiss(animated: true)
+    }
+    
+    @objc
+    func createWorkspaceButtonClicked() {
+        let vc = AddWorkspaceViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [
+                .large()
+            ]
+            
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(nav, animated: true)
     }
 }

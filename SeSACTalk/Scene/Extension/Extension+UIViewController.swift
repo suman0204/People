@@ -31,8 +31,11 @@ extension UIViewController {
         
         label.frame.origin = CGPoint(
             x: self.view.frame.size.width / 2 - label.frame.size.width / 2,
-            y: self.view.frame.size.height - 160
+            y: self.view.keyboardLayoutGuide.layoutFrame.origin.y - label.frame.size.height - 80
         )
+        
+//        let hei = view.frame.size.height
+//        let he2 = view.keyboardLayoutGuide.layoutFrame.size.height
         
         self.view.addSubview(label)
         
@@ -87,3 +90,42 @@ extension UIViewController {
 //        let labelWidth = min(textSize.w)
 //    }
 }
+
+//extension UIViewController {
+//
+//    func showToast(message: String) {
+//        // 최대 width를 설정하거나 필요에 따라 조절합니다.
+//        let maxWidth: CGFloat = 300.0
+//        
+//        // 메시지에 맞게 label의 크기를 조절합니다.
+//        let label = UILabel()
+//        label.font = .systemFont(ofSize: 16, weight: .regular)
+//        label.text = message
+//        label.numberOfLines = 0
+//        label.textAlignment = .center
+//        label.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+//        label.textColor = UIColor.white
+//        label.layer.cornerRadius = 8
+//        label.clipsToBounds = true
+//        
+//        let maxSize = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+//        let expectedSize = label.sizeThatFits(maxSize)
+//        label.frame.size = CGSize(width: min(expectedSize.width + 16, maxWidth), height: expectedSize.height + 10)
+//        
+//        // 키보드 레이아웃 가이드에 맞춰서 토스트 메시지의 위치를 조정
+//        let yPosition = self.view.frame.size.height - label.frame.size.height - 20
+//        label.frame.origin = CGPoint(x: self.view.frame.size.width / 2 - label.frame.size.width / 2, y: yPosition)
+//        self.view.addSubview(label)
+//        
+//        UIView.animate(withDuration: 2.5, delay: 0.1, options: .curveEaseOut, animations: {
+//            label.alpha = 0.0
+//        }, completion: { _ in
+//            label.removeFromSuperview()
+//        })
+//    }
+//}
+
+
+
+
+

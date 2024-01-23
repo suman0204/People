@@ -87,3 +87,20 @@ enum LoginError: String, LoggableError {
         }
     }
 }
+
+enum AddWorkspaceError: String, LoggableError {
+    case wrongRequest = "E11"
+    case duplicatedData = "E12"
+    case notEnoughCoin = "E21"
+    
+    var description: String {
+        switch self {
+        case .wrongRequest:
+            return "잘못된 요청"
+        case .duplicatedData:
+            return "중복 데이터"
+        case .notEnoughCoin:
+            return "새싹 코인 부족"
+        }
+    }
+}

@@ -42,4 +42,15 @@ struct LogInResponse: Decodable {
     let token: Token
 }
 
+struct AddWorkspaceResponse: Decodable {
+    let workspaceID, ownerID: Int
+    let description: String?
+    let name, thumbnail, createdAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case workspaceID = "workspace_id"
+        case ownerID = "owner_id"
+        case name,description, thumbnail, createdAt
+    }
+}
 

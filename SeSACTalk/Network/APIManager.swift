@@ -79,6 +79,38 @@ final class APIManager {
     }
     
 
-    
+    func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<Result<T, CommonError>> {
+        return Single.create { single in
+            AF.upload(multipartFormData: api.multipart, with: api).responseDecodable(of: T.self) { response in
+                switch response.result {
+                case.success(let result):
+                    print("Multipart Result", result)
+                    single(.success(.success(result)))
+                case .failure(let error):
+                    print("Multipart Error", error)
+                    
+                    guard let responseData = response.data else {
+                        single(.failure(CommonError.unknownError))
+                        return
+                    }
+                    
+                    do {
+                        let networkError = try JSONDecoder().decode(ErrorResponse.self, from: responseData)
+                        let errorCode = networkError.errorCode
+                        let error = CommonError(rawValue: errorCode)
+                        single(.success(.failure(error ?? CommonError.unknownError)))
+                    }
+                    catch {
+                        single(.failure(CommonError.unknownError))
+                    }
+                    
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
 
 }
+
+

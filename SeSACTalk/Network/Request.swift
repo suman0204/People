@@ -24,3 +24,9 @@ struct LogInRequest: Encodable {
     let password: String
     let deviceToken: String
 }
+
+struct AddWorkspaceRequest: Encodable {
+    let name: String
+    let description: String?
+    let image: Data
+}

@@ -63,3 +63,17 @@ enum LogInState: Int {
         }
     }
 }
+
+enum AddWorkspaceState: Int {
+    case imageValid = 0
+    case nameValid = 1
+    
+    var description: String {
+        switch self {
+        case .imageValid:
+            return "워크스페이스 이미지를 등록해주세요"
+        case .nameValid:
+            return "워크스페이스 이름은 1~30자로 설정해주세요"
+        }
+    }
+}
