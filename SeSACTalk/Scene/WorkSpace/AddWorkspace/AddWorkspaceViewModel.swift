@@ -75,6 +75,7 @@ class AddWorkspaceViewModel: ViewModelType {
                 case .success(let result):
                     print(result)
                 case .failure(let error):
+                    print("Add Workspace Error")
                     print(error)
                 }
             }

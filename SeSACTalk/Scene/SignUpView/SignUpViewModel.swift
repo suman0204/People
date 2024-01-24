@@ -199,8 +199,8 @@ final class SignUpViewModel: ViewModelType {
                 case .success(let response):
                     print(response)
                     let token = response.token
-                    KeychainManager.shared.create(account: "token", value: response.token.accessToken)
-                    KeychainManager.shared.create(account: "token", value: response.token.refreshToken)
+                    KeychainManager.shared.create(account: "accessToken", value: response.token.accessToken)
+                    KeychainManager.shared.create(account: "refreshToken", value: response.token.refreshToken)
 
                 case .failure(let error):
                     print(error)

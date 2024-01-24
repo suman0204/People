@@ -42,6 +42,10 @@ struct LogInResponse: Decodable {
     let token: Token
 }
 
+struct RefreshResponse: Decodable {
+    let accessToken: String
+}
+
 struct AddWorkspaceResponse: Decodable {
     let workspaceID, ownerID: Int
     let description: String?

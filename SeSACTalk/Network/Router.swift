@@ -68,6 +68,7 @@ enum Router: URLRequestConvertible {
     case emailValidation(model: EmailValidationRequest)
     case signUp(model: SignUpRequest)
     case logIn(model: LogInRequest)
+    case refresh
     case addWorkspace(model: AddWorkspaceRequest)
 
     private var baseURL: URL {
@@ -82,6 +83,8 @@ enum Router: URLRequestConvertible {
             return "v1/users/join"
         case .logIn:
             return "v2/users/login"
+        case .refresh:
+            return "v1/auth/refresh"
         case .addWorkspace:
             return "v1/workspaces"
         }
@@ -92,9 +95,14 @@ enum Router: URLRequestConvertible {
         case .emailValidation, .signUp, .logIn:
             return ["Content-Type" : "application/json",
                     "SesacKey": APIKey.SeSACKey]
+        case .refresh:
+            return ["Content-Type" : "application/json",
+                    "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
+                    "SesacKey": APIKey.SeSACKey,
+                    "RefreshToken": KeychainManager.shared.read(account: "refreshToken") ?? ""]
         case .addWorkspace:
             return ["Content-Type" : "multipart/form-data",
-                    "Authorization": KeychainManager.shared.read(account: "token") ?? "",
+                    "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
                     "SesacKey": APIKey.SeSACKey]
         }
     }
@@ -103,6 +111,8 @@ enum Router: URLRequestConvertible {
         switch self {
         case .emailValidation, .signUp, .logIn, .addWorkspace:
             return .post
+        case .refresh:
+            return .get
         }
     }
     

@@ -18,7 +18,7 @@ final class APIManager {
     
     func request<T: Decodable>(type: T.Type, api: Router, completion: @escaping (Result<T, CommonError>) -> Void) {
         
-        AF.request(api).validate(statusCode: 200..<300).responseDecodable(of: T.self) { response in
+        AF.request(api, interceptor: Interceptor.shared).validate(statusCode: 200..<300).responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let data):
                 print("APIManager request", data)
@@ -81,7 +81,7 @@ final class APIManager {
 
     func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<Result<T, CommonError>> {
         return Single.create { single in
-            AF.upload(multipartFormData: api.multipart, with: api).responseDecodable(of: T.self) { response in
+            AF.upload(multipartFormData: api.multipart, with: api, interceptor: Interceptor.shared).responseDecodable(of: T.self) { response in
                 switch response.result {
                 case.success(let result):
                     print("Multipart Result", result)
@@ -111,6 +111,35 @@ final class APIManager {
         }
     }
 
+    func refreshRequest<T: Decodable>(
+        type: T.Type,
+        api: Router,
+        completion: @escaping (Result<T, CommonError>) -> Void
+    ) {
+        AF.request(api)
+            .validate(statusCode: 200..<300).responseDecodable(of: T.self) { response in
+//                print("0000\(response)")
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                    
+                case .failure(let error):
+                    print(error)
+                    if let data = response.data {
+                        print(data)
+                        do {
+                            let networkError = try JSONDecoder().decode(ErrorResponse.self, from: data)
+                            let errorString = networkError.errorCode
+                            let errorEnum = CommonError(rawValue: errorString) ?? CommonError.unknownError
+                            completion(.failure(errorEnum))
+                        }
+                        catch {
+                            completion(.failure(CommonError.unknownError))
+                        }
+                    }
+                }
+            }
+    }
 }
 
 
