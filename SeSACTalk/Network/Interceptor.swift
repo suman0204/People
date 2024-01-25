@@ -64,6 +64,8 @@ final class Interceptor: RequestInterceptor {
             case .failure(let failure):
                 print("Refresh Failure ---", failure.rawValue, failure.description)
                 
+                SwitchView.shared.switchView(viewController: OnboardingViewController())
+                
                 completion(.doNotRetryWithError(failure))
             }
         }

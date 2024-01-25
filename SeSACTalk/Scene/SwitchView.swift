@@ -21,7 +21,7 @@ final class SwitchView {
                 return
         }
         
-        window.rootViewController = viewController
+        window.rootViewController = UINavigationController(rootViewController: viewController)
         
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }

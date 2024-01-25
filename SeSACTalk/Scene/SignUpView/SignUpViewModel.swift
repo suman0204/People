@@ -201,7 +201,9 @@ final class SignUpViewModel: ViewModelType {
                     let token = response.token
                     KeychainManager.shared.create(account: "accessToken", value: response.token.accessToken)
                     KeychainManager.shared.create(account: "refreshToken", value: response.token.refreshToken)
-
+                    
+                    //회원 가입 성공 시 WorkSpaceInitialView로 이동
+                    SwitchView.shared.switchView(viewController: WorkSpaceInitialView())
                 case .failure(let error):
                     print(error)
                     print(SignUpError(rawValue: error.rawValue)?.description)
