@@ -37,12 +37,14 @@ final class OnboardingViewController: BaseViewController {
         view.backgroundColor = .white
         
         //네비게이션 바 설정
-        let appearance = UINavigationBarAppearance()
-        appearance.shadowColor = .clear
-        appearance.backgroundColor = .white
+//        let appearance = UINavigationBarAppearance()
+//        appearance.shadowColor = .clear
+//        appearance.backgroundColor = .white
+//        
+//        self.navigationController?.navigationBar.standardAppearance = appearance
+//        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        self.navigationController?.navigationBar.standardAppearance = appearance
-        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.isHidden = true
 
         [splashTextLabel, splashImageView, startButton].forEach {
             view.addSubview($0)

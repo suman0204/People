@@ -27,6 +27,9 @@ final class HomeViewController: BaseViewController {
     override func configureView() {
         view.backgroundColor = .white
         
+        let headerViewTap = UITapGestureRecognizer(target: self, action: #selector(headerViewTapped))
+        headerView.addGestureRecognizer(headerViewTap)
+        
         [headerView, emptySpaceView].forEach {
             view.addSubview($0)
         }
@@ -36,7 +39,7 @@ final class HomeViewController: BaseViewController {
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(60)
+            make.height.equalTo(44)
         }
         
         emptySpaceView.snp.makeConstraints { make in
@@ -44,5 +47,12 @@ final class HomeViewController: BaseViewController {
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc func headerViewTapped() {
+        let workspaceList = WorkspaceListViewController()
+        let menu = SideMenuNavigation(rootViewController: workspaceList)
+        
+        present(menu, animated: true)
     }
 }

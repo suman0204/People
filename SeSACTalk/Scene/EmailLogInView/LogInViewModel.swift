@@ -84,7 +84,9 @@ final class LogInViewModel: ViewModelType {
                     print(response)
                     KeychainManager.shared.create(account: "accessToken", value: response.token.accessToken)
                     KeychainManager.shared.create(account: "refreshToken", value: response.token.refreshToken)
-
+                    
+                    owner.switchMain()
+                    
                 case .failure(let error):
                     print(error)
                 }
@@ -93,5 +95,25 @@ final class LogInViewModel: ViewModelType {
         
         
         return Output(logInButtonActive: logInButtonActive, validationArray: validationArray)
+    }
+}
+
+extension LogInViewModel {
+    
+    func switchMain() {
+        APIManager.shared.request(type: Workspaces.self, api: .getWorkspaceList) { result in
+            switch result {
+            case .success(let response):
+                print("LoginViewModel Get Workspace Succes", response)
+                if response.count > 0 {
+                    SwitchView.shared.switchView(viewController: TabBarController())
+                } else {
+                    SwitchView.shared.switchView(viewController: HomeViewController())
+                }
+            case .failure(let error):
+                print("LoginViewModel Get Workspace Failure", error)
+                SwitchView.shared.switchView(viewController: OnboardingViewController())
+            }
+        }
     }
 }

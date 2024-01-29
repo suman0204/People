@@ -39,6 +39,18 @@
 		8B52B7F72B60E3E300284550 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B7F62B60E3E300284550 /* EmptyView.swift */; };
 		8B52B7F92B60F5B600284550 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B7F82B60F5B600284550 /* SwitchView.swift */; };
 		8B52B7FB2B60FB1D00284550 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B7FA2B60FB1D00284550 /* Interceptor.swift */; };
+		8B52B8042B62567700284550 /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8032B62567700284550 /* ChannelTableViewCell.swift */; };
+		8B52B8062B6256AC00284550 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8052B6256AC00284550 /* BaseTableViewCell.swift */; };
+		8B52B8082B625D7900284550 /* ChannelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8072B625D7900284550 /* ChannelHeaderView.swift */; };
+		8B52B80A2B62659000284550 /* ChannelFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8092B62659000284550 /* ChannelFooterView.swift */; };
+		8B52B80C2B62665900284550 /* HomeInitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B80B2B62665900284550 /* HomeInitialViewController.swift */; };
+		8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B80D2B62670600284550 /* ReusableViewProtocol.swift */; };
+		8B52B8112B637F9000284550 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 8B52B8102B637F9000284550 /* SideMenu */; };
+		8B52B8162B63812200284550 /* WorkspaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8152B63812200284550 /* WorkspaceListViewController.swift */; };
+		8B52B8182B63817200284550 /* SideMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8172B63817200284550 /* SideMenuNavigation.swift */; };
+		8B52B81A2B639F5600284550 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B8192B639F5600284550 /* EmptyListView.swift */; };
+		8B52B81C2B63A5EC00284550 /* WorkspaceListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */; };
+		8B52B81E2B678E4600284550 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52B81D2B678E4600284550 /* TabBarController.swift */; };
 		8B56A3B92B4FEB38004A6C38 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 8B56A3B82B4FEB38004A6C38 /* Moya */; };
 		8B56A3BB2B4FECA0004A6C38 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3BA2B4FECA0004A6C38 /* Response.swift */; };
 		8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3BC2B5030C1004A6C38 /* APIError.swift */; };
@@ -109,6 +121,17 @@
 		8B52B7F62B60E3E300284550 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		8B52B7F82B60F5B600284550 /* SwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 		8B52B7FA2B60FB1D00284550 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		8B52B8032B62567700284550 /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
+		8B52B8052B6256AC00284550 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		8B52B8072B625D7900284550 /* ChannelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHeaderView.swift; sourceTree = "<group>"; };
+		8B52B8092B62659000284550 /* ChannelFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelFooterView.swift; sourceTree = "<group>"; };
+		8B52B80B2B62665900284550 /* HomeInitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInitialViewController.swift; sourceTree = "<group>"; };
+		8B52B80D2B62670600284550 /* ReusableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewProtocol.swift; sourceTree = "<group>"; };
+		8B52B8152B63812200284550 /* WorkspaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewController.swift; sourceTree = "<group>"; };
+		8B52B8172B63817200284550 /* SideMenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNavigation.swift; sourceTree = "<group>"; };
+		8B52B8192B639F5600284550 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListCell.swift; sourceTree = "<group>"; };
+		8B52B81D2B678E4600284550 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8B56A3BA2B4FECA0004A6C38 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		8B56A3BC2B5030C1004A6C38 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8B56A3BF2B5111BE004A6C38 /* LoggableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggableError.swift; sourceTree = "<group>"; };
@@ -146,6 +169,7 @@
 				8B3B6D172B43ED9500B5B486 /* KakaoSDKCommon in Frameworks */,
 				8B3B6D152B43ED9500B5B486 /* KakaoSDKAuth in Frameworks */,
 				8B3B6D0A2B43ED6700B5B486 /* Kingfisher in Frameworks */,
+				8B52B8112B637F9000284550 /* SideMenu in Frameworks */,
 				8B3B6D1C2B43EDA100B5B486 /* RxKakaoSDKAuth in Frameworks */,
 				8B3B6D042B43ED4A00B5B486 /* SnapKit in Frameworks */,
 				8B56A3B92B4FEB38004A6C38 /* Moya in Frameworks */,
@@ -236,6 +260,8 @@
 				8B3B6CFE2B43E5E300B5B486 /* BaseViewController.swift */,
 				8BC407BF2B495AD500F4C3D6 /* BaseView.swift */,
 				8B9506552B4691FD00A353A0 /* ViewModelType.swift */,
+				8B52B8052B6256AC00284550 /* BaseTableViewCell.swift */,
+				8B52B80D2B62670600284550 /* ReusableViewProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -294,8 +320,24 @@
 				8B5048D12B59290800E8A8A0 /* HomeViewController.swift */,
 				8B5048D32B597D9100E8A8A0 /* HomeHeaderView.swift */,
 				8B52B7F62B60E3E300284550 /* EmptyView.swift */,
+				8B52B8032B62567700284550 /* ChannelTableViewCell.swift */,
+				8B52B8072B625D7900284550 /* ChannelHeaderView.swift */,
+				8B52B8092B62659000284550 /* ChannelFooterView.swift */,
+				8B52B80B2B62665900284550 /* HomeInitialViewController.swift */,
+				8B52B81D2B678E4600284550 /* TabBarController.swift */,
 			);
 			path = HomeView;
+			sourceTree = "<group>";
+		};
+		8B52B8142B6380F600284550 /* WorkspaceList */ = {
+			isa = PBXGroup;
+			children = (
+				8B52B8152B63812200284550 /* WorkspaceListViewController.swift */,
+				8B52B8172B63817200284550 /* SideMenuNavigation.swift */,
+				8B52B8192B639F5600284550 /* EmptyListView.swift */,
+				8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */,
+			);
+			path = WorkspaceList;
 			sourceTree = "<group>";
 		};
 		8B56A3BE2B5111AD004A6C38 /* Error */ = {
@@ -320,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				8B764B282B5658B90066AF07 /* WorkSpaceInitialView.swift */,
+				8B52B8142B6380F600284550 /* WorkspaceList */,
 				8B5048D52B5981A200E8A8A0 /* AddWorkspace */,
 				8B52B7F52B5FCDAB00284550 /* HomeView */,
 			);
@@ -413,6 +456,7 @@
 				8B3B6D1D2B43EDA100B5B486 /* RxKakaoSDKCommon */,
 				8B3B6D1F2B43EDA100B5B486 /* RxKakaoSDKUser */,
 				8B56A3B82B4FEB38004A6C38 /* Moya */,
+				8B52B8102B637F9000284550 /* SideMenu */,
 			);
 			productName = SeSACTalk;
 			productReference = 8B3B6C9E2B43D6CD00B5B486 /* SeSACTalk.app */;
@@ -495,6 +539,7 @@
 				8B3B6D132B43ED9500B5B486 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				8B3B6D1A2B43EDA100B5B486 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
 				8B56A3B72B4FEB38004A6C38 /* XCRemoteSwiftPackageReference "Moya" */,
+				8B52B80F2B637F9000284550 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 8B3B6C9F2B43D6CD00B5B486 /* Products */;
 			projectDirPath = "";
@@ -540,6 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3B6CA62B43D6CD00B5B486 /* ViewController.swift in Sources */,
+				8B52B8082B625D7900284550 /* ChannelHeaderView.swift in Sources */,
 				8B764B1F2B5507E00066AF07 /* SignUpState.swift in Sources */,
 				8B52B7F92B60F5B600284550 /* SwitchView.swift in Sources */,
 				8BC407C72B4BFE3B00F4C3D6 /* Extension+UITextField.swift in Sources */,
@@ -548,13 +594,18 @@
 				8BAFF9A12B4412ED005713EA /* Colors.swift in Sources */,
 				8B764B242B5522840066AF07 /* LoginViewController.swift in Sources */,
 				8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */,
+				8B52B8042B62567700284550 /* ChannelTableViewCell.swift in Sources */,
+				8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */,
 				8B5048D42B597D9100E8A8A0 /* HomeHeaderView.swift in Sources */,
 				8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */,
 				8BAFF9AC2B459028005713EA /* AuthViewController.swift in Sources */,
 				8BC407C92B4BFE5C00F4C3D6 /* Extension+String.swift in Sources */,
 				8B56A3C02B5111BE004A6C38 /* LoggableError.swift in Sources */,
+				8B52B80A2B62659000284550 /* ChannelFooterView.swift in Sources */,
 				8BAFF9AA2B455C25005713EA /* CustomButton.swift in Sources */,
 				8B56A3C42B512DAC004A6C38 /* APIManager.swift in Sources */,
+				8B52B81A2B639F5600284550 /* EmptyListView.swift in Sources */,
+				8B52B81C2B63A5EC00284550 /* WorkspaceListCell.swift in Sources */,
 				8B6FA1C92B4FDB9F00D23188 /* Extension+UIViewController.swift in Sources */,
 				8BAFF9A32B444845005713EA /* Typography.swift in Sources */,
 				8BAFF99C2B440A3D005713EA /* OnboardingViewController.swift in Sources */,
@@ -563,15 +614,20 @@
 				8B3B6CFF2B43E5E300B5B486 /* BaseViewController.swift in Sources */,
 				8B5048CE2B5915CB00E8A8A0 /* CustomTextFieldView.swift in Sources */,
 				8B9506522B467A9F00A353A0 /* AuthViewModel.swift in Sources */,
+				8B52B8182B63817200284550 /* SideMenuNavigation.swift in Sources */,
 				8B5048D72B5981BD00E8A8A0 /* AddWorkspaceViewModel.swift in Sources */,
+				8B52B80C2B62665900284550 /* HomeInitialViewController.swift in Sources */,
 				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
 				8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */,
 				8B52B7F72B60E3E300284550 /* EmptyView.swift in Sources */,
 				8B764B212B551E430066AF07 /* KeyChainManager.swift in Sources */,
 				8B3B6CA22B43D6CD00B5B486 /* AppDelegate.swift in Sources */,
 				8B3B6CA42B43D6CD00B5B486 /* SceneDelegate.swift in Sources */,
+				8B52B8162B63812200284550 /* WorkspaceListViewController.swift in Sources */,
 				8B764B292B5658B90066AF07 /* WorkSpaceInitialView.swift in Sources */,
+				8B52B8062B6256AC00284550 /* BaseTableViewCell.swift in Sources */,
 				8B9506542B467B0000A353A0 /* APIKey.swift in Sources */,
+				8B52B81E2B678E4600284550 /* TabBarController.swift in Sources */,
 				8BC407C02B495AD500F4C3D6 /* BaseView.swift in Sources */,
 				8B5048D22B59290800E8A8A0 /* HomeViewController.swift in Sources */,
 				8B3B6D012B43E63900B5B486 /* SplashViewController.swift in Sources */,
@@ -982,6 +1038,14 @@
 				minimumVersion = 2.20.0;
 			};
 		};
+		8B52B80F2B637F9000284550 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
 		8B56A3B72B4FEB38004A6C38 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -1052,6 +1116,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B3B6D1A2B43EDA100B5B486 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */;
 			productName = RxKakaoSDKUser;
+		};
+		8B52B8102B637F9000284550 /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B52B80F2B637F9000284550 /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
 		};
 		8B56A3B82B4FEB38004A6C38 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;

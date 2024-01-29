@@ -46,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
         
+        if #available(iOS 15.0, *) {
+                UITableView.appearance().sectionHeaderTopPadding = .zero
+            }
+        
         return true
     }
 

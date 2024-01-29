@@ -27,7 +27,32 @@ final class SplashViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setView()
+    }
+    
+    func setView() {
+        if let accessToken = KeychainManager.shared.read(account: "accessToken") {
+            switchMain()
+        } else {
+            SwitchView.shared.switchView(viewController: OnboardingViewController())
+        }
+    }
+    
+    func switchMain() {
+        APIManager.shared.request(type: Workspaces.self, api: .getWorkspaceList) { response in
+            switch response {
+            case .success(let result):
+                print("Splash Get Workspace Succes",result)
+                if result.count > 0 {
+                    SwitchView.shared.switchView(viewController: TabBarController())
+                } else {
+                    SwitchView.shared.switchView(viewController: HomeViewController())
+                }
+            case .failure(let error):
+                print("Splash Get Workspace Faliure", error)
+                SwitchView.shared.switchView(viewController: OnboardingViewController())
+            }
+        }
     }
     
     override func configureView() {
