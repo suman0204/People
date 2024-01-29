@@ -46,7 +46,7 @@ final class SplashViewController: BaseViewController {
                 if result.count > 0 {
                     SwitchView.shared.switchView(viewController: TabBarController())
                 } else {
-                    SwitchView.shared.switchView(viewController: HomeViewController())
+                    SwitchView.shared.switchView(viewController: HomeEmptyViewController())
                 }
             case .failure(let error):
                 print("Splash Get Workspace Faliure", error)

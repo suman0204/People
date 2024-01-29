@@ -11,6 +11,9 @@ import RxCocoa
 
 final class WorkSpaceInitialView: BaseViewController {
     
+    let disposeBag = DisposeBag()
+    let viewModel = WorkspaceInitalViewModel()
+    
     let titleLabel = {
         let label = UILabel()
         label.text = "출시 준비 완료!"
@@ -62,6 +65,10 @@ final class WorkSpaceInitialView: BaseViewController {
     }
     
     override func bind() {
+        let input = WorkspaceInitalViewModel.Input(addWorkspaceButtonClicked: createWorkspaceButton.rx.tap, dismissButtonClicked: dismissButton.rx.tap)
+        
+        let output = viewModel.transform(input: input)
+        
         
     }
     
@@ -115,7 +122,18 @@ extension WorkSpaceInitialView {
     
     @objc
     func dismissButtonClicked() {
-        self.dismiss(animated: true)
+//        APIManager.shared.request(type: Workspaces, api: .getWorkspaceList) { result in
+//            switch result {
+//            case .success(let response):
+//                if response.count > 0 {
+//                    
+//                } else {
+//                    
+//                }
+//            case .failure(let error):
+//                <#code#>
+//            }
+//        }
     }
     
     @objc

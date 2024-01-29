@@ -9,7 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class HomeViewController: BaseViewController {
+final class HomeEmptyViewController: BaseViewController {
+    
+    let disposeBag = DisposeBag()
+    let viewModel = HomeEmptyViewModel()
     
     let headerView = HomeHeaderView()
     

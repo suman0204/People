@@ -20,7 +20,7 @@ final class HomeHeaderView: BaseView {
     
     let workspaceName = {
         let label = UILabel()
-        label.backgroundColor = .brown
+//        label.backgroundColor = .brown
         label.text = "No Workspace"
         label.textColor = Colors.TextColor.primary
         label.font = .systemFont(ofSize: Typography.Title1.size, weight: Typography.Title1.weight)
@@ -39,7 +39,7 @@ final class HomeHeaderView: BaseView {
     
     override func configureView() {
         
-        backgroundColor = .yellow
+//        backgroundColor = .yellow
         
         [workspaceImage, workspaceName, profileImage].forEach {
             addSubview($0)

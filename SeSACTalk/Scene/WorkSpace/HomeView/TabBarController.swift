@@ -16,7 +16,7 @@ final class TabBarController: UITabBarController {
     }
     
     func addTabBar() {
-        let homeVC = UINavigationController(rootViewController: HomeViewController())
+        let homeVC = UINavigationController(rootViewController: HomeInitialViewController())
         homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "home"), selectedImage: UIImage(named: "homeSelected"))
         
         let dmVC = UINavigationController(rootViewController: UIViewController())
