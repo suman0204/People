@@ -30,7 +30,7 @@ final class OnboardingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("OnboardingView Present")
     }
     
     override func configureView() {

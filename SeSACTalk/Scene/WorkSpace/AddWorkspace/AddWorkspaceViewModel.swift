@@ -74,6 +74,8 @@ class AddWorkspaceViewModel: ViewModelType {
                 switch response {
                 case .success(let result):
                     print(result)
+                    SwitchView.shared.switchView(viewController: TabBarController())
+                    KeychainManager.shared.create(account: "workspaceID", value: "\(result.workspaceID)")
                 case .failure(let error):
                     print("Add Workspace Error")
                     print(error)

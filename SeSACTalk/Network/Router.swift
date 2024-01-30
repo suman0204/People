@@ -71,6 +71,10 @@ enum Router: URLRequestConvertible {
     case refresh
     case addWorkspace(model: AddWorkspaceRequest)
     case getWorkspaceList
+    case getOneWorkspace(id: Int)
+    case getMyProfile
+    case getMyChannels(id: Int)
+    case getWorkspaceDMList(id: Int)
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -90,6 +94,14 @@ enum Router: URLRequestConvertible {
             return "v1/workspaces"
         case .getWorkspaceList:
             return "v1/workspaces"
+        case .getOneWorkspace(let id):
+            return "v1/workspaces/\(id)"
+        case .getMyProfile:
+            return "v1/users/my"
+        case .getMyChannels(let id):
+            return "v1/workspaces/\(id)/channels/my"
+        case .getWorkspaceDMList(let id):
+            return "v1/workspaces/\(id)/dms"
         }
     }
 
@@ -107,7 +119,7 @@ enum Router: URLRequestConvertible {
             return ["Content-Type" : "multipart/form-data",
                     "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
                     "SesacKey": APIKey.SeSACKey]
-        case .getWorkspaceList:
+        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace:
             return ["Content-Type" : "application/json",
                     "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
                     "SesacKey": APIKey.SeSACKey]
@@ -118,7 +130,7 @@ enum Router: URLRequestConvertible {
         switch self {
         case .emailValidation, .signUp, .logIn, .addWorkspace:
             return .post
-        case .refresh, .getWorkspaceList:
+        case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace:
             return .get
         }
     }

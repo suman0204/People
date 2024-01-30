@@ -67,7 +67,7 @@ final class WorkSpaceInitialView: BaseViewController {
     override func bind() {
         let input = WorkspaceInitalViewModel.Input(addWorkspaceButtonClicked: createWorkspaceButton.rx.tap, dismissButtonClicked: dismissButton.rx.tap)
         
-        let output = viewModel.transform(input: input)
+//        let output = viewModel.transform(input: input)
         
         
     }

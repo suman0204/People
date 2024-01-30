@@ -108,7 +108,7 @@ extension LogInViewModel {
                 if response.count > 0 {
                     SwitchView.shared.switchView(viewController: TabBarController())
                 } else {
-                    SwitchView.shared.switchView(viewController: HomeEmptyViewController())
+                    SwitchView.shared.switchView(viewController: HomeViewController(homeState: .empty))
                 }
             case .failure(let error):
                 print("LoginViewModel Get Workspace Failure", error)

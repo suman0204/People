@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EmptyView: BaseView {
+final class EmptyView: BaseView {
     
     let titleLabel = {
         let label = UILabel()

@@ -32,8 +32,10 @@ final class SplashViewController: BaseViewController {
     
     func setView() {
         if let accessToken = KeychainManager.shared.read(account: "accessToken") {
+            print("Splash AccessToken Exist")
             switchMain()
         } else {
+            print("Splash AccessToken Nil")
             SwitchView.shared.switchView(viewController: OnboardingViewController())
         }
     }
@@ -46,7 +48,7 @@ final class SplashViewController: BaseViewController {
                 if result.count > 0 {
                     SwitchView.shared.switchView(viewController: TabBarController())
                 } else {
-                    SwitchView.shared.switchView(viewController: HomeEmptyViewController())
+                    SwitchView.shared.switchView(viewController: HomeViewController(homeState: .empty))
                 }
             case .failure(let error):
                 print("Splash Get Workspace Faliure", error)
