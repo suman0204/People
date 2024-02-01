@@ -35,7 +35,10 @@ class WorkspaceListCell: BaseTableViewCell {
     
     let workspaceMenu = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "ellipsis")
+        imageView.image = UIImage(systemName: "ellipsis")
+        imageView.tintColor = Colors.BrandColor.black
+        imageView.contentMode = .scaleAspectFill
+        imageView.isHidden = true
         return imageView
     }()
     
@@ -69,7 +72,7 @@ class WorkspaceListCell: BaseTableViewCell {
         workspaceMenu.snp.makeConstraints { make in
             make.size.equalTo(20)
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-12)
         }
         
         //8, 18
@@ -77,6 +80,7 @@ class WorkspaceListCell: BaseTableViewCell {
         labelStackView.snp.makeConstraints { make in
             make.leading.equalTo(workspaceImage.snp.trailing).offset(8)
             make.trailing.equalTo(workspaceMenu.snp.leading).offset(-18)
+            make.centerY.equalToSuperview()
             make.height.equalTo(36)
         }
     }

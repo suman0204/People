@@ -59,6 +59,8 @@
 		8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3BC2B5030C1004A6C38 /* APIError.swift */; };
 		8B56A3C02B5111BE004A6C38 /* LoggableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3BF2B5111BE004A6C38 /* LoggableError.swift */; };
 		8B56A3C42B512DAC004A6C38 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3C32B512DAC004A6C38 /* APIManager.swift */; };
+		8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */; };
+		8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */; };
 		8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C42B4FC1B500D23188 /* Router.swift */; };
 		8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C62B4FD66E00D23188 /* Request.swift */; };
 		8B6FA1C92B4FDB9F00D23188 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */; };
@@ -142,6 +144,8 @@
 		8B56A3BC2B5030C1004A6C38 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8B56A3BF2B5111BE004A6C38 /* LoggableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggableError.swift; sourceTree = "<group>"; };
 		8B56A3C32B512DAC004A6C38 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewModel.swift; sourceTree = "<group>"; };
+		8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
 		8B6FA1C42B4FC1B500D23188 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8B6FA1C62B4FD66E00D23188 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				8B52B8152B63812200284550 /* WorkspaceListViewController.swift */,
+				8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */,
 				8B52B8172B63817200284550 /* SideMenuNavigation.swift */,
 				8B52B8192B639F5600284550 /* EmptyListView.swift */,
 				8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */,
@@ -447,6 +452,7 @@
 				8BC407C82B4BFE5C00F4C3D6 /* Extension+String.swift */,
 				8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */,
 				8B5048D82B5E630000E8A8A0 /* Rx+UIImagePickerController.swift */,
+				8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -623,6 +629,7 @@
 				8B52B8042B62567700284550 /* ChannelTableViewCell.swift in Sources */,
 				8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */,
 				8B5048D42B597D9100E8A8A0 /* HomeHeaderView.swift in Sources */,
+				8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */,
 				8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */,
 				8BAFF9AC2B459028005713EA /* AuthViewController.swift in Sources */,
 				8BC407C92B4BFE5C00F4C3D6 /* Extension+String.swift in Sources */,
@@ -645,6 +652,7 @@
 				8B5048D72B5981BD00E8A8A0 /* AddWorkspaceViewModel.swift in Sources */,
 				8B52B80C2B62665900284550 /* HomeInitialViewController.swift in Sources */,
 				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
+				8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */,
 				8B52B8242B67FF6C00284550 /* HomeViewModel.swift in Sources */,
 				8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */,
 				8B52B7F72B60E3E300284550 /* EmptyView.swift in Sources */,

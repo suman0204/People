@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 enum HomeState {
     case empty
@@ -49,11 +50,35 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         
+        viewModel.enterFlag.onNext(true)
+        
         print(homeState)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.enterFlag.onNext(false)
     }
     
     override func bind() {
         let input = HomeViewModel.Input(homeState: BehaviorSubject(value: homeState))
+        
+        let output = viewModel.transform(input: input)
+        
+        output.workspaceList
+            .subscribe(with: self) { owner, workspaceList in
+                print("HomeView WorkspaceList",workspaceList)
+            }
+            .disposed(by: disposeBag)
+        
+//        output.workspaceList
+//            .bind(to: tableView.rx.items(cellIdentifier: WorkspaceListCell.reuseIdentifier, cellType: WorkspaceListCell.self)) { (row, element, cell) in
+//                cell.workspaceImage.kf.setImage(with: URL(string: element.thumbnail))
+//                cell.workspaceTitle.text = element.name
+//                cell.workspaceCreatedAt.text = element.createdAt
+//            }
+//            .disposed(by: disposeBag)
     }
     
     override func configureView() {

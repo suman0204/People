@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import Kingfisher
 
 class WorkspaceListViewController: BaseViewController {
+    
+    let viewModel = WorkspaceListViewModel()
+    let disposeBag = DisposeBag()
     
     let homeState: HomeState
     
@@ -27,6 +33,14 @@ class WorkspaceListViewController: BaseViewController {
     
     let emptyListView = EmptyListView()
     
+    let tableView = {
+        let tableView = UITableView(frame: .zero)
+        tableView.register(WorkspaceListCell.self, forCellReuseIdentifier: WorkspaceListCell.reuseIdentifier)
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 72
+        return tableView
+    }()
+    
     let addWorkspaceButton = LeftImageButton(title: "워크스페이스 추가", imageName: "plus")
     
     let helpButton = LeftImageButton(title: "도움말", imageName: "questionmark.circle")
@@ -42,14 +56,56 @@ class WorkspaceListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.enterFlag.onNext(true)
                 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.enterFlag.onNext(false)
+    }
+    
+    override func bind() {
+        let input = WorkspaceListViewModel.Input(homeState: BehaviorSubject(value: homeState))
+        
+        let output = viewModel.transform(input: input)
+        
+        output.workspaceList
+            .bind(to: tableView.rx.items(cellIdentifier: WorkspaceListCell.reuseIdentifier, cellType: WorkspaceListCell.self)) { (row, element, cell) in
+                cell.workspaceImage.loadImage(from: element.thumbnail)
+                cell.workspaceTitle.text = element.name
+                cell.workspaceCreatedAt.text = element.createdAt
+                
+                if let savedID = KeychainManager.shared.read(account: .workspaceID) {
+                    if "\(element.workspaceID)" == savedID {
+                        cell.workspaceMenu.isHidden = false
+                        cell.backgroundColor = Colors.BrandColor.gray
+                    } else {
+                        if row == 0 {
+                            cell.workspaceMenu.isHidden = false
+                            cell.backgroundColor = Colors.BrandColor.gray
+                        }
+                    }
+                } else {
+                    if row == 0 {
+                        cell.workspaceMenu.isHidden = false
+                        cell.backgroundColor = Colors.BrandColor.gray
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+    }
     
     override func configureView() {
         self.navigationController?.navigationBar.isHidden = true
         
         view.backgroundColor = Colors.BackgroundColor.secondary
+        
+        view.layer.cornerRadius = 25
+        view.layer.masksToBounds = true
+        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMaxXMinYCorner, .layerMaxXMaxYCorner)
     
         [topView, titleLabel, addWorkspaceButton, helpButton].forEach {
             view.addSubview($0)
@@ -63,6 +119,9 @@ class WorkspaceListViewController: BaseViewController {
             
         case .nonempty:
             print("otl")
+            [tableView].forEach {
+                view.addSubview($0)
+            }
         }
         
     }
@@ -100,6 +159,11 @@ class WorkspaceListViewController: BaseViewController {
         
         case .nonempty:
             print("otl")
+            tableView.snp.makeConstraints { make in
+                make.top.equalTo(topView.snp.bottom)
+                make.horizontalEdges.equalToSuperview()
+                make.bottom.equalTo(addWorkspaceButton.snp.top)
+            }
         }
     }
 }

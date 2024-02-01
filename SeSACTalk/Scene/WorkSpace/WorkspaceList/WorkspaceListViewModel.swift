@@ -1,15 +1,15 @@
 //
-//  HomeEmptyViewModel.swift
+//  WorkspaceListViewModel.swift
 //  SeSACTalk
 //
-//  Created by 홍수만 on 2024/01/30.
+//  Created by 홍수만 on 2024/02/01.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-final class HomeViewModel: ViewModelType {
+class WorkspaceListViewModel: ViewModelType {
     
     let disposeBag = DisposeBag()
     
@@ -20,12 +20,13 @@ final class HomeViewModel: ViewModelType {
     }
     
     struct Output {
-//        let profileData
         let workspaceList: BehaviorSubject<Workspaces>
     }
     
     func transform(input: Input) -> Output {
+        
         let workspaceList: BehaviorSubject<Workspaces> = BehaviorSubject(value: [])
+        
         Observable.combineLatest(input.homeState, enterFlag)
             .filter { homeState, enterFlag in
                 homeState == .nonempty && enterFlag == true
@@ -43,40 +44,6 @@ final class HomeViewModel: ViewModelType {
                 }
             }
             .disposed(by: disposeBag)
-        
-//        input.homeState
-//            .map {
-//                if $0 == HomeState.nonempty {
-//                    return true
-//                } else {
-//                    return false
-//                }
-//            }
-            
-        
-//        enterFlag
-//            .map {
-//                if input.homeState == HomeState.empty {
-//                    return false
-//                }
-//            }
-//            .filter {
-//                $0
-//            }
-//            .flatMapLatest {_ in 
-//                input.homeState
-//            }
-//            .flatMapLatest { _ in
-//                APIManager.shared.singleRequest(type: , api: .getWorkspaceList)
-//            }
-//            .subscribe(with: self) { owner, result in
-//                switch result {
-//                case .success(let response):
-//                    
-//                case .failure(let error):
-//                    
-//                }
-//            }
         
         return Output(workspaceList: workspaceList)
     }

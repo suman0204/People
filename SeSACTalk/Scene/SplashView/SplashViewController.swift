@@ -28,6 +28,10 @@ final class SplashViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        
+        let accessToken = KeychainManager.shared.read(account: .accessToken)
+        let refreshToken = KeychainManager.shared.read(account: .refreshToken)
+        print(accessToken ?? "Non AccessToken", refreshToken ?? "Non RefreshToken")
     }
     
     func setView() {

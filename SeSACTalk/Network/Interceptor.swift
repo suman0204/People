@@ -60,6 +60,8 @@ final class Interceptor: RequestInterceptor {
             case .success(let success):
                 print("Refresh Success ---", success.accessToken)
                 KeychainManager.shared.create(account: .accessToken, value: success.accessToken)
+                
+//                SwitchView.shared.switchView(viewController: TabBarController())
                 completion(.retry)
             case .failure(let failure):
                 print("Refresh Failure ---", failure.rawValue, failure.description)
