@@ -82,8 +82,8 @@ final class LogInViewModel: ViewModelType {
                 switch result {
                 case .success(let response):
                     print(response)
-                    KeychainManager.shared.create(account: "accessToken", value: response.token.accessToken)
-                    KeychainManager.shared.create(account: "refreshToken", value: response.token.refreshToken)
+                    KeychainManager.shared.create(account: .accessToken, value: response.token.accessToken)
+                    KeychainManager.shared.create(account: .refreshToken, value: response.token.refreshToken)
                     
                     owner.switchMain()
                     

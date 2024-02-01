@@ -18,7 +18,7 @@ final class Interceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         print("Enter Adapt")
         
-        guard urlRequest.url?.absoluteString.hasPrefix(APIKey.baseURL) == true, let accessToken = KeychainManager.shared.read(account: "accessToken") else {
+        guard urlRequest.url?.absoluteString.hasPrefix(APIKey.baseURL) == true, let accessToken = KeychainManager.shared.read(account: .accessToken) else {
             completion(.success(urlRequest))
             return
         }
@@ -52,14 +52,14 @@ final class Interceptor: RequestInterceptor {
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         print("Enter Retry", error)
         
-        guard let refreshToken = KeychainManager.shared.read(account: "refreshToken") else { return }
+        guard let refreshToken = KeychainManager.shared.read(account: .refreshToken) else { return }
         
         APIManager.shared.refreshRequest(type: RefreshResponse.self, api: .refresh) { response in
             print("Retry Response ---", response)
             switch response {
             case .success(let success):
                 print("Refresh Success ---", success.accessToken)
-                KeychainManager.shared.create(account: "accessToken", value: success.accessToken)
+                KeychainManager.shared.create(account: .accessToken, value: success.accessToken)
                 completion(.retry)
             case .failure(let failure):
                 print("Refresh Failure ---", failure.rawValue, failure.description)

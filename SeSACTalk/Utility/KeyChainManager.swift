@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum KeyChainAccount: String {
+    case accessToken
+    case refreshToken
+    case workspaceID
+}
+
 final class KeychainManager {
     
     static let shared = KeychainManager()
@@ -16,13 +22,13 @@ final class KeychainManager {
     private let service = Bundle.main.bundleIdentifier ?? ""
     
     //Create 메서드
-    func create(account: String, value: String) {
+    func create(account: KeyChainAccount, value: String) {
         
         //query
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
-            kSecAttrAccount: account,
+            kSecAttrAccount: account.rawValue,
             kSecValueData: value.data(using: .utf8, allowLossyConversion: false)!
         ]
         
@@ -35,13 +41,13 @@ final class KeychainManager {
     }
     
     //Read 메서드
-    func read(account: String) -> String? {
+    func read(account: KeyChainAccount) -> String? {
         
         //query
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
-            kSecAttrAccount: account,
+            kSecAttrAccount: account.rawValue,
             kSecReturnData: kCFBooleanTrue, //CFData타입으로 불러와라
             kSecMatchLimit: kSecMatchLimitOne // 중복되는 경우 하나의 값만 가져와라
         ]
@@ -62,13 +68,13 @@ final class KeychainManager {
     }
     
     //Delete 메서드
-    func delete(account: String) {
+    func delete(account: KeyChainAccount) {
         
         //query
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
-            kSecAttrAccount: account
+            kSecAttrAccount: account.rawValue
         ]
         
         let status = SecItemDelete(query)

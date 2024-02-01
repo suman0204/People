@@ -112,16 +112,16 @@ enum Router: URLRequestConvertible {
                     "SesacKey": APIKey.SeSACKey]
         case .refresh:
             return ["Content-Type" : "application/json",
-                    "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
+                    "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey,
-                    "RefreshToken": KeychainManager.shared.read(account: "refreshToken") ?? ""]
+                    "RefreshToken": KeychainManager.shared.read(account: .refreshToken) ?? ""]
         case .addWorkspace:
             return ["Content-Type" : "multipart/form-data",
-                    "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
+                    "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
         case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace:
             return ["Content-Type" : "application/json",
-                    "Authorization": KeychainManager.shared.read(account: "accessToken") ?? "",
+                    "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
         }
     }

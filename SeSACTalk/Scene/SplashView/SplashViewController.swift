@@ -31,7 +31,7 @@ final class SplashViewController: BaseViewController {
     }
     
     func setView() {
-        if let accessToken = KeychainManager.shared.read(account: "accessToken") {
+        if let accessToken = KeychainManager.shared.read(account: .accessToken) {
             print("Splash AccessToken Exist")
             switchMain()
         } else {
