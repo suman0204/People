@@ -55,6 +55,12 @@ final class HomeViewController: BaseViewController {
         print(homeState)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        headerView.layer.addBorder([.bottom], color: Colors.BrandColor.gray, width: 1)
+
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -83,7 +89,7 @@ final class HomeViewController: BaseViewController {
     
     override func configureView() {
         view.backgroundColor = .white
-        
+                
         //헤더뷰의 title에 제스쳐 추가
         let headerViewTap = UITapGestureRecognizer(target: self, action: #selector(headerViewTapped))
         headerView.workspaceName.addGestureRecognizer(headerViewTap)

@@ -11,8 +11,9 @@ final class HomeHeaderView: BaseView {
     
     let workspaceImage = {
         let imageView = UIImageView(frame: .zero)
-        imageView.backgroundColor = .black
-        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "workspace")
+        imageView.backgroundColor = Colors.BrandColor.green
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         return imageView
@@ -40,6 +41,7 @@ final class HomeHeaderView: BaseView {
     override func configureView() {
         
 //        backgroundColor = .yellow
+//        self.layer.addBorder([.bottom], color: Colors.BrandColor.gray, width: 1)
         
         [workspaceImage, workspaceName, profileImage].forEach {
             addSubview($0)

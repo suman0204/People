@@ -61,6 +61,7 @@
 		8B56A3C42B512DAC004A6C38 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3C32B512DAC004A6C38 /* APIManager.swift */; };
 		8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */; };
 		8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */; };
+		8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */; };
 		8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C42B4FC1B500D23188 /* Router.swift */; };
 		8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C62B4FD66E00D23188 /* Request.swift */; };
 		8B6FA1C92B4FDB9F00D23188 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */; };
@@ -146,6 +147,7 @@
 		8B56A3C32B512DAC004A6C38 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewModel.swift; sourceTree = "<group>"; };
 		8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
+		8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CALayer.swift"; sourceTree = "<group>"; };
 		8B6FA1C42B4FC1B500D23188 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8B6FA1C62B4FD66E00D23188 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */,
 				8B5048D82B5E630000E8A8A0 /* Rx+UIImagePickerController.swift */,
 				8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */,
+				8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				8B5048D72B5981BD00E8A8A0 /* AddWorkspaceViewModel.swift in Sources */,
 				8B52B80C2B62665900284550 /* HomeInitialViewController.swift in Sources */,
 				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
+				8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */,
 				8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */,
 				8B52B8242B67FF6C00284550 /* HomeViewModel.swift in Sources */,
 				8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */,

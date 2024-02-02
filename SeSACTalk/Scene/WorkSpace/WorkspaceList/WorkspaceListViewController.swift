@@ -41,7 +41,7 @@ class WorkspaceListViewController: BaseViewController {
         return tableView
     }()
     
-    let addWorkspaceButton = LeftImageButton(title: "워크스페이스 추가", imageName: "plus")
+    @objc let addWorkspaceButton = LeftImageButton(title: "워크스페이스 추가", imageName: "plus")
     
     let helpButton = LeftImageButton(title: "도움말", imageName: "questionmark.circle")
     
@@ -103,10 +103,14 @@ class WorkspaceListViewController: BaseViewController {
         
         view.backgroundColor = Colors.BackgroundColor.secondary
         
+        //뷰 우측 상단 및 하단 cornerRadius
         view.layer.cornerRadius = 25
         view.layer.masksToBounds = true
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMaxXMinYCorner, .layerMaxXMaxYCorner)
-    
+        
+        addWorkspaceButton.addTarget(self, action: #selector(addWorkspaceButtonClicked), for: .touchUpInside)
+        emptyListView.addWorkspaceButton.addTarget(self, action: #selector(addWorkspaceButtonClicked), for: .touchUpInside)
+        
         [topView, titleLabel, addWorkspaceButton, helpButton].forEach {
             view.addSubview($0)
         }
@@ -165,5 +169,23 @@ class WorkspaceListViewController: BaseViewController {
                 make.bottom.equalTo(addWorkspaceButton.snp.top)
             }
         }
+    }
+}
+
+extension WorkspaceListViewController {
+    
+    @objc func addWorkspaceButtonClicked() {
+        let vc = AddWorkspaceViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [
+                .large()
+            ]
+            
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(nav, animated: true)
     }
 }

@@ -15,7 +15,6 @@ class EmptyListView: BaseView {
         label.textAlignment = .center
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: Typography.Title1.size, weight: Typography.Title1.weight)
-        label.backgroundColor = .yellow
         return label
     }()
     
@@ -25,7 +24,6 @@ class EmptyListView: BaseView {
         label.textAlignment = .center
         label.numberOfLines = 3
         label.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
-        label.backgroundColor = .red
         return label
     }()
     
