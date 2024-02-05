@@ -62,6 +62,7 @@
 		8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */; };
 		8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */; };
 		8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */; };
+		8B64DD762B70BD7300062AB4 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD752B70BD7300062AB4 /* PopUpView.swift */; };
 		8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C42B4FC1B500D23188 /* Router.swift */; };
 		8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C62B4FD66E00D23188 /* Request.swift */; };
 		8B6FA1C92B4FDB9F00D23188 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */; };
@@ -148,6 +149,7 @@
 		8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewModel.swift; sourceTree = "<group>"; };
 		8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
 		8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CALayer.swift"; sourceTree = "<group>"; };
+		8B64DD752B70BD7300062AB4 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		8B6FA1C42B4FC1B500D23188 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8B6FA1C62B4FD66E00D23188 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		8B6FA1C82B4FDB9F00D23188 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				8BAFF9A92B455C25005713EA /* CustomButton.swift */,
 				8B5048CD2B5915CB00E8A8A0 /* CustomTextFieldView.swift */,
 				8B4E926D2B68E0E900ABFEB9 /* LeftImageButton.swift */,
+				8B64DD752B70BD7300062AB4 /* PopUpView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */,
 				8B5048D42B597D9100E8A8A0 /* HomeHeaderView.swift in Sources */,
 				8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */,
+				8B64DD762B70BD7300062AB4 /* PopUpView.swift in Sources */,
 				8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */,
 				8BAFF9AC2B459028005713EA /* AuthViewController.swift in Sources */,
 				8BC407C92B4BFE5C00F4C3D6 /* Extension+String.swift in Sources */,

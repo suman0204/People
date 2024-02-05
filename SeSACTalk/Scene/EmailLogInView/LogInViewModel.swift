@@ -84,7 +84,8 @@ final class LogInViewModel: ViewModelType {
                     print(response)
                     KeychainManager.shared.create(account: .accessToken, value: response.token.accessToken)
                     KeychainManager.shared.create(account: .refreshToken, value: response.token.refreshToken)
-                    
+                    KeychainManager.shared.create(account: .userID, value: "\(response.user_id)")
+
                     owner.switchMain()
                     
                 case .failure(let error):

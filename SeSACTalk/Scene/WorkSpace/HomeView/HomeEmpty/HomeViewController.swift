@@ -55,10 +55,17 @@ final class HomeViewController: BaseViewController {
         print(homeState)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("HomeVC WillAppear")
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         headerView.layer.addBorder([.bottom], color: Colors.BrandColor.gray, width: 1)
 
+        print("HomeViewController DidAppear")
     }
     
     override func viewDidDisappear(_ animated: Bool) {

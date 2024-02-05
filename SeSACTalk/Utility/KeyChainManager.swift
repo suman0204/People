@@ -11,6 +11,7 @@ enum KeyChainAccount: String {
     case accessToken
     case refreshToken
     case workspaceID
+    case userID
 }
 
 final class KeychainManager {

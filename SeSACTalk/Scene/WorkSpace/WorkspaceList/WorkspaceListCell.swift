@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class WorkspaceListCell: BaseTableViewCell {
+    
+    var disposeBag = DisposeBag()
     
     let workspaceImage = {
         let imageView = UIImageView(frame: .zero)
@@ -33,13 +36,21 @@ class WorkspaceListCell: BaseTableViewCell {
         return label
     }()
     
+//    let workspaceMenu = {
+//        let imageView = UIImageView(frame: .zero)
+//        imageView.image = UIImage(systemName: "ellipsis")
+//        imageView.tintColor = Colors.BrandColor.black
+//        imageView.contentMode = .scaleAspectFill
+//        imageView.isHidden = true
+//        return imageView
+//    }()
+    
     let workspaceMenu = {
-        let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "ellipsis")
-        imageView.tintColor = Colors.BrandColor.black
-        imageView.contentMode = .scaleAspectFill
-        imageView.isHidden = true
-        return imageView
+        let button = UIButton(frame: .zero)
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = Colors.BrandColor.black
+        button.isHidden = true
+        return button
     }()
     
     let labelStackView = {
@@ -49,14 +60,22 @@ class WorkspaceListCell: BaseTableViewCell {
         return stackView
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+    }
+    
     override func configureCell() {
+        
+//        workspaceMenu.becomeFirstResponder()
         
         [workspaceTitle, workspaceCreatedAt].forEach {
             labelStackView.addArrangedSubview($0)
         }
         
         [workspaceImage, labelStackView, workspaceMenu].forEach {
-            addSubview($0)
+            contentView.addSubview($0)
         }
     }
     

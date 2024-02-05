@@ -10,20 +10,20 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-class WorkspaceListViewController: BaseViewController {
+final class WorkspaceListViewController: BaseViewController {
     
-    let viewModel = WorkspaceListViewModel()
-    let disposeBag = DisposeBag()
+    private let viewModel = WorkspaceListViewModel()
+    private let disposeBag = DisposeBag()
     
-    let homeState: HomeState
+    private let homeState: HomeState
     
-    let topView = {
+    private let topView = {
         let view = UIView()
         view.backgroundColor = Colors.BackgroundColor.primary
         return view
     }()
     
-    let titleLabel = {
+    private let titleLabel = {
         let label = UILabel()
         label.text = "워크스페이스"
         label.textColor = Colors.TextColor.primary
@@ -31,9 +31,9 @@ class WorkspaceListViewController: BaseViewController {
         return label
     }()
     
-    let emptyListView = EmptyListView()
+    private let emptyListView = EmptyListView()
     
-    let tableView = {
+    private let tableView = {
         let tableView = UITableView(frame: .zero)
         tableView.register(WorkspaceListCell.self, forCellReuseIdentifier: WorkspaceListCell.reuseIdentifier)
         tableView.separatorStyle = .none
@@ -43,7 +43,7 @@ class WorkspaceListViewController: BaseViewController {
     
     @objc let addWorkspaceButton = LeftImageButton(title: "워크스페이스 추가", imageName: "plus")
     
-    let helpButton = LeftImageButton(title: "도움말", imageName: "questionmark.circle")
+    private let helpButton = LeftImageButton(title: "도움말", imageName: "questionmark.circle")
     
     init(homeState: HomeState) {
         self.homeState = homeState
@@ -65,6 +65,8 @@ class WorkspaceListViewController: BaseViewController {
         super.viewDidDisappear(animated)
         
         viewModel.enterFlag.onNext(false)
+        
+        print("WorkspaceListView Disappear")
     }
     
     override func bind() {
@@ -78,24 +80,62 @@ class WorkspaceListViewController: BaseViewController {
                 cell.workspaceTitle.text = element.name
                 cell.workspaceCreatedAt.text = element.createdAt
                 
+                let isAdmin = (KeychainManager.shared.read(account: .userID) == "\(element.ownerID)")
+                
                 if let savedID = KeychainManager.shared.read(account: .workspaceID) {
                     if "\(element.workspaceID)" == savedID {
                         cell.workspaceMenu.isHidden = false
                         cell.backgroundColor = Colors.BrandColor.gray
+                        cell.workspaceMenu.rx.tap
+                            .bind {
+                                print("cell mene tapped")
+                                self.showAlert(isAdmin: isAdmin)
+                            }
+                            .disposed(by: cell.disposeBag)
+                        
                     } else {
                         if row == 0 {
                             cell.workspaceMenu.isHidden = false
                             cell.backgroundColor = Colors.BrandColor.gray
+                            cell.workspaceMenu.rx.tap
+                                .bind {
+                                    print("cell mene tapped")
+                                    self.showAlert(isAdmin: isAdmin)
+
+                                }
+                                .disposed(by: cell.disposeBag)
                         }
                     }
                 } else {
                     if row == 0 {
                         cell.workspaceMenu.isHidden = false
                         cell.backgroundColor = Colors.BrandColor.gray
+                        cell.workspaceMenu.rx.tap
+                            .bind {
+                                print("cell mene tapped")
+                                self.showAlert(isAdmin: isAdmin)
+
+                            }
+                            .disposed(by: cell.disposeBag)
                     }
                 }
             }
             .disposed(by: disposeBag)
+        
+//        tableView.rx.itemSelected
+//            .subscribe(with: self) { owner, index in
+//
+//            }
+        
+//        Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(AddWorkspaceResponse.self))
+//            .map { "셀 선택 \($0) \($1)" }
+//            .subscribe(with: self) { owner, value in
+//                print(value)
+//
+//            }
+//            .disposed(by: disposeBag)
+        
+
     }
     
     override func configureView() {
@@ -174,7 +214,7 @@ class WorkspaceListViewController: BaseViewController {
 
 extension WorkspaceListViewController {
     
-    @objc func addWorkspaceButtonClicked() {
+    @objc private func addWorkspaceButtonClicked() {
         let vc = AddWorkspaceViewController()
         let nav = UINavigationController(rootViewController: vc)
         
@@ -187,5 +227,37 @@ extension WorkspaceListViewController {
         }
         
         present(nav, animated: true)
+    }
+    
+    private func showAlert(isAdmin: Bool) {
+        let alert = UIAlertController()
+        
+        let workspaceEdit = UIAlertAction(title: "워크스페이스 편집", style: .default)
+        let workspaceLeave = UIAlertAction(title: "워크스페이스 나가기", style: .default) { _ in
+            self.leaveButtonClicked()
+        }
+        let changeAdmin = UIAlertAction(title: "워크스페이스 관리자 변경", style: .default)
+        let workspaceDelete = UIAlertAction(title: "워크스페이스 삭제", style: .destructive)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+
+        if isAdmin {
+            [workspaceEdit, workspaceLeave, changeAdmin, workspaceDelete, cancel].forEach {
+                alert.addAction($0)
+            }
+        } else {
+            [workspaceLeave, cancel].forEach {
+                alert.addAction($0)
+            }
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func leaveButtonClicked() {
+        print("Leave")
+        let popUpViewController = PopUpView(titleText: "워크스페이스 나가기", bodyText: "회원님은 워크스페이스 관리자입니다. 워크스페이스 관리 자를 다른 멤버로 변경한 후 나갈 수 있습니다.", buttonTitle: "확인", buttonType: .single)
+        popUpViewController.modalPresentationStyle = .overFullScreen
+        
+        present(popUpViewController, animated: true)
     }
 }
