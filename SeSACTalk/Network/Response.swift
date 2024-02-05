@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 // MARK: - Error
 struct ErrorResponse: Decodable {
     let errorCode: String
@@ -55,6 +56,15 @@ struct AddWorkspaceResponse: Decodable {
     let workspaceID, ownerID: Int
     let description: String?
     let name, thumbnail, createdAt: String
+//    let createdAt: Date
+    
+    var formattedCreatedAt: String {
+        let dataFormmater = DateFormatter()
+        dataFormmater.dateFormat = "yyyy.MM.dd"
+        let date = dataFormmater.date(from: createdAt)
+        let dataString = dataFormmater.string(from: date ?? Date())
+        return dataString
+    }
     
     enum CodingKeys: String, CodingKey {
         case workspaceID = "workspace_id"

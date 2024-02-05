@@ -68,8 +68,6 @@ class WorkspaceListCell: BaseTableViewCell {
     
     override func configureCell() {
         
-//        workspaceMenu.becomeFirstResponder()
-        
         [workspaceTitle, workspaceCreatedAt].forEach {
             labelStackView.addArrangedSubview($0)
         }
@@ -93,8 +91,6 @@ class WorkspaceListCell: BaseTableViewCell {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-12)
         }
-        
-        //8, 18
         
         labelStackView.snp.makeConstraints { make in
             make.leading.equalTo(workspaceImage.snp.trailing).offset(8)

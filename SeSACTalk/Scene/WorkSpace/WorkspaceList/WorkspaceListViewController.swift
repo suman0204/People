@@ -78,7 +78,7 @@ final class WorkspaceListViewController: BaseViewController {
             .bind(to: tableView.rx.items(cellIdentifier: WorkspaceListCell.reuseIdentifier, cellType: WorkspaceListCell.self)) { (row, element, cell) in
                 cell.workspaceImage.loadImage(from: element.thumbnail)
                 cell.workspaceTitle.text = element.name
-                cell.workspaceCreatedAt.text = element.createdAt
+                cell.workspaceCreatedAt.text = element.formattedCreatedAt
                 
                 let isAdmin = (KeychainManager.shared.read(account: .userID) == "\(element.ownerID)")
                 
