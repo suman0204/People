@@ -52,6 +52,9 @@ final class HomeViewController: BaseViewController {
         
         viewModel.enterFlag.onNext(true)
         
+        print("HomeView Didload", KeychainManager.shared.read(account: .workspaceID))
+//        APIManager.shared.singleRequest(type: <#T##Decodable.Protocol#>, api: <#T##Router#>)
+        
         print(homeState)
     }
     
@@ -84,6 +87,15 @@ final class HomeViewController: BaseViewController {
                 print("HomeView WorkspaceList",workspaceList)
             }
             .disposed(by: disposeBag)
+        
+        output.workspace
+            .subscribe(with: self) { owner, workspace in
+                owner.headerView.workspaceName.text = workspace.name
+                owner.headerView.workspaceImage.loadImage(from: workspace.thumbnail)
+//                owner.headerView.profileImage.loadImage(from: workspace.)
+            }
+            .disposed(by: disposeBag)
+        
         
 //        output.workspaceList
 //            .bind(to: tableView.rx.items(cellIdentifier: WorkspaceListCell.reuseIdentifier, cellType: WorkspaceListCell.self)) { (row, element, cell) in

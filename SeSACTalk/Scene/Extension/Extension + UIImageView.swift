@@ -10,7 +10,7 @@ import Kingfisher
 
 extension UIImageView {
     
-    func loadImage(from url: String, placeHolderImage: UIImage? = nil) {
+    func loadImage(from url: String, placeHolderImage: UIImage = UIImage(named: "workspace")!) {
         let modifier = AnyModifier { request in
             var request = request
             if let accessToken = KeychainManager.shared.read(account: .accessToken) {

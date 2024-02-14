@@ -17,6 +17,8 @@ final class WorkspaceListViewController: BaseViewController {
     
     private let homeState: HomeState
     
+    private var workspaceInfo: AddWorkspaceResponse?
+    
     private let topView = {
         let view = UIView()
         view.backgroundColor = Colors.BackgroundColor.primary
@@ -61,6 +63,11 @@ final class WorkspaceListViewController: BaseViewController {
                 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("ListView Did Appear")
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -93,6 +100,8 @@ final class WorkspaceListViewController: BaseViewController {
                             }
                             .disposed(by: cell.disposeBag)
                         
+                        self.workspaceInfo = element
+                        
                     } else {
                         if row == 0 {
                             cell.workspaceMenu.isHidden = false
@@ -104,6 +113,9 @@ final class WorkspaceListViewController: BaseViewController {
 
                                 }
                                 .disposed(by: cell.disposeBag)
+                            
+                            self.workspaceInfo = element
+
                         }
                     }
                 } else {
@@ -117,6 +129,9 @@ final class WorkspaceListViewController: BaseViewController {
 
                             }
                             .disposed(by: cell.disposeBag)
+                        
+                        self.workspaceInfo = element
+
                     }
                 }
             }
@@ -232,7 +247,9 @@ extension WorkspaceListViewController {
     private func showAlert(isAdmin: Bool) {
         let alert = UIAlertController()
         
-        let workspaceEdit = UIAlertAction(title: "워크스페이스 편집", style: .default)
+        let workspaceEdit = UIAlertAction(title: "워크스페이스 편집", style: .default) { _ in
+            self.editWorkspace()
+        }
         let workspaceLeave = UIAlertAction(title: "워크스페이스 나가기", style: .default) { _ in
             self.leaveButtonClicked()
         }
@@ -251,6 +268,28 @@ extension WorkspaceListViewController {
         }
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func editWorkspace() {
+        print("Edit")
+        
+        guard let workspaceInfo = workspaceInfo else {
+            return
+        }
+        
+        let vc = WorkspaceEditViewController(workspaceInfo: workspaceInfo)
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [
+                .large()
+            ]
+            
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(nav, animated: true)
+        
     }
     
     private func leaveButtonClicked() {

@@ -1,75 +1,73 @@
 //
-//  AddWorkspaceViewController.swift
+//  WorkspaceEditViewController.swift
 //  SeSACTalk
 //
-//  Created by 홍수만 on 2024/01/18.
+//  Created by 홍수만 on 2024/02/08.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-final class AddWorkspaceViewController: BaseViewController {
+final class WorkspaceEditViewController: BaseViewController {
     
-    let viewModel = AddWorkspaceViewModel()
+    private let viewModel = WorkspaceEditViewModel()
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    let selectImageButton = {
-        let button = UIButton(frame: .zero)
-        button.setImage(UIImage(named: "addworkspaceimage"), for: .normal)
-        button.layer.cornerRadius = 8
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(selectImageButtonClicked), for: .touchUpInside)
-        return button
-    }()
+    let workspaceInfo: AddWorkspaceResponse
     
-    let imageSelectView = {
+    private let imageSelectView = {
         let view = UIView()
         return view
     }()
     
-    let workspaceImageView = {
+    private lazy var workspaceImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "workspace")
+//        imageView.image = UIImage(named: "workspace")
+        imageView.loadImage(from: workspaceInfo.thumbnail)
+//        viewModel.image = imageView.image?.jpegData(compressionQuality: 0.5)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
+        print("Lazy", imageView.image)
         return imageView
     }()
     
-    let cameraImageView = {
+    private let cameraImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(named: "Camera")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
-    let workspaceNameTextField = {
+    private lazy var workspaceNameTextField = {
         let view = CustomTextFieldView(type: .normal)
         view.labelText = "워크스페이스 이름"
         view.placeholder = "워크스페이스 이름을 입력하세요 (필수)"
+        view.inputTextField.text = workspaceInfo.name
         return view
     }()
 
-    let workspaceDescriptionTextField = {
+    private lazy var workspaceDescriptionTextField = {
         let view = CustomTextFieldView(type: .normal)
         view.labelText = "워크스페이스 설명"
         view.placeholder = "워크스페이스를 설명하세요 (옵션)"
+        view.inputTextField.text = workspaceInfo.description
         return view
     }()
     
-    let addWorkspaceButton = CustomButton(title: "완료", setbackgroundColor: Colors.BrandColor.inactive)
+    private let addWorkspaceButton = CustomButton(title: "저장", setbackgroundColor: Colors.BrandColor.inactive)
     
     //dismiss Button
-    lazy var dismissButton = {
+    private lazy var dismissButton = {
         let button = UIBarButtonItem(image: UIImage(named: "Xmark"), style: .plain, target: self, action: #selector(dismissButtonClicked))
         button.tintColor = Colors.BrandColor.black
         return button
     }()
     
     //이미지 picker
-    lazy var imagePickerController: UIImagePickerController = {
+    private lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
@@ -77,19 +75,48 @@ final class AddWorkspaceViewController: BaseViewController {
         return imagePickerController
     }()
     
+    init(workspaceInfo: AddWorkspaceResponse) {
+        self.workspaceInfo = workspaceInfo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    override func bind() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("Bind", workspaceImageView.image)
+        guard let data = workspaceImageView.image?.jpegData(compressionQuality: 0.5) else {
+            print("nil image")
+            return }
+        print("VC Data", data)
+        self.viewModel.image
+            .onNext(data)
 
-        let input = AddWorkspaceViewModel.Input(name: workspaceNameTextField.inputTextField.rx.text.orEmpty, description: workspaceDescriptionTextField.inputTextField.rx.text.orEmpty, addWorkspaceButtonClicked: addWorkspaceButton.rx.tap)
+    }
+    
+    override func bind() {
+//        print("Bind", workspaceImageView.image)
+//        guard let data = workspaceImageView.image?.jpegData(compressionQuality: 0.5) else {
+//            print("nil image")
+//            return }
+//        print("VC Data", data)
+//        self.viewModel.image
+//            .onNext(data)
+        
+        let input = WorkspaceEditViewModel.Input(workspace: workspaceInfo, name: workspaceNameTextField.inputTextField.rx.text.orEmpty, description: workspaceDescriptionTextField.inputTextField.rx.text.orEmpty, addWorkspaceButtonClicked: addWorkspaceButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
         output.addWorkspaceButtonValid
             .subscribe(with: self) { owner, bool in
+                print("workspaceButton Valid", bool)
                 let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
                 owner.addWorkspaceButton.backgroundColor = color
                 owner.addWorkspaceButton.isEnabled = bool
@@ -107,6 +134,10 @@ final class AddWorkspaceViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        print("Edit Button Valid", output.addWorkspaceButtonValid)
+        
+        print(output.addWorkspaceButtonValid)
     }
     
     override func configureView() {
@@ -119,7 +150,7 @@ final class AddWorkspaceViewController: BaseViewController {
         imageSelectView.addGestureRecognizer(imageSelectViewTap)
         imageSelectView.isUserInteractionEnabled = true
     
-        self.title = "워크스페이스 생성"
+        self.title = "워크스페이스 편집"
         
         [workspaceImageView, cameraImageView].forEach {
             imageSelectView.addSubview($0)
@@ -175,17 +206,17 @@ final class AddWorkspaceViewController: BaseViewController {
 }
 
 
-extension AddWorkspaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension WorkspaceEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //sheet dismiss
     @objc
-    func dismissButtonClicked() {
+    private func dismissButtonClicked() {
         self.dismiss(animated: true)
     }
     
     //imagePicker
     @objc
-    func selectImageButtonClicked() {
+    private func selectImageButtonClicked() {
         let alert =  UIAlertController(title: "워크스페이스 이미지", message: "워크스페이스 프로필 이미지를 선택하세요", preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "앨범에서 가져오기", style: .default) { (action) in self.openLibrary() }
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
@@ -197,13 +228,13 @@ extension AddWorkspaceViewController: UIImagePickerControllerDelegate, UINavigat
     }
     
     //앨범 열기
-    func openLibrary(){
+    private func openLibrary(){
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: false, completion: nil)
     }
     
     //카메라 열기
-    func openCamera(){
+    private func openCamera(){
         imagePickerController.sourceType = .camera
         present(imagePickerController, animated: false, completion: nil)
     }

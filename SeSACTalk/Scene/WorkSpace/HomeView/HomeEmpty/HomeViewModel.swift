@@ -15,6 +15,8 @@ final class HomeViewModel: ViewModelType {
     
     let enterFlag = BehaviorSubject(value: false)
     
+    let workspaceID = KeychainManager.shared.read(account: .workspaceID) ?? "0"
+    
     struct Input {
         let homeState: BehaviorSubject<HomeState>
     }
@@ -22,10 +24,13 @@ final class HomeViewModel: ViewModelType {
     struct Output {
 //        let profileData
         let workspaceList: BehaviorSubject<Workspaces>
+        let workspace: BehaviorSubject<Workspace>
     }
     
     func transform(input: Input) -> Output {
         let workspaceList: BehaviorSubject<Workspaces> = BehaviorSubject(value: [])
+        let workspace: BehaviorSubject<Workspace> = BehaviorSubject(value: Workspace(workspaceID: 0, name: "", description: "", thumbnail: "", ownerID: 0, createdAt: "", channels: [], workspaceMembers: []))
+        
         Observable.combineLatest(input.homeState, enterFlag)
             .filter { homeState, enterFlag in
                 homeState == .nonempty && enterFlag == true
@@ -40,6 +45,29 @@ final class HomeViewModel: ViewModelType {
                     workspaceList.onNext(response)
                 case .failure(let error):
                     print("HomeView Get WorkspaceList Failure",error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        guard let workspaceID = KeychainManager.shared.read(account: .workspaceID), let intID = Int(workspaceID) else {
+            return Output(workspaceList: workspaceList, workspace: workspace)
+        }
+        
+        Observable.combineLatest(input.homeState, enterFlag)
+            .filter { homeState, enterFlag in
+                homeState == .nonempty && enterFlag == true
+            }
+            .flatMapLatest { _ in
+                APIManager.shared.singleRequest(type: Workspace.self, api: .getOneWorkspace(id: intID))
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print("HomeView Get Workspace Info Success", response)
+                    workspace.onNext(response)
+                case .failure(let error):
+                    print("HomeView Get Workspace Info Failure", error)
+                    
                 }
             }
             .disposed(by: disposeBag)
@@ -78,6 +106,6 @@ final class HomeViewModel: ViewModelType {
 //                }
 //            }
         
-        return Output(workspaceList: workspaceList)
+        return Output(workspaceList: workspaceList, workspace: workspace)
     }
 }

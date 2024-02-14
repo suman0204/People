@@ -89,7 +89,7 @@ struct MyProfile: Decodable {
 }
 
 // MARK: - Workspace (One)
-struct Workspace: Codable {
+struct Workspace: Decodable {
     let workspaceID: Int
     let name, description, thumbnail: String
     let ownerID: Int
@@ -106,9 +106,10 @@ struct Workspace: Codable {
 }
 
 // MARK: - Channel
-struct Channel: Codable {
+struct Channel: Decodable {
     let workspaceID, channelID: Int
-    let name, description: String
+    let name: String
+    let description: String?
     let ownerID, channelPrivate: Int
     let createdAt: String
 
@@ -123,9 +124,10 @@ struct Channel: Codable {
 }
 
 // MARK: - WorkspaceMember
-struct WorkspaceMember: Codable {
+struct WorkspaceMember: Decodable {
     let userID: Int
-    let email, nickname, profileImage: String
+    let email, nickname: String
+    let profileImage: String?
 
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"

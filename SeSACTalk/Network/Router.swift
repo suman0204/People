@@ -75,6 +75,7 @@ enum Router: URLRequestConvertible {
     case getMyProfile
     case getMyChannels(id: Int)
     case getWorkspaceDMList(id: Int)
+    case editWorspace(id: Int, model: AddWorkspaceRequest)
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -102,6 +103,8 @@ enum Router: URLRequestConvertible {
             return "v1/workspaces/\(id)/channels/my"
         case .getWorkspaceDMList(let id):
             return "v1/workspaces/\(id)/dms"
+        case .editWorspace(let id, _):
+            return "v1/workspaces/\(id)"
         }
     }
 
@@ -115,7 +118,7 @@ enum Router: URLRequestConvertible {
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey,
                     "RefreshToken": KeychainManager.shared.read(account: .refreshToken) ?? ""]
-        case .addWorkspace:
+        case .addWorkspace, .editWorspace:
             return ["Content-Type" : "multipart/form-data",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
@@ -132,6 +135,8 @@ enum Router: URLRequestConvertible {
             return .post
         case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace:
             return .get
+        case .editWorspace:
+            return .put
         }
     }
     
@@ -171,7 +176,7 @@ enum Router: URLRequestConvertible {
 extension Router {
     var multipart: MultipartFormData {
         switch self {
-        case .addWorkspace(let model):
+        case .addWorkspace(let model), .editWorspace(_, let model):
             let multipartFormData = MultipartFormData()
             
             let name = model.name.data(using: .utf8) ?? Data()

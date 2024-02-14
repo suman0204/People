@@ -12,6 +12,13 @@ enum ButtonType {
     case double
 }
 
+enum ButtonAction {
+    case workspaceEdit
+    case workspaceExit
+    case workspaceChangeAdmin
+    case workspaceDelete
+}
+
 final class PopUpView: BaseViewController {
     
 //    private let titleText: String
@@ -74,6 +81,11 @@ final class PopUpView: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if buttonType == .single {
+            greenButton.addTarget(self, action: #selector(dismissButtonClicked), for: .touchUpInside)
+        } else if buttonType == .double {
+            cancelButton.addTarget(self, action: #selector(dismissButtonClicked), for: .touchUpInside)
+        }
     }
     
     override func configureView() {
@@ -123,6 +135,17 @@ final class PopUpView: BaseViewController {
             make.horizontalEdges.equalToSuperview().inset(24)
         }
     }
+    
+    
+}
+
+extension PopUpView {
+
+    @objc
+    func dismissButtonClicked() {
+        self.dismiss(animated: true)
+    }
+    
     
     
 }

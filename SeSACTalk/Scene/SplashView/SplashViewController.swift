@@ -31,6 +31,7 @@ final class SplashViewController: BaseViewController {
         
         let accessToken = KeychainManager.shared.read(account: .accessToken)
         let refreshToken = KeychainManager.shared.read(account: .refreshToken)
+        print(accessToken, refreshToken)
         print(accessToken ?? "Non AccessToken", refreshToken ?? "Non RefreshToken")
     }
     
@@ -51,6 +52,7 @@ final class SplashViewController: BaseViewController {
                 print("Splash Get Workspace Succes",result)
                 if result.count > 0 {
                     SwitchView.shared.switchView(viewController: TabBarController())
+                    KeychainManager.shared.create(account: .workspaceID, value: "\(result.first?.workspaceID ?? 0)")
                 } else {
                     SwitchView.shared.switchView(viewController: HomeViewController(homeState: .empty))
                 }

@@ -30,6 +30,8 @@
 		8B3B6D1C2B43EDA100B5B486 /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1B2B43EDA100B5B486 /* RxKakaoSDKAuth */; };
 		8B3B6D1E2B43EDA100B5B486 /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1D2B43EDA100B5B486 /* RxKakaoSDKCommon */; };
 		8B3B6D202B43EDA100B5B486 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1F2B43EDA100B5B486 /* RxKakaoSDKUser */; };
+		8B430C602B74B40B0050FA63 /* WorkspaceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C5F2B74B40B0050FA63 /* WorkspaceEditViewController.swift */; };
+		8B430C622B74CA160050FA63 /* WorkspaceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C612B74CA160050FA63 /* WorkspaceEditViewModel.swift */; };
 		8B4E926E2B68E0E900ABFEB9 /* LeftImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4E926D2B68E0E900ABFEB9 /* LeftImageButton.swift */; };
 		8B5048CC2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5048CB2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift */; };
 		8B5048CE2B5915CB00E8A8A0 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5048CD2B5915CB00E8A8A0 /* CustomTextFieldView.swift */; };
@@ -119,6 +121,8 @@
 		8B3B6CC42B43D6CE00B5B486 /* SeSACTalkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTalkUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8B3B6CFE2B43E5E300B5B486 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8B3B6D002B43E63900B5B486 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		8B430C5F2B74B40B0050FA63 /* WorkspaceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEditViewController.swift; sourceTree = "<group>"; };
+		8B430C612B74CA160050FA63 /* WorkspaceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEditViewModel.swift; sourceTree = "<group>"; };
 		8B4E926D2B68E0E900ABFEB9 /* LeftImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftImageButton.swift; sourceTree = "<group>"; };
 		8B5048CB2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceViewController.swift; sourceTree = "<group>"; };
 		8B5048CD2B5915CB00E8A8A0 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
@@ -319,6 +323,31 @@
 			path = SplashView;
 			sourceTree = "<group>";
 		};
+		8B430C5E2B74B3F50050FA63 /* WorkspaceSetting */ = {
+			isa = PBXGroup;
+			children = (
+				8B430C662B7B68150050FA63 /* ChangeAdmin */,
+				8B430C652B7B67FF0050FA63 /* EditWorkspace */,
+			);
+			path = WorkspaceSetting;
+			sourceTree = "<group>";
+		};
+		8B430C652B7B67FF0050FA63 /* EditWorkspace */ = {
+			isa = PBXGroup;
+			children = (
+				8B430C5F2B74B40B0050FA63 /* WorkspaceEditViewController.swift */,
+				8B430C612B74CA160050FA63 /* WorkspaceEditViewModel.swift */,
+			);
+			path = EditWorkspace;
+			sourceTree = "<group>";
+		};
+		8B430C662B7B68150050FA63 /* ChangeAdmin */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChangeAdmin;
+			sourceTree = "<group>";
+		};
 		8B5048D52B5981A200E8A8A0 /* AddWorkspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +374,7 @@
 		8B52B8142B6380F600284550 /* WorkspaceList */ = {
 			isa = PBXGroup;
 			children = (
+				8B430C5E2B74B3F50050FA63 /* WorkspaceSetting */,
 				8B52B8152B63812200284550 /* WorkspaceListViewController.swift */,
 				8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */,
 				8B52B8172B63817200284550 /* SideMenuNavigation.swift */,
@@ -633,6 +663,7 @@
 				8B764B242B5522840066AF07 /* LoginViewController.swift in Sources */,
 				8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */,
 				8B52B8042B62567700284550 /* ChannelTableViewCell.swift in Sources */,
+				8B430C602B74B40B0050FA63 /* WorkspaceEditViewController.swift in Sources */,
 				8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */,
 				8B5048D42B597D9100E8A8A0 /* HomeHeaderView.swift in Sources */,
 				8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */,
@@ -667,6 +698,7 @@
 				8B764B212B551E430066AF07 /* KeyChainManager.swift in Sources */,
 				8B3B6CA22B43D6CD00B5B486 /* AppDelegate.swift in Sources */,
 				8B3B6CA42B43D6CD00B5B486 /* SceneDelegate.swift in Sources */,
+				8B430C622B74CA160050FA63 /* WorkspaceEditViewModel.swift in Sources */,
 				8B52B8162B63812200284550 /* WorkspaceListViewController.swift in Sources */,
 				8B764B292B5658B90066AF07 /* WorkSpaceInitialView.swift in Sources */,
 				8B52B8062B6256AC00284550 /* BaseTableViewCell.swift in Sources */,
