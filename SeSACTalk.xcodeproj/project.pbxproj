@@ -385,12 +385,8 @@
 		8B52B8142B6380F600284550 /* WorkspaceList */ = {
 			isa = PBXGroup;
 			children = (
+				8BC842D42B7E08BA000A2C59 /* WorkspaceListView */,
 				8B430C5E2B74B3F50050FA63 /* WorkspaceSetting */,
-				8B52B8152B63812200284550 /* WorkspaceListViewController.swift */,
-				8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */,
-				8B52B8172B63817200284550 /* SideMenuNavigation.swift */,
-				8B52B8192B639F5600284550 /* EmptyListView.swift */,
-				8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */,
 			);
 			path = WorkspaceList;
 			sourceTree = "<group>";
@@ -503,6 +499,18 @@
 				8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8BC842D42B7E08BA000A2C59 /* WorkspaceListView */ = {
+			isa = PBXGroup;
+			children = (
+				8B52B8152B63812200284550 /* WorkspaceListViewController.swift */,
+				8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */,
+				8B52B8172B63817200284550 /* SideMenuNavigation.swift */,
+				8B52B8192B639F5600284550 /* EmptyListView.swift */,
+				8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */,
+			);
+			path = WorkspaceListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

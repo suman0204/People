@@ -17,6 +17,9 @@ final class HomeViewModel: ViewModelType {
     
     let workspaceID = KeychainManager.shared.read(account: .workspaceID) ?? "0"
     
+    //NotificationCenter
+    let changeWorkspaceNoti = NotificationCenter.default.rx.notification(Notification.Name("ChangeWorkspace"))
+    
     struct Input {
         let homeState: BehaviorSubject<HomeState>
     }
@@ -50,6 +53,7 @@ final class HomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         guard let workspaceID = KeychainManager.shared.read(account: .workspaceID), let intID = Int(workspaceID) else {
+            print("WorkspaceID Nil")
             return Output(workspaceList: workspaceList, workspace: workspace)
         }
         
@@ -59,6 +63,22 @@ final class HomeViewModel: ViewModelType {
             }
             .flatMapLatest { _ in
                 APIManager.shared.singleRequest(type: Workspace.self, api: .getOneWorkspace(id: intID))
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print("HomeView Get Workspace Info Success", response)
+                    workspace.onNext(response)
+                case .failure(let error):
+                    print("HomeView Get Workspace Info Failure", error)
+                    
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        changeWorkspaceNoti
+            .flatMapLatest { noti in
+                APIManager.shared.singleRequest(type: Workspace.self, api: .getOneWorkspace(id: noti.object as! Int))
             }
             .subscribe(with: self) { owner, result in
                 switch result {

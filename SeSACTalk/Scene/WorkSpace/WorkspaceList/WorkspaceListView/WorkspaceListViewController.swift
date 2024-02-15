@@ -63,7 +63,7 @@ final class WorkspaceListViewController: BaseViewController {
         super.viewDidLoad()
         
         viewModel.enterFlag.onNext(true)
-                
+        print("ListView WorkspaceID",KeychainManager.shared.read(account: .workspaceID))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,14 +93,18 @@ final class WorkspaceListViewController: BaseViewController {
         
         output.workspaceList
             .bind(to: tableView.rx.items(cellIdentifier: WorkspaceListCell.reuseIdentifier, cellType: WorkspaceListCell.self)) { (row, element, cell) in
+                cell.selectionStyle = .none
                 cell.workspaceImage.loadImage(from: element.thumbnail)
                 cell.workspaceTitle.text = element.name
                 cell.workspaceCreatedAt.text = element.formattedCreatedAt
+//                cell.backgroundColor = Colors.BackgroundColor.secondary
                 
                 let isAdmin = (KeychainManager.shared.read(account: .userID) == "\(element.ownerID)")
                 
                 if let savedID = KeychainManager.shared.read(account: .workspaceID) {
+                    print("SavedID", savedID)
                     if "\(element.workspaceID)" == savedID {
+                        print("SameSame", cell.workspaceCreatedAt)
                         cell.workspaceMenu.isHidden = false
                         cell.backgroundColor = Colors.BrandColor.gray
                         cell.workspaceMenu.rx.tap
@@ -113,20 +117,8 @@ final class WorkspaceListViewController: BaseViewController {
                         self.workspaceInfo = element
                         
                     } else {
-                        if row == 0 {
-                            cell.workspaceMenu.isHidden = false
-                            cell.backgroundColor = Colors.BrandColor.gray
-                            cell.workspaceMenu.rx.tap
-                                .bind {
-                                    print("cell mene tapped")
-                                    self.showAlert(isAdmin: isAdmin)
-
-                                }
-                                .disposed(by: cell.disposeBag)
-                            
-                            self.workspaceInfo = element
-
-                        }
+                            cell.backgroundColor = Colors.BackgroundColor.secondary
+                            cell.workspaceMenu.isHidden = true
                     }
                 } else {
                     if row == 0 {
@@ -142,23 +134,32 @@ final class WorkspaceListViewController: BaseViewController {
                         
                         self.workspaceInfo = element
 
+                    } else {
+                        cell.backgroundColor = Colors.BackgroundColor.secondary
+                        cell.workspaceMenu.isHidden = true
                     }
                 }
             }
             .disposed(by: disposeBag)
         
-//        tableView.rx.itemSelected
-//            .subscribe(with: self) { owner, index in
-//
-//            }
-        
-//        Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(AddWorkspaceResponse.self))
+        Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(AddWorkspaceResponse.self))
 //            .map { "셀 선택 \($0) \($1)" }
-//            .subscribe(with: self) { owner, value in
-//                print(value)
-//
-//            }
-//            .disposed(by: disposeBag)
+            .subscribe(with: self, onNext: { owner, selection in
+                print(selection.0.row)
+                print(selection.1)
+                let selectedIndex = selection.0
+                
+                owner.tableView.cellForRow(at: selectedIndex)?.backgroundColor = Colors.BrandColor.gray
+                owner.tableView.visibleCells.forEach { cell in
+                    if let cellIndexPath = owner.tableView.indexPath(for: cell), cellIndexPath != selectedIndex {
+                        cell.backgroundColor = .clear
+                    }
+                }
+                KeychainManager.shared.create(account: .workspaceID, value: "\(selection.1.workspaceID)")
+                NotificationCenter.default.post(name: NSNotification.Name("ChangeWorkspace"), object: selection.1.workspaceID)
+                owner.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
         
 
     }

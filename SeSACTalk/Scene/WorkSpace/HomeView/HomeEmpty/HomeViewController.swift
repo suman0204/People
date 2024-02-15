@@ -73,7 +73,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        print("HomeViewController DidDisappear")
         viewModel.enterFlag.onNext(false)
     }
     
