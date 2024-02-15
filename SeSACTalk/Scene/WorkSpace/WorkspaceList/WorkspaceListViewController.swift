@@ -19,6 +19,9 @@ final class WorkspaceListViewController: BaseViewController {
     
     private var workspaceInfo: AddWorkspaceResponse?
     
+    //NotificationCenter
+    let notificationObservable = NotificationCenter.default.rx.notification(Notification.Name("EditComplete"))
+    
     private let topView = {
         let view = UIView()
         view.backgroundColor = Colors.BackgroundColor.primary
@@ -77,6 +80,13 @@ final class WorkspaceListViewController: BaseViewController {
     }
     
     override func bind() {
+        
+        notificationObservable
+            .subscribe(with: self) { owner, notification in
+                owner.showToast(message: "워크스페이스가 편집외었습니다.")
+            }
+            .disposed(by: disposeBag)
+        
         let input = WorkspaceListViewModel.Input(homeState: BehaviorSubject(value: homeState))
         
         let output = viewModel.transform(input: input)
@@ -253,7 +263,9 @@ extension WorkspaceListViewController {
         let workspaceLeave = UIAlertAction(title: "워크스페이스 나가기", style: .default) { _ in
             self.leaveButtonClicked()
         }
-        let changeAdmin = UIAlertAction(title: "워크스페이스 관리자 변경", style: .default)
+        let changeAdmin = UIAlertAction(title: "워크스페이스 관리자 변경", style: .default) { _ in
+            self.changeAdmin()
+        }
         let workspaceDelete = UIAlertAction(title: "워크스페이스 삭제", style: .destructive)
         let cancel = UIAlertAction(title: "취소", style: .cancel)
 
@@ -271,13 +283,31 @@ extension WorkspaceListViewController {
     }
     
     private func editWorkspace() {
-        print("Edit")
+        print("EditWorkspace")
         
         guard let workspaceInfo = workspaceInfo else {
             return
         }
         
         let vc = WorkspaceEditViewController(workspaceInfo: workspaceInfo)
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [
+                .large()
+            ]
+            
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(nav, animated: true)
+        
+    }
+    
+    private func changeAdmin() {
+        print("ChangeAdmin")
+        
+        let vc = ChangeAdminViewController()
         let nav = UINavigationController(rootViewController: vc)
         
         if let sheet = nav.sheetPresentationController {

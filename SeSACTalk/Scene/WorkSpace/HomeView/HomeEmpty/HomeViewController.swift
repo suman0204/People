@@ -91,6 +91,7 @@ final class HomeViewController: BaseViewController {
         output.workspace
             .subscribe(with: self) { owner, workspace in
                 owner.headerView.workspaceName.text = workspace.name
+                print("Workspace Name", workspace.name)
                 owner.headerView.workspaceImage.loadImage(from: workspace.thumbnail)
 //                owner.headerView.profileImage.loadImage(from: workspace.)
             }

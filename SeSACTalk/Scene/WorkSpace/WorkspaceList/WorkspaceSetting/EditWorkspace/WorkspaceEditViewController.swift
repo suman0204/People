@@ -57,7 +57,7 @@ final class WorkspaceEditViewController: BaseViewController {
         return view
     }()
     
-    private let addWorkspaceButton = CustomButton(title: "저장", setbackgroundColor: Colors.BrandColor.inactive)
+    private let editWorkspaceButton = CustomButton(title: "저장", setbackgroundColor: Colors.BrandColor.inactive)
     
     //dismiss Button
     private lazy var dismissButton = {
@@ -109,21 +109,24 @@ final class WorkspaceEditViewController: BaseViewController {
 //        print("VC Data", data)
 //        self.viewModel.image
 //            .onNext(data)
+        viewModel.editSuccess = { [weak self] in
+            self?.dismissButtonClicked()
+        }
         
-        let input = WorkspaceEditViewModel.Input(workspace: workspaceInfo, name: workspaceNameTextField.inputTextField.rx.text.orEmpty, description: workspaceDescriptionTextField.inputTextField.rx.text.orEmpty, addWorkspaceButtonClicked: addWorkspaceButton.rx.tap)
+        let input = WorkspaceEditViewModel.Input(workspace: workspaceInfo, name: workspaceNameTextField.inputTextField.rx.text.orEmpty, description: workspaceDescriptionTextField.inputTextField.rx.text.orEmpty, editWorkspaceButtonClicked: editWorkspaceButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
-        output.addWorkspaceButtonValid
+        output.editWorkspaceButtonValid
             .subscribe(with: self) { owner, bool in
                 print("workspaceButton Valid", bool)
                 let color: UIColor = bool ? Colors.BrandColor.green : Colors.BrandColor.inactive
-                owner.addWorkspaceButton.backgroundColor = color
-                owner.addWorkspaceButton.isEnabled = bool
+                owner.editWorkspaceButton.backgroundColor = color
+                owner.editWorkspaceButton.isEnabled = bool
             }
             .disposed(by: disposeBag)
         
-        addWorkspaceButton.rx.tap
+        editWorkspaceButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 guard let invalidIndex = try? output.validationArray.value().firstIndex(of: false) else { return }
                 
@@ -135,9 +138,6 @@ final class WorkspaceEditViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        print("Edit Button Valid", output.addWorkspaceButtonValid)
-        
-        print(output.addWorkspaceButtonValid)
     }
     
     override func configureView() {
@@ -156,7 +156,7 @@ final class WorkspaceEditViewController: BaseViewController {
             imageSelectView.addSubview($0)
         }
         
-        [/*selectImageButton*/imageSelectView, workspaceNameTextField, workspaceDescriptionTextField, addWorkspaceButton].forEach {
+        [/*selectImageButton*/imageSelectView, workspaceNameTextField, workspaceDescriptionTextField, editWorkspaceButton].forEach {
             view.addSubview($0)
         }
     }
@@ -196,7 +196,7 @@ final class WorkspaceEditViewController: BaseViewController {
             make.height.equalTo(76)
         }
         
-        addWorkspaceButton.snp.makeConstraints { make in
+        editWorkspaceButton.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(44)
             make.top.lessThanOrEqualTo(workspaceDescriptionTextField.snp.bottom).offset(447)

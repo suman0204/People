@@ -32,6 +32,9 @@
 		8B3B6D202B43EDA100B5B486 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3B6D1F2B43EDA100B5B486 /* RxKakaoSDKUser */; };
 		8B430C602B74B40B0050FA63 /* WorkspaceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C5F2B74B40B0050FA63 /* WorkspaceEditViewController.swift */; };
 		8B430C622B74CA160050FA63 /* WorkspaceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C612B74CA160050FA63 /* WorkspaceEditViewModel.swift */; };
+		8B430C682B7C95390050FA63 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C672B7C95390050FA63 /* NotificationCenter.swift */; };
+		8B430C6A2B7CBC530050FA63 /* ChangeAdimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C692B7CBC530050FA63 /* ChangeAdimViewController.swift */; };
+		8B430C6C2B7CBCA20050FA63 /* ChangeAdminTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B430C6B2B7CBCA20050FA63 /* ChangeAdminTableCell.swift */; };
 		8B4E926E2B68E0E900ABFEB9 /* LeftImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4E926D2B68E0E900ABFEB9 /* LeftImageButton.swift */; };
 		8B5048CC2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5048CB2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift */; };
 		8B5048CE2B5915CB00E8A8A0 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5048CD2B5915CB00E8A8A0 /* CustomTextFieldView.swift */; };
@@ -86,6 +89,7 @@
 		8BC407C42B4ADDA700F4C3D6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C32B4ADDA700F4C3D6 /* SignUpViewModel.swift */; };
 		8BC407C72B4BFE3B00F4C3D6 /* Extension+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C62B4BFE3B00F4C3D6 /* Extension+UITextField.swift */; };
 		8BC407C92B4BFE5C00F4C3D6 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C82B4BFE5C00F4C3D6 /* Extension+String.swift */; };
+		8BC842D32B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842D22B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +127,9 @@
 		8B3B6D002B43E63900B5B486 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8B430C5F2B74B40B0050FA63 /* WorkspaceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEditViewController.swift; sourceTree = "<group>"; };
 		8B430C612B74CA160050FA63 /* WorkspaceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEditViewModel.swift; sourceTree = "<group>"; };
+		8B430C672B7C95390050FA63 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		8B430C692B7CBC530050FA63 /* ChangeAdimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAdimViewController.swift; sourceTree = "<group>"; };
+		8B430C6B2B7CBCA20050FA63 /* ChangeAdminTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAdminTableCell.swift; sourceTree = "<group>"; };
 		8B4E926D2B68E0E900ABFEB9 /* LeftImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftImageButton.swift; sourceTree = "<group>"; };
 		8B5048CB2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceViewController.swift; sourceTree = "<group>"; };
 		8B5048CD2B5915CB00E8A8A0 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
@@ -176,6 +183,7 @@
 		8BC407C32B4ADDA700F4C3D6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		8BC407C62B4BFE3B00F4C3D6 /* Extension+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextField.swift"; sourceTree = "<group>"; };
 		8BC407C82B4BFE5C00F4C3D6 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		8BC842D22B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAdnimViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +352,9 @@
 		8B430C662B7B68150050FA63 /* ChangeAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				8B430C692B7CBC530050FA63 /* ChangeAdimViewController.swift */,
+				8B430C6B2B7CBCA20050FA63 /* ChangeAdminTableCell.swift */,
+				8BC842D22B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift */,
 			);
 			path = ChangeAdmin;
 			sourceTree = "<group>";
@@ -455,6 +466,7 @@
 				8BAFF9A02B4412ED005713EA /* Colors.swift */,
 				8BAFF9A22B444845005713EA /* Typography.swift */,
 				8B764B202B551E430066AF07 /* KeyChainManager.swift */,
+				8B430C672B7C95390050FA63 /* NotificationCenter.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -689,9 +701,11 @@
 				8B52B8182B63817200284550 /* SideMenuNavigation.swift in Sources */,
 				8B5048D72B5981BD00E8A8A0 /* AddWorkspaceViewModel.swift in Sources */,
 				8B52B80C2B62665900284550 /* HomeInitialViewController.swift in Sources */,
+				8B430C6C2B7CBCA20050FA63 /* ChangeAdminTableCell.swift in Sources */,
 				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
 				8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */,
 				8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */,
+				8B430C682B7C95390050FA63 /* NotificationCenter.swift in Sources */,
 				8B52B8242B67FF6C00284550 /* HomeViewModel.swift in Sources */,
 				8B6FA1C52B4FC1B500D23188 /* Router.swift in Sources */,
 				8B52B7F72B60E3E300284550 /* EmptyView.swift in Sources */,
@@ -699,10 +713,12 @@
 				8B3B6CA22B43D6CD00B5B486 /* AppDelegate.swift in Sources */,
 				8B3B6CA42B43D6CD00B5B486 /* SceneDelegate.swift in Sources */,
 				8B430C622B74CA160050FA63 /* WorkspaceEditViewModel.swift in Sources */,
+				8BC842D32B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift in Sources */,
 				8B52B8162B63812200284550 /* WorkspaceListViewController.swift in Sources */,
 				8B764B292B5658B90066AF07 /* WorkSpaceInitialView.swift in Sources */,
 				8B52B8062B6256AC00284550 /* BaseTableViewCell.swift in Sources */,
 				8B9506542B467B0000A353A0 /* APIKey.swift in Sources */,
+				8B430C6A2B7CBC530050FA63 /* ChangeAdimViewController.swift in Sources */,
 				8B52B81E2B678E4600284550 /* TabBarController.swift in Sources */,
 				8BC407C02B495AD500F4C3D6 /* BaseView.swift in Sources */,
 				8B5048D22B59290800E8A8A0 /* HomeViewController.swift in Sources */,

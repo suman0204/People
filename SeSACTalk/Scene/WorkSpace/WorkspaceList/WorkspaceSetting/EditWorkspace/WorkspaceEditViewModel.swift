@@ -18,16 +18,18 @@ final class WorkspaceEditViewModel: ViewModelType {
     let image: BehaviorSubject<Data> = BehaviorSubject(value: Data())
     let imageValid: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     
+    var editSuccess: (() -> Void)?
+    
     struct Input {
         let workspace: AddWorkspaceResponse
         let name: ControlProperty<String>
         let description: ControlProperty<String>
-        let addWorkspaceButtonClicked: ControlEvent<Void>
+        let editWorkspaceButtonClicked: ControlEvent<Void>
     }
     
     struct Output {
         let nameValid: BehaviorSubject<Bool>
-        let addWorkspaceButtonValid: BehaviorSubject<Bool>
+        let editWorkspaceButtonValid: BehaviorSubject<Bool>
         let validationArray: BehaviorSubject<Array<Bool>>
     }
     
@@ -36,7 +38,7 @@ final class WorkspaceEditViewModel: ViewModelType {
         print("ViewModel Data", try! image.value())
         
         let nameValid: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-        let addWorkspaceButtonValid: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+        let editWorkspaceButtonValid: BehaviorSubject<Bool> = BehaviorSubject(value: false)
         let validationArray: BehaviorSubject<Array<Bool>> = BehaviorSubject(value: [])
 
 //        input.name
@@ -64,7 +66,7 @@ final class WorkspaceEditViewModel: ViewModelType {
 //                print("Combine Bool", bool)
 //            })
             .debug()
-            .bind(to: addWorkspaceButtonValid)
+            .bind(to: editWorkspaceButtonValid)
             .disposed(by: disposeBag)
         
         
@@ -90,7 +92,7 @@ final class WorkspaceEditViewModel: ViewModelType {
         let inputData = Observable.combineLatest(input.name, input.description, image)
 
         //워크스페이스 생성 버튼 클릭 시 서버에 생성 요청
-        input.addWorkspaceButtonClicked
+        input.editWorkspaceButtonClicked
 //            .withLatestFrom(validationArray)
 //            .filter {
 //                return $0.allSatisfy { $0 == true }
@@ -106,14 +108,17 @@ final class WorkspaceEditViewModel: ViewModelType {
                     print("Edit Workspace Success", result)
 //                    SwitchView.shared.switchView(viewController: TabBarController())
 //                    KeychainManager.shared.create(account: .workspaceID, value: "\(result.workspaceID)")
+                    NotificationCenter.default.post(name: NSNotification.Name("EditComplete"), object: nil)
+                    owner.editSuccess?()
                 case .failure(let error):
                     print("Edit Workspace Error")
                     print(error)
                 }
+                
             }
             .disposed(by: disposeBag)
         
         
-        return Output(nameValid: nameValid, addWorkspaceButtonValid: addWorkspaceButtonValid, validationArray: validationArray)
+        return Output(nameValid: nameValid, editWorkspaceButtonValid: editWorkspaceButtonValid, validationArray: validationArray)
     }
 }

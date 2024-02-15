@@ -59,11 +59,19 @@ struct AddWorkspaceResponse: Decodable {
 //    let createdAt: Date
     
     var formattedCreatedAt: String {
-        let dataFormmater = DateFormatter()
-        dataFormmater.dateFormat = "yyyy.MM.dd"
-        let date = dataFormmater.date(from: createdAt)
-        let dataString = dataFormmater.string(from: date ?? Date())
-        return dataString
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+
+        if let date = isoDateFormatter.date(from: createdAt) {
+            return dateFormatter.string(from: date)
+        } else {
+            return ""
+        }
     }
     
     enum CodingKeys: String, CodingKey {
@@ -134,3 +142,5 @@ struct WorkspaceMember: Decodable {
         case email, nickname, profileImage
     }
 }
+
+typealias WorkspaceMembers = [WorkspaceMember]

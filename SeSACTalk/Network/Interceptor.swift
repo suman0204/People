@@ -34,9 +34,9 @@ final class Interceptor: RequestInterceptor {
 //            completion(.success(urlRequest))
 //            return
 //        }
-//        
-//        guard let accessToken = KeychainManager.shared.read(account: "accessToken"), let refreshToken = KeychainManager.shared.read(account: "refreshToken") else { return }
-//        
+////        
+//        guard let accessToken = KeychainManager.shared.read(account: .accessToken), let refreshToken = KeychainManager.shared.read(account: .refreshToken) else { return }
+////
 //        var urlRequest = urlRequest
 //        urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
 //        
@@ -46,6 +46,7 @@ final class Interceptor: RequestInterceptor {
 //        }
 //        
 //        print("adapt header", urlRequest.headers)
+//        urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
 //        completion(.success(urlRequest))
     }
     

@@ -15,6 +15,9 @@ class WorkspaceListViewModel: ViewModelType {
     
     let enterFlag = BehaviorSubject(value: false)
     
+    //NotificationCenter
+    let notificationObservable = NotificationCenter.default.rx.notification(Notification.Name("EditComplete"))
+    
     struct Input {
         let homeState: BehaviorSubject<HomeState>
     }
@@ -31,6 +34,21 @@ class WorkspaceListViewModel: ViewModelType {
             .filter { homeState, enterFlag in
                 homeState == .nonempty && enterFlag == true
             }
+            .flatMapLatest { _ in
+                APIManager.shared.singleRequest(type: Workspaces.self, api: .getWorkspaceList)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print("HomeView Get WorkspaceList Success",response)
+                    workspaceList.onNext(response)
+                case .failure(let error):
+                    print("HomeView Get WorkspaceList Failure",error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        notificationObservable
             .flatMapLatest { _ in
                 APIManager.shared.singleRequest(type: Workspaces.self, api: .getWorkspaceList)
             }

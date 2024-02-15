@@ -203,6 +203,10 @@ final class SignUpViewModel: ViewModelType {
                     KeychainManager.shared.create(account: .refreshToken, value: response.token.refreshToken)
                     KeychainManager.shared.create(account: .userID, value: "\(response.userID)")
                     
+                    if KeychainManager.shared.read(account: .workspaceID) == nil {
+                        print("WorkspaceID Nil")
+                        
+                    }
                     //회원 가입 성공 시 WorkSpaceInitialView로 이동
                     SwitchView.shared.switchView(viewController: WorkSpaceInitialView())
                 case .failure(let error):
