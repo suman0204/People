@@ -262,12 +262,14 @@ extension WorkspaceListViewController {
             self.editWorkspace()
         }
         let workspaceLeave = UIAlertAction(title: "워크스페이스 나가기", style: .default) { _ in
-            self.leaveButtonClicked()
+            self.adimLeaveButtonClicked()
         }
         let changeAdmin = UIAlertAction(title: "워크스페이스 관리자 변경", style: .default) { _ in
             self.changeAdmin()
         }
-        let workspaceDelete = UIAlertAction(title: "워크스페이스 삭제", style: .destructive)
+        let workspaceDelete = UIAlertAction(title: "워크스페이스 삭제", style: .destructive) { _ in
+            self.deletButtonClicked()
+        }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
 
         if isAdmin {
@@ -323,9 +325,17 @@ extension WorkspaceListViewController {
         
     }
     
-    private func leaveButtonClicked() {
+    private func adimLeaveButtonClicked() {
         print("Leave")
-        let popUpViewController = PopUpView(titleText: "워크스페이스 나가기", bodyText: "회원님은 워크스페이스 관리자입니다. 워크스페이스 관리 자를 다른 멤버로 변경한 후 나갈 수 있습니다.", buttonTitle: "확인", buttonType: .single)
+        let popUpViewController = PopUpView(titleText: "워크스페이스 나가기", bodyText: "회원님은 워크스페이스 관리자입니다. 워크스페이스 관리 자를 다른 멤버로 변경한 후 나갈 수 있습니다.", buttonTitle: "확인", buttonType: .single, buttonAction: .workspaceExit, workspaceID: workspaceInfo?.workspaceID)
+        popUpViewController.modalPresentationStyle = .overFullScreen
+        
+        present(popUpViewController, animated: true)
+    }
+    
+    private func deletButtonClicked() {
+        print("Delete")
+        let popUpViewController = PopUpView(titleText: "워크스페이스 삭제", bodyText: "정말 이 워크스페이스를 삭제하시겠습니까? 삭제시 채널/멤버/채팅 등 워크스페이스 내의 모든 정보가 삭제되며 복구할 수 없습니다..", buttonTitle: "삭제", buttonType: .double, buttonAction: .workspaceDelete, workspaceID: workspaceInfo?.workspaceID)
         popUpViewController.modalPresentationStyle = .overFullScreen
         
         present(popUpViewController, animated: true)

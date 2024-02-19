@@ -29,6 +29,10 @@ final class PopUpView: BaseViewController {
     
     private let buttonType: ButtonType
     
+    private let buttonAction: ButtonAction?
+    
+    private let workspaceID: Int?
+    
     private let titleLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Typography.Title2.size, weight: Typography.Title2.weight)
@@ -66,11 +70,13 @@ final class PopUpView: BaseViewController {
         return stackView
     }()
         
-    init(titleText: String, bodyText: String, buttonTitle: String, buttonType: ButtonType) {
+    init(titleText: String, bodyText: String, buttonTitle: String, buttonType: ButtonType, buttonAction: ButtonAction?, workspaceID: Int?) {
         self.titleLabel.text = titleText
         self.bodyLabel.text = bodyText
         self.buttonTitle = buttonTitle
         self.buttonType = buttonType
+        self.buttonAction = buttonAction
+        self.workspaceID = workspaceID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -85,6 +91,19 @@ final class PopUpView: BaseViewController {
             greenButton.addTarget(self, action: #selector(dismissButtonClicked), for: .touchUpInside)
         } else if buttonType == .double {
             cancelButton.addTarget(self, action: #selector(dismissButtonClicked), for: .touchUpInside)
+            
+            switch buttonAction {
+            case .workspaceEdit:
+                greenButton.addTarget(self, action: #selector(workspaceLeave), for: .touchUpInside)
+            case .workspaceExit:
+                return
+            case .workspaceChangeAdmin:
+                return
+            case .workspaceDelete:
+                return
+            case nil:
+                return
+            }
         }
     }
     
@@ -142,10 +161,23 @@ final class PopUpView: BaseViewController {
 extension PopUpView {
 
     @objc
-    func dismissButtonClicked() {
+    private func dismissButtonClicked() {
         self.dismiss(animated: true)
     }
     
-    
+    @objc
+    private func workspaceLeave() {
+        APIManager.shared.request(type: AddWorkspaceResponse.self, api: .leaveWorkspace(id: workspaceID ?? 0)) { result in
+            switch result {
+            case .success(let response):
+                print("Leave Workspace Success")
+                print(response)
+                self.dismissButtonClicked()
+            case .failure(let error):
+                print("Leave Workspace failure")
+                print(error)
+            }
+        }
+    }
     
 }

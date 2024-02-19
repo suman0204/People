@@ -87,7 +87,7 @@ extension ChangeAdminViewController: UITableViewDelegate, UITableViewDataSource 
         
         if workspaceMemebers.count == 1 {
             print("Impossible Change")
-            let popUpViewController = PopUpView(titleText: "워크스페이스 관리자 변경 불가", bodyText: "워크스페이스 멤버가 없어 관리자 변경을 할 수 없습니다. 새로운 멤버를 워크스페이스에 초대해보세요.", buttonTitle: "확인", buttonType: .single)
+            let popUpViewController = PopUpView(titleText: "워크스페이스 관리자 변경 불가", bodyText: "워크스페이스 멤버가 없어 관리자 변경을 할 수 없습니다. 새로운 멤버를 워크스페이스에 초대해보세요.", buttonTitle: "확인", buttonType: .single, buttonAction: nil, workspaceID: nil)
             popUpViewController.modalPresentationStyle = .overFullScreen
             
             present(popUpViewController, animated: true)
@@ -105,7 +105,7 @@ extension ChangeAdminViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let name = workspaceMemebers[indexPath.row].nickname
         
-        let popUpViewController = PopUpView(titleText: "\(name) 님을 관리자로 지정하시겠습니까?", bodyText: "워크스페이스 관리자는 다음과 같은 권한이 있습니다. \n워크스페이스 이름 또는 설명 변경 \n워크스페이스 삭제 \n워크스페이스 멤버 초대", buttonTitle: "확인", buttonType: .double)
+        let popUpViewController = PopUpView(titleText: "\(name) 님을 관리자로 지정하시겠습니까?", bodyText: "워크스페이스 관리자는 다음과 같은 권한이 있습니다. \n\n워크스페이스 이름 또는 설명 변경 \n워크스페이스 삭제 \n워크스페이스 멤버 초대", buttonTitle: "확인", buttonType: .double, buttonAction: .workspaceChangeAdmin, workspaceID: nil)
         popUpViewController.modalPresentationStyle = .overFullScreen
         
         present(popUpViewController, animated: true)
