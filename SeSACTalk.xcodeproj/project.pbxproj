@@ -90,6 +90,8 @@
 		8BC407C72B4BFE3B00F4C3D6 /* Extension+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C62B4BFE3B00F4C3D6 /* Extension+UITextField.swift */; };
 		8BC407C92B4BFE5C00F4C3D6 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC407C82B4BFE5C00F4C3D6 /* Extension+String.swift */; };
 		8BC842D32B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842D22B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift */; };
+		8BC842D92B83B8C2000A2C59 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC842D82B83B8C2000A2C59 /* Differentiator */; };
+		8BC842DB2B83B8C2000A2C59 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC842DA2B83B8C2000A2C59 /* RxDataSources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,9 +194,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3B6D202B43EDA100B5B486 /* RxKakaoSDKUser in Frameworks */,
+				8BC842D92B83B8C2000A2C59 /* Differentiator in Frameworks */,
 				8B3B6D172B43ED9500B5B486 /* KakaoSDKCommon in Frameworks */,
 				8B3B6D152B43ED9500B5B486 /* KakaoSDKAuth in Frameworks */,
 				8B3B6D0A2B43ED6700B5B486 /* Kingfisher in Frameworks */,
+				8BC842DB2B83B8C2000A2C59 /* RxDataSources in Frameworks */,
 				8B52B8112B637F9000284550 /* SideMenu in Frameworks */,
 				8B3B6D1C2B43EDA100B5B486 /* RxKakaoSDKAuth in Frameworks */,
 				8B3B6D042B43ED4A00B5B486 /* SnapKit in Frameworks */,
@@ -544,6 +548,8 @@
 				8B3B6D1F2B43EDA100B5B486 /* RxKakaoSDKUser */,
 				8B56A3B82B4FEB38004A6C38 /* Moya */,
 				8B52B8102B637F9000284550 /* SideMenu */,
+				8BC842D82B83B8C2000A2C59 /* Differentiator */,
+				8BC842DA2B83B8C2000A2C59 /* RxDataSources */,
 			);
 			productName = SeSACTalk;
 			productReference = 8B3B6C9E2B43D6CD00B5B486 /* SeSACTalk.app */;
@@ -627,6 +633,7 @@
 				8B3B6D1A2B43EDA100B5B486 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
 				8B56A3B72B4FEB38004A6C38 /* XCRemoteSwiftPackageReference "Moya" */,
 				8B52B80F2B637F9000284550 /* XCRemoteSwiftPackageReference "SideMenu" */,
+				8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 8B3B6C9F2B43D6CD00B5B486 /* Products */;
 			projectDirPath = "";
@@ -1154,6 +1161,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1226,6 +1241,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B56A3B72B4FEB38004A6C38 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		8BC842D82B83B8C2000A2C59 /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		8BC842DA2B83B8C2000A2C59 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

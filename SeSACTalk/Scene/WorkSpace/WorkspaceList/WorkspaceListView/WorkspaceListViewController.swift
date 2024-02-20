@@ -262,7 +262,7 @@ extension WorkspaceListViewController {
             self.editWorkspace()
         }
         let workspaceLeave = UIAlertAction(title: "워크스페이스 나가기", style: .default) { _ in
-            self.adimLeaveButtonClicked()
+            self.adimLeaveButtonClicked(isAdmin: isAdmin)
         }
         let changeAdmin = UIAlertAction(title: "워크스페이스 관리자 변경", style: .default) { _ in
             self.changeAdmin()
@@ -325,9 +325,14 @@ extension WorkspaceListViewController {
         
     }
     
-    private func adimLeaveButtonClicked() {
+    private func adimLeaveButtonClicked(isAdmin: Bool) {
         print("Leave")
-        let popUpViewController = PopUpView(titleText: "워크스페이스 나가기", bodyText: "회원님은 워크스페이스 관리자입니다. 워크스페이스 관리 자를 다른 멤버로 변경한 후 나갈 수 있습니다.", buttonTitle: "확인", buttonType: .single, buttonAction: .workspaceExit, workspaceID: workspaceInfo?.workspaceID)
+        let popUpViewController: PopUpView
+        if isAdmin {
+            popUpViewController = PopUpView(titleText: "워크스페이스 나가기", bodyText: "회원님은 워크스페이스 관리자입니다. 워크스페이스 관리 자를 다른 멤버로 변경한 후 나갈 수 있습니다.", buttonTitle: "확인", buttonType: .single, buttonAction: .workspaceExit, workspaceID: workspaceInfo?.workspaceID)
+        } else {
+            popUpViewController = PopUpView(titleText: "워크스페이스 나가기", bodyText: "정말 이 워크스페이스를 떠나시겠습니까?", buttonTitle: "확인", buttonType: .double, buttonAction: .workspaceExit, workspaceID: workspaceInfo?.workspaceID)
+        }
         popUpViewController.modalPresentationStyle = .overFullScreen
         
         present(popUpViewController, animated: true)

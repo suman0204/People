@@ -46,11 +46,18 @@ final class HomeViewModel: ViewModelType {
                 case .success(let response):
                     print("HomeView Get WorkspaceList Success",response)
                     workspaceList.onNext(response)
+                    
+//                    KeychainManager.shared.create(account: .workspaceID, value: String(response.first?.workspaceID ?? 0))
                 case .failure(let error):
                     print("HomeView Get WorkspaceList Failure",error)
                 }
             }
             .disposed(by: disposeBag)
+        
+//        if KeychainManager.shared.read(account: .workspaceID) == nil {
+//            
+//            KeychainManager.shared.create(account: .workspaceID, value: String(try! (workspaceList.value().first?.workspaceID ?? 0)))
+//        } 
         
         guard let workspaceID = KeychainManager.shared.read(account: .workspaceID), let intID = Int(workspaceID) else {
             print("WorkspaceID Nil")

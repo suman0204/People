@@ -94,9 +94,9 @@ final class PopUpView: BaseViewController {
             
             switch buttonAction {
             case .workspaceEdit:
-                greenButton.addTarget(self, action: #selector(workspaceLeave), for: .touchUpInside)
-            case .workspaceExit:
                 return
+            case .workspaceExit:
+                greenButton.addTarget(self, action: #selector(workspaceLeave), for: .touchUpInside)            
             case .workspaceChangeAdmin:
                 return
             case .workspaceDelete:
