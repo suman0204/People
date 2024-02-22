@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class ChannelTableViewCell: BaseTableViewCell {
     
-    let hashtagImage = {
+    private var disposeBag = DisposeBag()
+    
+    private let hashtagImage = {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(named: "hashtag")
         imageView.contentMode = .scaleAspectFill
@@ -19,11 +22,12 @@ class ChannelTableViewCell: BaseTableViewCell {
     let titleLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
+        label.numberOfLines = 1
         return label
     }()
     
     //24 18 caption
-    let unreadCount = {
+    private let unreadCount = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Typography.Caption.size, weight: Typography.Caption.weight)
         label.textColor = Colors.BrandColor.white
@@ -31,6 +35,12 @@ class ChannelTableViewCell: BaseTableViewCell {
         label.layer.masksToBounds = true
         return label
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+    }
     
     override func configureCell() {
         [hashtagImage, titleLabel, unreadCount].forEach {
@@ -57,5 +67,7 @@ class ChannelTableViewCell: BaseTableViewCell {
             make.centerY.equalToSuperview()
         }
     }
+    
+    
 
 }

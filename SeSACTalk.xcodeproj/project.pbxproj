@@ -92,6 +92,11 @@
 		8BC842D32B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842D22B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift */; };
 		8BC842D92B83B8C2000A2C59 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC842D82B83B8C2000A2C59 /* Differentiator */; };
 		8BC842DB2B83B8C2000A2C59 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC842DA2B83B8C2000A2C59 /* RxDataSources */; };
+		8BC842DF2B848B0A000A2C59 /* HomeViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842DE2B848B0A000A2C59 /* HomeViewDataSource.swift */; };
+		8BC842E22B849A03000A2C59 /* DMTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E12B849A03000A2C59 /* DMTableViewCell.swift */; };
+		8BC842E42B873668000A2C59 /* DMHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E32B873668000A2C59 /* DMHeaderView.swift */; };
+		8BC842E62B8736A0000A2C59 /* DMFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E52B8736A0000A2C59 /* DMFooterView.swift */; };
+		8BC842E92B8736F0000A2C59 /* AddMemberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +191,11 @@
 		8BC407C62B4BFE3B00F4C3D6 /* Extension+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextField.swift"; sourceTree = "<group>"; };
 		8BC407C82B4BFE5C00F4C3D6 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		8BC842D22B7DDFBE000A2C59 /* ChangeAdnimViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAdnimViewModel.swift; sourceTree = "<group>"; };
+		8BC842DE2B848B0A000A2C59 /* HomeViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDataSource.swift; sourceTree = "<group>"; };
+		8BC842E12B849A03000A2C59 /* DMTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMTableViewCell.swift; sourceTree = "<group>"; };
+		8BC842E32B873668000A2C59 /* DMHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMHeaderView.swift; sourceTree = "<group>"; };
+		8BC842E52B8736A0000A2C59 /* DMFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMFooterView.swift; sourceTree = "<group>"; };
+		8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,13 +385,14 @@
 		8B52B7F52B5FCDAB00284550 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				8B5048D32B597D9100E8A8A0 /* HomeHeaderView.swift */,
-				8B52B8222B67FE9E00284550 /* HomeEmpty */,
-				8B52B8032B62567700284550 /* ChannelTableViewCell.swift */,
-				8B52B8072B625D7900284550 /* ChannelHeaderView.swift */,
-				8B52B8092B62659000284550 /* ChannelFooterView.swift */,
-				8B52B80B2B62665900284550 /* HomeInitialViewController.swift */,
 				8B52B81D2B678E4600284550 /* TabBarController.swift */,
+				8BC842DC2B848ABE000A2C59 /* CustomView */,
+				8B5048D12B59290800E8A8A0 /* HomeViewController.swift */,
+				8B52B8232B67FF6C00284550 /* HomeViewModel.swift */,
+				8BC842DE2B848B0A000A2C59 /* HomeViewDataSource.swift */,
+				8BC842DD2B848ACA000A2C59 /* Channel */,
+				8BC842E02B8499EB000A2C59 /* DM */,
+				8BC842E72B8736D4000A2C59 /* AddMember */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -402,16 +413,6 @@
 				8B52B81F2B67F9CD00284550 /* WorkspaceInitalViewModel.swift */,
 			);
 			path = WorkspaceInitial;
-			sourceTree = "<group>";
-		};
-		8B52B8222B67FE9E00284550 /* HomeEmpty */ = {
-			isa = PBXGroup;
-			children = (
-				8B5048D12B59290800E8A8A0 /* HomeViewController.swift */,
-				8B52B8232B67FF6C00284550 /* HomeViewModel.swift */,
-				8B52B7F62B60E3E300284550 /* EmptyView.swift */,
-			);
-			path = HomeEmpty;
 			sourceTree = "<group>";
 		};
 		8B56A3BE2B5111AD004A6C38 /* Error */ = {
@@ -515,6 +516,44 @@
 				8B52B81B2B63A5EC00284550 /* WorkspaceListCell.swift */,
 			);
 			path = WorkspaceListView;
+			sourceTree = "<group>";
+		};
+		8BC842DC2B848ABE000A2C59 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				8B5048D32B597D9100E8A8A0 /* HomeHeaderView.swift */,
+				8B52B7F62B60E3E300284550 /* EmptyView.swift */,
+				8B52B80B2B62665900284550 /* HomeInitialViewController.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		8BC842DD2B848ACA000A2C59 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				8B52B8032B62567700284550 /* ChannelTableViewCell.swift */,
+				8B52B8072B625D7900284550 /* ChannelHeaderView.swift */,
+				8B52B8092B62659000284550 /* ChannelFooterView.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		8BC842E02B8499EB000A2C59 /* DM */ = {
+			isa = PBXGroup;
+			children = (
+				8BC842E12B849A03000A2C59 /* DMTableViewCell.swift */,
+				8BC842E32B873668000A2C59 /* DMHeaderView.swift */,
+				8BC842E52B8736A0000A2C59 /* DMFooterView.swift */,
+			);
+			path = DM;
+			sourceTree = "<group>";
+		};
+		8BC842E72B8736D4000A2C59 /* AddMember */ = {
+			isa = PBXGroup;
+			children = (
+				8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */,
+			);
+			path = AddMember;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -680,13 +719,16 @@
 			files = (
 				8B3B6CA62B43D6CD00B5B486 /* ViewController.swift in Sources */,
 				8B52B8082B625D7900284550 /* ChannelHeaderView.swift in Sources */,
+				8BC842DF2B848B0A000A2C59 /* HomeViewDataSource.swift in Sources */,
 				8B764B1F2B5507E00066AF07 /* SignUpState.swift in Sources */,
 				8B52B7F92B60F5B600284550 /* SwitchView.swift in Sources */,
 				8BC407C72B4BFE3B00F4C3D6 /* Extension+UITextField.swift in Sources */,
+				8BC842E42B873668000A2C59 /* DMHeaderView.swift in Sources */,
 				8BC407C42B4ADDA700F4C3D6 /* SignUpViewModel.swift in Sources */,
 				8B5048CC2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift in Sources */,
 				8BAFF9A12B4412ED005713EA /* Colors.swift in Sources */,
 				8B4E926E2B68E0E900ABFEB9 /* LeftImageButton.swift in Sources */,
+				8BC842E22B849A03000A2C59 /* DMTableViewCell.swift in Sources */,
 				8B764B242B5522840066AF07 /* LoginViewController.swift in Sources */,
 				8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */,
 				8B52B8042B62567700284550 /* ChannelTableViewCell.swift in Sources */,
@@ -715,10 +757,12 @@
 				8B9506522B467A9F00A353A0 /* AuthViewModel.swift in Sources */,
 				8B52B8182B63817200284550 /* SideMenuNavigation.swift in Sources */,
 				8B5048D72B5981BD00E8A8A0 /* AddWorkspaceViewModel.swift in Sources */,
+				8BC842E62B8736A0000A2C59 /* DMFooterView.swift in Sources */,
 				8B52B80C2B62665900284550 /* HomeInitialViewController.swift in Sources */,
 				8B430C6C2B7CBCA20050FA63 /* ChangeAdminTableCell.swift in Sources */,
 				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
 				8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */,
+				8BC842E92B8736F0000A2C59 /* AddMemberHeaderView.swift in Sources */,
 				8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */,
 				8B430C682B7C95390050FA63 /* NotificationCenter.swift in Sources */,
 				8B52B8242B67FF6C00284550 /* HomeViewModel.swift in Sources */,

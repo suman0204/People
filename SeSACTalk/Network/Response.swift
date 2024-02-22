@@ -114,7 +114,7 @@ struct Workspace: Decodable {
 }
 
 // MARK: - Channel
-struct Channel: Decodable {
+struct Channel: Decodable, Equatable {
     let workspaceID, channelID: Int
     let name: String
     let description: String?
@@ -130,6 +130,8 @@ struct Channel: Decodable {
         case createdAt
     }
 }
+// MARK: - Channels
+typealias Channels = [Channel]
 
 // MARK: - WorkspaceMember
 struct WorkspaceMember: Decodable {
@@ -144,3 +146,32 @@ struct WorkspaceMember: Decodable {
 }
 
 typealias WorkspaceMembers = [WorkspaceMember]
+
+// MARK: - DM
+struct DM: Decodable {
+    let workspaceID, roomID: Int
+    let createdAt: String
+    let user: User
+
+    enum CodingKeys: String, CodingKey {
+        case workspaceID = "workspace_id"
+        case roomID = "room_id"
+        case createdAt, user
+    }
+}
+
+// MARK: - DMs
+typealias DMs = [DM?]
+
+// MARK: - User
+struct User: Decodable {
+    let userID: Int
+    let email: String
+    let nickname: String
+    let profileImage: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case userID = "user_id"
+        case email, nickname, profileImage
+    }
+}

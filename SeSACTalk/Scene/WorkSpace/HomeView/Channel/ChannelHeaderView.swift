@@ -26,7 +26,7 @@ class ChannelHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = .yellow
+//        contentView.backgroundColor = .yellow
 //        contentView.snp.makeConstraints { make in
 //            make.height.equalTo(56)
 //        }
