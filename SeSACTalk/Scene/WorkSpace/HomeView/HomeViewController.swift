@@ -34,6 +34,7 @@ final class HomeViewController: BaseViewController {
         tableView.register(ChannelTableViewCell.self, forCellReuseIdentifier: ChannelTableViewCell.reuseIdentifier)
         tableView.register(ChannelHeaderView.self, forHeaderFooterViewReuseIdentifier: ChannelHeaderView.reuseIdentifier)
         tableView.register(ChannelFooterView.self, forHeaderFooterViewReuseIdentifier: ChannelFooterView.reuseIdentifier)
+        tableView.register(DmTableViewCell.self, forCellReuseIdentifier: DmTableViewCell.reuseIdentifier)
         tableView.register(DMHeaderView.self, forHeaderFooterViewReuseIdentifier: DMHeaderView.reuseIdentifier)
         tableView.register(DMFooterView.self, forHeaderFooterViewReuseIdentifier: DMFooterView.reuseIdentifier)
         tableView.register(AddMemberHeaderView.self, forHeaderFooterViewReuseIdentifier: AddMemberHeaderView.reuseIdentifier)
@@ -104,57 +105,38 @@ final class HomeViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        //ChannelTableView
-//        output.channels
-//            .bind(to: tableView.rx.items(cellIdentifier: ChannelTableViewCell.reuseIdentifier, cellType: ChannelTableViewCell.self)) { row, element, cell in
-//                
-//                if self.isOpen {
-//                    cell.titleLabel.text = element.name
-//                } else {
-//                    cell.isHidden = true
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
-//        output.channels
-//            .bind(to: tableView2.rx.items(cellIdentifier: ChannelTableViewCell.reuseIdentifier, cellType: ChannelTableViewCell.self)) { row, element, cell in
-//            
-//                cell.titleLabel.text = element.name
-//            }
-//            .disposed(by: disposeBag)
-        
-//        tableView.rx.itemSelected
-//            .subscribe(with: self) { owner, indexPath in
-//                if owner.isOpen == false {
-//                    owner.tableView.deleteRows(at: [indexPath], with: .fade)
-//                } else {
-//                    owner.tableView.insertRows(at: [indexPath], with: .fade)
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
-//        output.workspaceList
-//            .bind(to: tableView.rx.items(cellIdentifier: WorkspaceListCell.reuseIdentifier, cellType: WorkspaceListCell.self)) { (row, element, cell) in
-//                cell.workspaceImage.kf.setImage(with: URL(string: element.thumbnail))
-//                cell.workspaceTitle.text = element.name
-//                cell.workspaceCreatedAt.text = element.createdAt
-//            }
-//            .disposed(by: disposeBag)
-        
-//        var outputChannels: [Channel] = []
-//        output.channels.subscribe(with: self) { owner, channels in
-//            outputChannels = channels
-//            print("Channels Channels", channels)
-//        }
-//        .disposed(by: disposeBag)
-//        
-//        print("outputChannels.map { SectionItem.channelItem($0)}",outputChannels.map { SectionItem.channelItem($0)})
-        
 //        // MARK: TableView DataSource
         let dataSource = HomeViewController.dataSource()
 
         output.sections
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(SectionItem.self))
+            .subscribe(with: self) { owner, selected in
+                print(selected)
+            }
+            .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(SectionItem.self)
+            .subscribe(with: self) { owner, item in
+                switch item {
+                case let .channelItem(channel):
+                    // 채널 셀이 선택된 경우에 대한 처리
+                    print("Selected Channel:", channel.name)
+                    // 채널 셀이 선택되었을 때 어떤 작업을 수행하도록 코드를 추가하세요.
+                    let vc = ChannelChattingViewController()
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                case let .dmItem(dm):
+                    // DM 셀이 선택된 경우에 대한 처리
+                    print("Selected DM:", dm.user)
+                    // DM 셀이 선택되었을 때 어떤 작업을 수행하도록 코드를 추가하세요.
+                case .addMemberItem:
+                    // 추가 멤버 셀이 선택된 경우에 대한 처리
+                    print("Selected Add Member Cell")
+                    // 추가 멤버 셀이 선택되었을 때 어떤 작업을 수행하도록 코드를 추가하세요.
+                }
+            }
             .disposed(by: disposeBag)
     }
     
@@ -247,11 +229,14 @@ extension HomeViewController {
             configureCell: { dataSource, table, indexPath, item in
                 switch dataSource[indexPath] {
                 case let .channelItem(channel):
+                    print("DataSource Channel", channel)
                     let cell: ChannelTableViewCell = table.dequeueReusableCell(withIdentifier: ChannelTableViewCell.reuseIdentifier, for: indexPath) as! ChannelTableViewCell
                     cell.titleLabel.text = channel.name
                     return cell
                 case let .dmItem(dm):
-                    let cell = table.dequeueReusableCell(withIdentifier: ChannelTableViewCell.reuseIdentifier, for: indexPath)
+                    let cell = table.dequeueReusableCell(withIdentifier: DmTableViewCell.reuseIdentifier, for: indexPath) as! DmTableViewCell
+                    print("DataSource DM", dm)
+                    cell.setData(dm: dm)
                     return cell
                 case let .addMemberItem:
                     let cell = table.dequeueReusableCell(withIdentifier: ChannelTableViewCell.reuseIdentifier, for: indexPath)
@@ -265,22 +250,9 @@ extension HomeViewController {
 
 extension HomeViewController: UITableViewDelegate/*, UITableViewDataSource*/ {
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
-//    }
-    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return isOpen ? 41 : 0
     }
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: ChannelTableViewCell.reuseIdentifier, for: indexPath)
-//        return cell
-//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {

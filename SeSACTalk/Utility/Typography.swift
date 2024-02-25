@@ -38,6 +38,13 @@ enum Typography {
         static let lineHeight = 18
         static let weight = UIFont.Weight.regular
     }
+
+    enum Caption2 {
+        static let size: CGFloat = 11
+        static let lineHeight = 18
+        static let weight = UIFont.Weight.regular
+    }
+
 }
 
 

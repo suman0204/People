@@ -97,6 +97,8 @@
 		8BC842E42B873668000A2C59 /* DMHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E32B873668000A2C59 /* DMHeaderView.swift */; };
 		8BC842E62B8736A0000A2C59 /* DMFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E52B8736A0000A2C59 /* DMFooterView.swift */; };
 		8BC842E92B8736F0000A2C59 /* AddMemberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */; };
+		8BC842EC2B87466E000A2C59 /* ChannelChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842EB2B87466E000A2C59 /* ChannelChattingViewController.swift */; };
+		8BC842EE2B874914000A2C59 /* ChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842ED2B874914000A2C59 /* ChattingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +198,8 @@
 		8BC842E32B873668000A2C59 /* DMHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMHeaderView.swift; sourceTree = "<group>"; };
 		8BC842E52B8736A0000A2C59 /* DMFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMFooterView.swift; sourceTree = "<group>"; };
 		8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberHeaderView.swift; sourceTree = "<group>"; };
+		8BC842EB2B87466E000A2C59 /* ChannelChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChattingViewController.swift; sourceTree = "<group>"; };
+		8BC842ED2B874914000A2C59 /* ChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,6 +538,7 @@
 				8B52B8032B62567700284550 /* ChannelTableViewCell.swift */,
 				8B52B8072B625D7900284550 /* ChannelHeaderView.swift */,
 				8B52B8092B62659000284550 /* ChannelFooterView.swift */,
+				8BC842EA2B874639000A2C59 /* Channel Chatting */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -554,6 +559,15 @@
 				8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */,
 			);
 			path = AddMember;
+			sourceTree = "<group>";
+		};
+		8BC842EA2B874639000A2C59 /* Channel Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				8BC842EB2B87466E000A2C59 /* ChannelChattingViewController.swift */,
+				8BC842ED2B874914000A2C59 /* ChattingCell.swift */,
+			);
+			path = "Channel Chatting";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -762,6 +776,7 @@
 				8B430C6C2B7CBCA20050FA63 /* ChangeAdminTableCell.swift in Sources */,
 				8BC407BE2B494D4400F4C3D6 /* SignUpViewController.swift in Sources */,
 				8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */,
+				8BC842EE2B874914000A2C59 /* ChattingCell.swift in Sources */,
 				8BC842E92B8736F0000A2C59 /* AddMemberHeaderView.swift in Sources */,
 				8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */,
 				8B430C682B7C95390050FA63 /* NotificationCenter.swift in Sources */,
@@ -784,6 +799,7 @@
 				8B3B6D012B43E63900B5B486 /* SplashViewController.swift in Sources */,
 				8B56A3BB2B4FECA0004A6C38 /* Response.swift in Sources */,
 				8B52B7FB2B60FB1D00284550 /* Interceptor.swift in Sources */,
+				8BC842EC2B87466E000A2C59 /* ChannelChattingViewController.swift in Sources */,
 				8B9506562B4691FD00A353A0 /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

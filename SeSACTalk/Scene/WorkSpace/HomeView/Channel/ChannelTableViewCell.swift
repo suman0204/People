@@ -69,5 +69,7 @@ class ChannelTableViewCell: BaseTableViewCell {
     }
     
     
-
+    func setData(data: Channel) {
+        titleLabel.text = data.name
+    }
 }

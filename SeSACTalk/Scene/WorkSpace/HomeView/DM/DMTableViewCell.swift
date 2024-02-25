@@ -51,21 +51,30 @@ class DmTableViewCell: BaseTableViewCell {
     override func setConstraints() {
         profileImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(17.8)
-//            make.leading.equalToSuperview()
+            make.size.equalTo(24)
             make.centerY.equalToSuperview()
             
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(profileImage.snp.trailing).offset(16)
+            make.leading.equalTo(profileImage.snp.trailing).offset(8)
             make.centerY.equalToSuperview()
             
         }
         
         unreadCount.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-17)
+            make.leading.greaterThanOrEqualTo(nameLabel.snp.trailing).offset(8)
+            make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
         }
     }
 
+}
+
+extension DmTableViewCell {
+    func setData(dm: DM) {
+        profileImage.loadImage(from: dm.user.profileImage ?? "")
+        nameLabel.text = dm.user.nickname
+        
+    }
 }
