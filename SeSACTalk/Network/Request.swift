@@ -30,3 +30,8 @@ struct AddWorkspaceRequest: Encodable {
     let description: String?
     let image: Data
 }
+
+struct ChannelChattingRequest: Encodable {
+    let content: String
+    let files: [Data]
+}

@@ -64,6 +64,9 @@
 		8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3BC2B5030C1004A6C38 /* APIError.swift */; };
 		8B56A3C02B5111BE004A6C38 /* LoggableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3BF2B5111BE004A6C38 /* LoggableError.swift */; };
 		8B56A3C42B512DAC004A6C38 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B56A3C32B512DAC004A6C38 /* APIManager.swift */; };
+		8B5924022B8B846D0039D8EC /* ChannelChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5924012B8B846D0039D8EC /* ChannelChattingViewModel.swift */; };
+		8B5924042B8B8D020039D8EC /* ChattingSelectedImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5924032B8B8D020039D8EC /* ChattingSelectedImageCell.swift */; };
+		8B5924062B8B8D340039D8EC /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5924052B8B8D340039D8EC /* BaseCollectionViewCell.swift */; };
 		8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */; };
 		8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */; };
 		8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */; };
@@ -166,6 +169,9 @@
 		8B56A3BC2B5030C1004A6C38 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8B56A3BF2B5111BE004A6C38 /* LoggableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggableError.swift; sourceTree = "<group>"; };
 		8B56A3C32B512DAC004A6C38 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		8B5924012B8B846D0039D8EC /* ChannelChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChattingViewModel.swift; sourceTree = "<group>"; };
+		8B5924032B8B8D020039D8EC /* ChattingSelectedImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingSelectedImageCell.swift; sourceTree = "<group>"; };
+		8B5924052B8B8D340039D8EC /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewModel.swift; sourceTree = "<group>"; };
 		8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
 		8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CALayer.swift"; sourceTree = "<group>"; };
@@ -306,6 +312,7 @@
 				8B9506552B4691FD00A353A0 /* ViewModelType.swift */,
 				8B52B8052B6256AC00284550 /* BaseTableViewCell.swift */,
 				8B52B80D2B62670600284550 /* ReusableViewProtocol.swift */,
+				8B5924052B8B8D340039D8EC /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -565,7 +572,9 @@
 			isa = PBXGroup;
 			children = (
 				8BC842EB2B87466E000A2C59 /* ChannelChattingViewController.swift */,
+				8B5924012B8B846D0039D8EC /* ChannelChattingViewModel.swift */,
 				8BC842ED2B874914000A2C59 /* ChattingCell.swift */,
+				8B5924032B8B8D020039D8EC /* ChattingSelectedImageCell.swift */,
 			);
 			path = "Channel Chatting";
 			sourceTree = "<group>";
@@ -739,6 +748,7 @@
 				8BC407C72B4BFE3B00F4C3D6 /* Extension+UITextField.swift in Sources */,
 				8BC842E42B873668000A2C59 /* DMHeaderView.swift in Sources */,
 				8BC407C42B4ADDA700F4C3D6 /* SignUpViewModel.swift in Sources */,
+				8B5924042B8B8D020039D8EC /* ChattingSelectedImageCell.swift in Sources */,
 				8B5048CC2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift in Sources */,
 				8BAFF9A12B4412ED005713EA /* Colors.swift in Sources */,
 				8B4E926E2B68E0E900ABFEB9 /* LeftImageButton.swift in Sources */,
@@ -750,6 +760,7 @@
 				8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */,
 				8B5048D42B597D9100E8A8A0 /* HomeHeaderView.swift in Sources */,
 				8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */,
+				8B5924022B8B846D0039D8EC /* ChannelChattingViewModel.swift in Sources */,
 				8B64DD762B70BD7300062AB4 /* PopUpView.swift in Sources */,
 				8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */,
 				8BAFF9AC2B459028005713EA /* AuthViewController.swift in Sources */,
@@ -758,6 +769,7 @@
 				8B52B80A2B62659000284550 /* ChannelFooterView.swift in Sources */,
 				8BAFF9AA2B455C25005713EA /* CustomButton.swift in Sources */,
 				8B56A3C42B512DAC004A6C38 /* APIManager.swift in Sources */,
+				8B5924062B8B8D340039D8EC /* BaseCollectionViewCell.swift in Sources */,
 				8B52B81A2B639F5600284550 /* EmptyListView.swift in Sources */,
 				8B52B81C2B63A5EC00284550 /* WorkspaceListCell.swift in Sources */,
 				8B6FA1C92B4FDB9F00D23188 /* Extension+UIViewController.swift in Sources */,

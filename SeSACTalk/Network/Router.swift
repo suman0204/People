@@ -78,6 +78,7 @@ enum Router: URLRequestConvertible {
     case editWorspace(id: Int, model: AddWorkspaceRequest)
     case getWorkspaceMember(id: Int)
     case leaveWorkspace(id: Int)
+    case postChannelChat(name: String, id: Int, model: ChannelChattingRequest)
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -111,6 +112,8 @@ enum Router: URLRequestConvertible {
             return "/v1/workspaces/\(id)/members"
         case .leaveWorkspace(let id):
             return "/v1/workspaces/\(id)/leave"
+        case .postChannelChat(let name, let id, _):
+            return "/v1/workspaces/\(id)/channels/\(name)/chats"
         }
     }
 
@@ -124,7 +127,7 @@ enum Router: URLRequestConvertible {
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey,
                     "RefreshToken": KeychainManager.shared.read(account: .refreshToken) ?? ""]
-        case .addWorkspace, .editWorspace:
+        case .addWorkspace, .editWorspace, .postChannelChat:
             return ["Content-Type" : "multipart/form-data",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
@@ -137,7 +140,7 @@ enum Router: URLRequestConvertible {
 
     private var method: HTTPMethod {
         switch self {
-        case .emailValidation, .signUp, .logIn, .addWorkspace:
+        case .emailValidation, .signUp, .logIn, .addWorkspace, .postChannelChat:
             return .post
         case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace:
             return .get
@@ -192,6 +195,20 @@ extension Router {
             multipartFormData.append(name, withName: "name")
             multipartFormData.append(description, withName: "description")
             multipartFormData.append(image, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
+            
+            return multipartFormData
+            
+        case .postChannelChat(_, _, let model):
+            let multipartFormData = MultipartFormData()
+            
+            let content = model.content.data(using: .utf8) ?? Data()
+            let files = model.files
+            
+            multipartFormData.append(content, withName: "content")
+            
+            for file in files {
+                multipartFormData.append(file, withName: "files", fileName: "file.jpeg", mimeType: "image/jpeg")
+            }
             
             return multipartFormData
             
