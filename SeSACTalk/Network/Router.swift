@@ -79,6 +79,7 @@ enum Router: URLRequestConvertible {
     case getWorkspaceMember(id: Int)
     case leaveWorkspace(id: Int)
     case postChannelChat(name: String, id: Int, model: ChannelChattingRequest)
+    case getChannelChattings(name: String, id: Int, cursorDate: String?)
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -114,6 +115,8 @@ enum Router: URLRequestConvertible {
             return "/v1/workspaces/\(id)/leave"
         case .postChannelChat(let name, let id, _):
             return "/v1/workspaces/\(id)/channels/\(name)/chats"
+        case .getChannelChattings(let name, let id, _):
+            return "/v1/workspaces/\(id)/channels/\(name)/chats"
         }
     }
 
@@ -131,7 +134,7 @@ enum Router: URLRequestConvertible {
             return ["Content-Type" : "multipart/form-data",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
-        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace:
+        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings:
             return ["Content-Type" : "application/json",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
@@ -142,7 +145,7 @@ enum Router: URLRequestConvertible {
         switch self {
         case .emailValidation, .signUp, .logIn, .addWorkspace, .postChannelChat:
             return .post
-        case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace:
+        case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings:
             return .get
         case .editWorspace:
             return .put
@@ -157,6 +160,8 @@ enum Router: URLRequestConvertible {
             return ["email": model.email, "nickname": model.nickname, "phone": model.phone ?? "","password": model.password]
         case .logIn(let model):
             return ["email": model.email, "password": model.password, "deviceToken": model.deviceToken]
+        case .getChannelChattings(let name, let id, let cursorDate?):
+            return ["cursor_date": cursorDate, "name": name, "workspace_id": id]
         default:
             return nil
         }
