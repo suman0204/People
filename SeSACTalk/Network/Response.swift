@@ -175,3 +175,22 @@ struct User: Decodable {
         case email, nickname, profileImage
     }
 }
+
+// MARK: - ChannelChatting
+struct ChannelChatting: Decodable {
+    let channelID: Int
+    let channelName: String
+    let chatID: Int
+    let content: String
+    let createdAt: String
+    let files: [String?]
+    let user: User
+    
+    enum CodingKeys: String, CodingKey {
+        case channelID = "channel_id"
+        case chatID = "chat_id"
+        case channelName, content, createdAt, files, user
+    }
+}
+// MARK: - ChannelChattings
+typealias ChannelChattings = [ChannelChatting]

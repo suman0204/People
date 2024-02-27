@@ -12,6 +12,9 @@ import RxCocoa
 
 class ChannelChattingViewController: BaseViewController {
     
+    let viewModel = ChannelChattingViewModel()
+    let disposeBag = DisposeBag()
+    
 //    let channelInfo =
     private var imageArray = [UIImage]()
     private var selections = [String : PHPickerResult]()
@@ -97,11 +100,28 @@ class ChannelChattingViewController: BaseViewController {
         print("ChannelChattingView DidLoad")
         self.navigationItem.title = "그냥 떠들고 싶을 때"
 
+        viewModel.enterFlag.onNext(true)
 //        view.backgroundColor = Colors.BrandColor.green
     }
     
-    override func bind() {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
+        viewModel.enterFlag.onNext(false)
+    }
+    
+    override func bind() {
+        let input = ChannelChattingViewModel.Input(textInput: textView.rx.text.orEmpty, sendButtonClicekd: sendButton.rx.tap)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.sendButtonEnabled
+            .asDriver()
+            .drive(with: self) { owner, bool in
+                owner.sendButton.isEnabled = bool
+                owner.sendButton.setImage(UIImage(named: bool ? "SendA" : "SendInA"), for: .normal)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureView() {
@@ -344,6 +364,8 @@ extension ChannelChattingViewController: PHPickerViewControllerDelegate {
                     imageArray.append(image)
                     imageDataArray.append(image.jpegData(compressionQuality: 0.3) ?? Data())
                 }
+                
+                viewModel.imageData.onNext(imageDataArray)
                 
                 selectedImage.isHidden = false
                 selectedImage.reloadData()

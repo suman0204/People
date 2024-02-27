@@ -124,17 +124,18 @@ final class HomeViewController: BaseViewController {
                 case let .channelItem(channel):
                     // 채널 셀이 선택된 경우에 대한 처리
                     print("Selected Channel:", channel.name)
-                    // 채널 셀이 선택되었을 때 어떤 작업을 수행하도록 코드를 추가하세요.
                     let vc = ChannelChattingViewController()
                     owner.navigationController?.pushViewController(vc, animated: true)
+                    
+                    KeychainManager.shared.create(account: .channelName, value: channel.name)
+                    KeychainManager.shared.create(account: .channelID, value: String(channel.channelID))
+
                 case let .dmItem(dm):
                     // DM 셀이 선택된 경우에 대한 처리
                     print("Selected DM:", dm.user)
-                    // DM 셀이 선택되었을 때 어떤 작업을 수행하도록 코드를 추가하세요.
                 case .addMemberItem:
                     // 추가 멤버 셀이 선택된 경우에 대한 처리
                     print("Selected Add Member Cell")
-                    // 추가 멤버 셀이 선택되었을 때 어떤 작업을 수행하도록 코드를 추가하세요.
                 }
             }
             .disposed(by: disposeBag)
