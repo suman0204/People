@@ -75,7 +75,8 @@ class ChannelChatRepository {
         if let existingUser = existingUser {
             do {
                 try realm.write {
-                    chatTable.user.append(existingUser)
+//                    chatTable.user.append(existingUser)
+                    chatTable.user = existingUser
                 }
             } catch {
                 print("Failed to add user to ChatTable: \(error)")
@@ -84,7 +85,7 @@ class ChannelChatRepository {
             // 동일한 사용자가 존재하지 않으면 새로운 사용자를 추가합니다.
             do {
                 try realm.write {
-                    chatTable.user.append(item)
+                    chatTable.user = item
                 }
             } catch {
                 print("Create User Table Failure")

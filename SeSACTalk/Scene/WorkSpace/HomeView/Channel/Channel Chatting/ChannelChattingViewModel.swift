@@ -114,11 +114,28 @@ class ChannelChattingViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-//        input.sendButtonClicekd
-//            .withLatestFrom(inputData)
-//            .flatMapLatest { inputData in
-////                APIManager.shared.singleMultipartRequset(type: <#T##Decodable.Protocol#>, api: <#T##Router#>)
-//            }
+        input.sendButtonClicekd
+            .withLatestFrom(inputData)
+            .flatMapLatest { inputData in
+                APIManager.shared.singleMultipartRequset(type: ChannelChatting.self, api: .postChannelChat(name: channelName, id: workspaceID, model: ChannelChattingRequest(content: inputData.0, files: inputData.1)))
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print("Post Channel Chatting Success", response)
+                    
+                    let chatTable = ChatTable(chatID: response.chatID, content: response.content, createdAt: response.createdAt, files: owner.filesToList(response.files))
+                    
+                    let userTable = UserInfoTable(userID: response.user.userID, email: response.user.email, nickname: response.user.nickname, profileImage: response.user.profileImage ?? "")
+                    
+                    owner.repository.createChatTable(chatTable, channelID: channelID)
+                    owner.repository.createUserTable(userTable, chatID: response.chatID)
+                    
+                case .failure(let error):
+                    print("Post Channel Chatting Failure", error)
+                }
+            }
+            .disposed(by: disposeBag)
         
         return Output(sendButtonEnabled: sendButtonEnabled)
     }

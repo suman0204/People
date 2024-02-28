@@ -34,6 +34,7 @@ class ChannelChattingViewController: BaseViewController {
         tableView.backgroundColor = Colors.BrandColor.white
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     
@@ -94,6 +95,7 @@ class ChannelChattingViewController: BaseViewController {
     private let sendButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "SendInA"), for: .normal)
+        button.addTarget(self, action: #selector(sendButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -104,7 +106,6 @@ class ChannelChattingViewController: BaseViewController {
 
         print("ChannelChattingView DidLoad")
         self.navigationItem.title = "그냥 떠들고 싶을 때"
-
         viewModel.enterFlag.onNext(true)
 //        view.backgroundColor = Colors.BrandColor.green
         
@@ -113,12 +114,16 @@ class ChannelChattingViewController: BaseViewController {
             switch changes {
             case .initial:
                 self?.chattingTableView.reloadData()
+                self?.scrollToBottom()
             case .update(_, _, _, _):
                 self?.chattingTableView.reloadData()
+                self?.scrollToBottom()
             case .error(let error):
                 print("tasktoken error", error)
             }
         })
+        self.scrollToBottom()
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -170,6 +175,7 @@ class ChannelChattingViewController: BaseViewController {
 //            make.height.greaterThanOrEqualTo(38)
 //            make.height.lessThanOrEqualTo(80)
             make.top.equalTo(textView.snp.top).offset(-8)
+            make.top.equalTo(chattingTableView.snp.bottom).offset(16)
         }
         
         plusButton.snp.makeConstraints { make in
@@ -258,6 +264,7 @@ extension ChannelChattingViewController: UITextViewDelegate {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
             textView.textColor = Colors.TextColor.primary
+  
         }
     }
     
@@ -402,7 +409,7 @@ extension ChannelChattingViewController: UITableViewDelegate, UITableViewDataSou
         guard let chatList = tasks.first?.chat else { return UITableViewCell() }
         let data = chatList[indexPath.row]
         
-        cell.nameLabel.text = data.user.first?.nickname
+        cell.nameLabel.text = data.user?.nickname
         cell.chatTextLabel.text = data.content
         cell.profileImage.image = UIImage(systemName: "heart")
         cell.timeLabel.text = data.createdAt
@@ -434,5 +441,37 @@ extension ChannelChattingViewController {
             let dateString = formatter.string(from: date)
             return dateString
         }
+    }
+    
+    @objc
+    private func sendButtonClicked() {
+        textView.text = ""
+        imageArray.removeAll()
+        selectedImage.reloadData()
+        selectedImage.isHidden = true
+        scrollToBottom()
+    }
+    
+    func scrollToBottom(){
+        print("Scroll To Bottom")
+            DispatchQueue.main.async {
+                let index = self.chattingTableView.numberOfRows(inSection: 0)
+                if index > 0 {
+                    let indexPath = IndexPath(row: index - 1, section: 0)
+                    self.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
+            }
+        }
+    
+    func tableViewScrollToBottom(animated: Bool) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+          let numberOfSections = self.chattingTableView.numberOfSections
+//          let numberOfRows = self.chattingTableView.numberOfRows(inSection: numberOfSections - 1)
+          let index = self.chattingTableView.numberOfRows(inSection: 0)
+        if index > 0 {
+          let indexPath = IndexPath(row: index-1, section: 0)
+            self.chattingTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: animated)
+        }
+      }
     }
 }
