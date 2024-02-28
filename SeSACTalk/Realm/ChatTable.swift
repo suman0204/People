@@ -14,7 +14,7 @@ class ChatTable: Object {
     @Persisted var createdAt: String
     @Persisted var files: List<String>
     
-    @Persisted var user: UserInfoTable?
+    @Persisted var user: List<UserInfoTable>
     
     @Persisted(originProperty: "chat") var channel: LinkingObjects<ChannelInfoTable>
     

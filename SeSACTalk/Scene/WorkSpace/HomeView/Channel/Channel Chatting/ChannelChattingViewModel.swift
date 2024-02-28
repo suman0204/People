@@ -18,6 +18,8 @@ class ChannelChattingViewModel: ViewModelType {
     
     let enterFlag = BehaviorSubject(value: false)
     
+//    let cursorDate: BehaviorSubject<String> = BehaviorSubject(value: "")
+    
     //Realm
     private let repository = ChannelChatRepository()
     private var tasks: Results<ChannelInfoTable>!
@@ -35,6 +37,11 @@ class ChannelChattingViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
+        var cursorDate: String = ""
+        let workspaceID = Int(KeychainManager.shared.read(account: .workspaceID) ?? "0") ?? 0
+        let channelName = KeychainManager.shared.read(account: .channelName) ?? ""
+        let channelID = Int(KeychainManager.shared.read(account: .channelID) ?? "0") ?? 0
+        
         let sendButtonEnabled = BehaviorRelay(value: false)
         
         let inputData = Observable.combineLatest(input.textInput, imageData)
@@ -44,26 +51,48 @@ class ChannelChattingViewModel: ViewModelType {
             .filter {
                 $0 == true
             }
-            .do { [unowned self] _ in
-//                print(self.documentDirectoryPath())
-                self.tasks = self.repository.fetchChannelTable(channelID: Int(KeychainManager.shared.read(account: .channelID)!) ?? 0)
+            .do { [unowned self] _ in                
+                //Realm 데이터 불러오기
+                self.tasks = self.repository.fetchChannelTable(channelID: channelID)
                 print("Chatting ViewModel tasks", self.tasks)
-                
+
                 if self.tasks.isEmpty {
                     print("0")
-                    let channelInfoTable = ChannelInfoTable(channelID: Int(KeychainManager.shared.read(account: .channelID)!) ?? 0, channelName: KeychainManager.shared.read(account: .channelName) ?? "")
+                    let channelInfoTable = ChannelInfoTable(channelID: channelID, channelName: channelName)
+                    
                     repository.createChannelTable(channelInfoTable)
                     
+                    cursorDate = dateToISO()
                 }else {
                     print("not 0")
+                    
+                    cursorDate = tasks.first?.chat.last?.createdAt ?? dateToISO()
                 }
             }
             .flatMapLatest({ _ in
-                APIManager.shared.singleRequest(type: <#T##Decodable.Protocol#>, api: <#T##Router#>)
+                print(channelName)
+                return APIManager.shared.singleRequest(type: ChannelChattings.self, api: .getChannelChattings(name: channelName, id: workspaceID, cursorDate: cursorDate))
             })
-            .subscribe(with: self) { owner, _ in
-                print("ChattingViewModel Flag")
-            }
+            .subscribe(with: self, onNext: { owner, result in
+                switch result {
+                case .success(let response):
+                    print("GetChannelChatting Response", response)
+                    if response.isEmpty {
+                        print("No New Chat")
+                    } else {
+                        for newChat in response {
+                            let chatTable = ChatTable(chatID: newChat.chatID, content: newChat.content, createdAt: newChat.createdAt, files: owner.filesToList(newChat.files))
+                            
+                            let userTable = UserInfoTable(userID: newChat.user.userID, email: newChat.user.email, nickname: newChat.user.nickname, profileImage: newChat.user.profileImage ?? "")
+                            
+                            owner.repository.createChatTable(chatTable, channelID: channelID)
+                            owner.repository.createUserTable(userTable, chatID: newChat.chatID)
+                        }
+                    }
+                case .failure(let error):
+                    print("Get ChannelChattings Failure",error.rawValue)
+                }
+            })
             .disposed(by: disposeBag)
         
         //SendButton Enabled
@@ -76,6 +105,12 @@ class ChannelChattingViewModel: ViewModelType {
                     print("ChannelChattingViewModel false", value.1)
                     sendButtonEnabled.accept(false)
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        inputData
+            .bind(with: self) { owner, value in
+                print("Channel Chatting Value", value)
             }
             .disposed(by: disposeBag)
         
@@ -95,5 +130,25 @@ extension ChannelChattingViewModel {
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
         
         return documentDirectory
+    }
+    
+    func dateToISO() -> String {
+
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        
+        return dateFormatter.string(from: now)
+    }
+    
+    func filesToList(_ files: [String?]) -> List<String> {
+        let list = List<String>()
+        
+        for file in files {
+            list.append(file ?? "")
+        }
+        
+        return list
     }
 }

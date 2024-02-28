@@ -18,6 +18,9 @@ final class Interceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         print("Enter Adapt")
         
+        guard let path = urlRequest.url?.path(percentEncoded: true) else { return }
+        print(path)
+        
         guard urlRequest.url?.absoluteString.hasPrefix(APIKey.baseURL) == true, let accessToken = KeychainManager.shared.read(account: .accessToken) else {
             completion(.success(urlRequest))
             return
@@ -67,7 +70,13 @@ final class Interceptor: RequestInterceptor {
             case .failure(let failure):
                 print("Refresh Failure ---", failure.rawValue, failure.description)
                 
-                SwitchView.shared.switchView(viewController: OnboardingViewController())
+                let refreshError = ["E06", "E02", "E03"]
+                
+                if refreshError.contains(failure.rawValue) {
+                    
+                    SwitchView.shared.switchView(viewController: OnboardingViewController())
+                }
+                
                 
                 completion(.doNotRetryWithError(failure))
             }

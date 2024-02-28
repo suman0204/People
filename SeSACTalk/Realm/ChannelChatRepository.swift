@@ -68,14 +68,36 @@ class ChannelChatRepository {
         let chatTable = realm.objects(ChatTable.self).where {
             $0.chatID == chatID
         }.first!
+        // UserInfoTable에서 동일한 사용자를 찾습니다.
+        let existingUser = realm.objects(UserInfoTable.self).filter("userID == %@", item.userID).first
         
-        do {
-            try realm.write {
-                chatTable.user = item
+        // 만약 동일한 사용자가 존재한다면 그대로 추가합니다.
+        if let existingUser = existingUser {
+            do {
+                try realm.write {
+                    chatTable.user.append(existingUser)
+                }
+            } catch {
+                print("Failed to add user to ChatTable: \(error)")
             }
-        } catch {
-            print("Create User Table Failure")
-            print(error)
+        } else {
+            // 동일한 사용자가 존재하지 않으면 새로운 사용자를 추가합니다.
+            do {
+                try realm.write {
+                    chatTable.user.append(item)
+                }
+            } catch {
+                print("Create User Table Failure")
+                print(error)
+            }
         }
+//        do {
+//            try realm.write {
+//                chatTable.user.append(item)
+//            }
+//        } catch {
+//            print("Create User Table Failure")
+//            print(error)
+//        }
     }
 }

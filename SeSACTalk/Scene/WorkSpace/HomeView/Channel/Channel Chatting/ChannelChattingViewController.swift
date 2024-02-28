@@ -9,8 +9,13 @@ import UIKit
 import PhotosUI
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 class ChannelChattingViewController: BaseViewController {
+    
+    let repository = ChannelChatRepository()
+    var tasks: Results<ChannelInfoTable>!
+    var taskToken: NotificationToken?
     
     let viewModel = ChannelChattingViewModel()
     let disposeBag = DisposeBag()
@@ -102,6 +107,18 @@ class ChannelChattingViewController: BaseViewController {
 
         viewModel.enterFlag.onNext(true)
 //        view.backgroundColor = Colors.BrandColor.green
+        
+        tasks = repository.fetchChannelTable(channelID: Int(KeychainManager.shared.read(account: .channelID) ?? "") ?? 0)
+        taskToken = tasks.observe({ [weak self] changes in
+            switch changes {
+            case .initial:
+                self?.chattingTableView.reloadData()
+            case .update(_, _, _, _):
+                self?.chattingTableView.reloadData()
+            case .error(let error):
+                print("tasktoken error", error)
+            }
+        })
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -376,18 +393,46 @@ extension ChannelChattingViewController: PHPickerViewControllerDelegate {
 
 extension ChannelChattingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tasks.first?.chat.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChattingCell.reuseIdentifier, for: indexPath) as! ChattingCell
-        cell.nameLabel.text = "dhdsfddhdsfddhdsfd"
-        cell.chatTextLabel.text = "ad\nf"
+        
+        guard let chatList = tasks.first?.chat else { return UITableViewCell() }
+        let data = chatList[indexPath.row]
+        
+        cell.nameLabel.text = data.user.first?.nickname
+        cell.chatTextLabel.text = data.content
         cell.profileImage.image = UIImage(systemName: "heart")
-        cell.timeLabel.text = "1/13\n08:16 오전"
+        cell.timeLabel.text = data.createdAt
         
         return cell
     }
     
 
+}
+
+extension ChannelChattingViewController {
+    func formatDate(isoString: String) -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        guard let date = dateFormatter.date(from: isoString) else {
+            return "Invalid Date"
+        }
+        
+        let calendar = Calendar.current
+        let now = Date()
+        
+        if calendar.isDateInToday(date) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "hh:mm a"
+            let timeString = formatter.string(from: date)
+            return timeString
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "M/d hh:mm a"
+            let dateString = formatter.string(from: date)
+            return dateString
+        }
+    }
 }

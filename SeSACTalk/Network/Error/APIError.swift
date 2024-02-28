@@ -115,3 +115,14 @@ enum OneWorkspaceError: String, LoggableError {
         }
     }
 }
+
+enum GetChannelChattingError: String, LoggableError {
+    case unexist = "E13"
+    
+    var description: String {
+        switch self {
+        case .unexist:
+            return "존재하지 않는 데이터"
+        }
+    }
+}
