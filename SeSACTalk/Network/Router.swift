@@ -80,6 +80,7 @@ enum Router: URLRequestConvertible {
     case leaveWorkspace(id: Int)
     case postChannelChat(name: String, id: Int, model: ChannelChattingRequest)
     case getChannelChattings(name: String, id: Int, cursorDate: String?)
+    case postDeviceToken(token: String)
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -117,6 +118,8 @@ enum Router: URLRequestConvertible {
             return "/v1/workspaces/\(id)/channels/\(name)/chats"
         case .getChannelChattings(let name, let id, _):
             return "/v1/workspaces/\(id)/channels/\(name)/chats"
+        case .postDeviceToken:
+            return "/v1/users/deviceToken"
         }
     }
 
@@ -134,7 +137,7 @@ enum Router: URLRequestConvertible {
             return ["Content-Type" : "multipart/form-data",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
-        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings:
+        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings, .postDeviceToken:
             return ["Content-Type" : "application/json",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
@@ -143,7 +146,7 @@ enum Router: URLRequestConvertible {
 
     private var method: HTTPMethod {
         switch self {
-        case .emailValidation, .signUp, .logIn, .addWorkspace, .postChannelChat:
+        case .emailValidation, .signUp, .logIn, .addWorkspace, .postChannelChat, .postDeviceToken:
             return .post
         case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings:
             return .get
@@ -162,6 +165,8 @@ enum Router: URLRequestConvertible {
             return ["email": model.email, "password": model.password, "deviceToken": model.deviceToken]
         case .getChannelChattings(let name, let id, let cursorDate?):
             return ["cursor_date": cursorDate, "name": name, "workspace_id": id]
+        case .postDeviceToken(let token):
+            return ["deviceToken": token]
         default:
             return nil
         }

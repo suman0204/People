@@ -124,8 +124,23 @@ class ChannelChattingViewController: BaseViewController {
         })
         self.scrollToBottom()
 
+//        SocketIOManager.shared.connectSocket(channelID: Int(KeychainManager.shared.read(account: .channelID) ?? "") ?? 0)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        SocketIOManager.shared.connectSocket(channelID: Int(KeychainManager.shared.read(account: .channelID) ?? "") ?? 0)
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        SocketIOManager.shared.disconnectSocket()
+
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         

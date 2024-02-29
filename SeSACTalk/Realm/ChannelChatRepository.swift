@@ -27,6 +27,7 @@ class ChannelChatRepository {
     }
     
     func fetchChannelTable(channelID: Int) -> Results<ChannelInfoTable> {
+        print(fileURL())
         let result = realm.objects(ChannelInfoTable.self).where {
             $0.channelID == channelID
         }

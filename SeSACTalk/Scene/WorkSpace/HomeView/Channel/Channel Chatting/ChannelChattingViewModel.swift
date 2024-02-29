@@ -137,6 +137,30 @@ class ChannelChattingViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        //Socket
+        enterFlag
+            .subscribe(with: self) { owner, bool in
+                if bool {
+                    print("Enter ChannelChatting")
+                    SocketIOManager.shared.connectSocket(channelID: channelID)
+                    SocketIOManager.shared.receiveChattingData { response in
+                        print("Socket Response", response)
+                        
+                        if "\(response.user.userID)" == KeychainManager.shared.read(account: .userID) { return }
+                        
+                        let chatTable = ChatTable(chatID: response.chatID, content: response.content, createdAt: response.createdAt, files: owner.filesToList(response.files))
+                        
+                        let userTable = UserInfoTable(userID: response.user.userID, email: response.user.email, nickname: response.user.nickname, profileImage: response.user.profileImage ?? "")
+                        
+                        owner.repository.createChatTable(chatTable, channelID: channelID)
+                        owner.repository.createUserTable(userTable, chatID: response.chatID)
+                    }
+                } else {
+                    SocketIOManager.shared.disconnectSocket()
+                }
+            }
+            .disposed(by: disposeBag)
+        
         return Output(sendButtonEnabled: sendButtonEnabled)
     }
 }

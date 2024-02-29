@@ -73,7 +73,10 @@
 		8B5924172B8DC1550039D8EC /* UserInfoTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5924162B8DC1550039D8EC /* UserInfoTable.swift */; };
 		8B59241B2B8DC3AA0039D8EC /* ChannelInfoTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59241A2B8DC3AA0039D8EC /* ChannelInfoTable.swift */; };
 		8B59241D2B8DC4EA0039D8EC /* ChannelChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59241C2B8DC4EA0039D8EC /* ChannelChatRepository.swift */; };
-		8B5924202B8F38FC0039D8EC /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 8B59241F2B8F38FC0039D8EC /* SocketIO */; };
+		8B5924232B8F6DE30039D8EC /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5924222B8F6DE30039D8EC /* SocketIOManager.swift */; };
+		8B5924262B8F96650039D8EC /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 8B5924252B8F96650039D8EC /* SocketIO */; };
+		8B59242B2B9014660039D8EC /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8B59242A2B9014660039D8EC /* FirebaseMessaging */; };
+		8B59242D2B90149B0039D8EC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B59242C2B90149B0039D8EC /* FirebaseAnalytics */; };
 		8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */; };
 		8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */; };
 		8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */; };
@@ -109,6 +112,13 @@
 		8BC842E92B8736F0000A2C59 /* AddMemberHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */; };
 		8BC842EC2B87466E000A2C59 /* ChannelChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842EB2B87466E000A2C59 /* ChannelChattingViewController.swift */; };
 		8BC842EE2B874914000A2C59 /* ChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC842ED2B874914000A2C59 /* ChattingCell.swift */; };
+		8BDBD1272B906BEB004C78E5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDBD1262B906BEB004C78E5 /* MyProfileViewController.swift */; };
+		8BDBD12B2B90707C004C78E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BDBD12A2B90707C004C78E5 /* GoogleService-Info.plist */; };
+		8BDBD12D2B907179004C78E5 /* MyProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDBD12C2B907179004C78E5 /* MyProfileTableViewCell.swift */; };
+		8BDBD1302B9073E7004C78E5 /* CoinPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDBD12F2B9073E7004C78E5 /* CoinPaymentViewController.swift */; };
+		8BDBD1322B907D64004C78E5 /* CoinPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDBD1312B907D64004C78E5 /* CoinPaymentViewModel.swift */; };
+		8BDBD1342B907DDA004C78E5 /* CoinPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDBD1332B907DDA004C78E5 /* CoinPaymentTableViewCell.swift */; };
+		8BDBD1372B90B2DC004C78E5 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 8BDBD1362B90B2DC004C78E5 /* iamport-ios */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +193,8 @@
 		8B5924162B8DC1550039D8EC /* UserInfoTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTable.swift; sourceTree = "<group>"; };
 		8B59241A2B8DC3AA0039D8EC /* ChannelInfoTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInfoTable.swift; sourceTree = "<group>"; };
 		8B59241C2B8DC4EA0039D8EC /* ChannelChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChatRepository.swift; sourceTree = "<group>"; };
+		8B5924222B8F6DE30039D8EC /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		8B59242E2B90168A0039D8EC /* SeSACTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACTalk.entitlements; sourceTree = "<group>"; };
 		8B64DD6F2B6B8AB800062AB4 /* WorkspaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewModel.swift; sourceTree = "<group>"; };
 		8B64DD712B6B933A00062AB4 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
 		8B64DD732B6CC3CB00062AB4 /* Extension+CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CALayer.swift"; sourceTree = "<group>"; };
@@ -217,6 +229,12 @@
 		8BC842E82B8736F0000A2C59 /* AddMemberHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberHeaderView.swift; sourceTree = "<group>"; };
 		8BC842EB2B87466E000A2C59 /* ChannelChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChattingViewController.swift; sourceTree = "<group>"; };
 		8BC842ED2B874914000A2C59 /* ChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCell.swift; sourceTree = "<group>"; };
+		8BDBD1262B906BEB004C78E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		8BDBD12A2B90707C004C78E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8BDBD12C2B907179004C78E5 /* MyProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTableViewCell.swift; sourceTree = "<group>"; };
+		8BDBD12F2B9073E7004C78E5 /* CoinPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPaymentViewController.swift; sourceTree = "<group>"; };
+		8BDBD1312B907D64004C78E5 /* CoinPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPaymentViewModel.swift; sourceTree = "<group>"; };
+		8BDBD1332B907DDA004C78E5 /* CoinPaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPaymentTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3B6D202B43EDA100B5B486 /* RxKakaoSDKUser in Frameworks */,
-				8B5924202B8F38FC0039D8EC /* SocketIO in Frameworks */,
+				8B5924262B8F96650039D8EC /* SocketIO in Frameworks */,
 				8BC842D92B83B8C2000A2C59 /* Differentiator in Frameworks */,
 				8B3B6D172B43ED9500B5B486 /* KakaoSDKCommon in Frameworks */,
 				8B3B6D152B43ED9500B5B486 /* KakaoSDKAuth in Frameworks */,
@@ -236,13 +254,16 @@
 				8B3B6D042B43ED4A00B5B486 /* SnapKit in Frameworks */,
 				8B59240E2B8CC8250039D8EC /* Realm in Frameworks */,
 				8B56A3B92B4FEB38004A6C38 /* Moya in Frameworks */,
+				8B59242B2B9014660039D8EC /* FirebaseMessaging in Frameworks */,
 				8B3B6D0F2B43ED7700B5B486 /* RxSwift in Frameworks */,
+				8B59242D2B90149B0039D8EC /* FirebaseAnalytics in Frameworks */,
 				8B5924102B8CC8250039D8EC /* RealmSwift in Frameworks */,
 				8B3B6D1E2B43EDA100B5B486 /* RxKakaoSDKCommon in Frameworks */,
 				8B3B6D0D2B43ED7700B5B486 /* RxCocoa in Frameworks */,
 				8B3B6D072B43ED5F00B5B486 /* Alamofire in Frameworks */,
 				8B3B6D122B43ED8700B5B486 /* IQKeyboardManagerSwift in Frameworks */,
 				8B3B6D192B43ED9500B5B486 /* KakaoSDKUser in Frameworks */,
+				8BDBD1372B90B2DC004C78E5 /* iamport-ios in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +307,7 @@
 		8B3B6CA02B43D6CD00B5B486 /* SeSACTalk */ = {
 			isa = PBXGroup;
 			children = (
+				8B59242E2B90168A0039D8EC /* SeSACTalk.entitlements */,
 				8B3B6CA12B43D6CD00B5B486 /* AppDelegate.swift */,
 				8B3B6CA32B43D6CD00B5B486 /* SceneDelegate.swift */,
 				8B3B6CA52B43D6CD00B5B486 /* ViewController.swift */,
@@ -293,6 +315,7 @@
 				8B3B6CAA2B43D6CE00B5B486 /* Assets.xcassets */,
 				8B3B6CAC2B43D6CE00B5B486 /* LaunchScreen.storyboard */,
 				8B3B6CAF2B43D6CE00B5B486 /* Info.plist */,
+				8BDBD12A2B90707C004C78E5 /* GoogleService-Info.plist */,
 				8BAFF99D2B440FD7005713EA /* Utility */,
 				8B3B6CFC2B43E58B00B5B486 /* Network */,
 				8B5924112B8CEC390039D8EC /* Realm */,
@@ -335,6 +358,7 @@
 		8B3B6CFB2B43E57E00B5B486 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				8BDBD1252B906BD9004C78E5 /* MyProfile */,
 				8B52B7F82B60F5B600284550 /* SwitchView.swift */,
 				8BC407C52B4BFE2A00F4C3D6 /* Extension */,
 				8B3B6CFA2B43E53400B5B486 /* Base */,
@@ -352,6 +376,7 @@
 		8B3B6CFC2B43E58B00B5B486 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				8B5924212B8F6DD70039D8EC /* Socket */,
 				8B9506532B467B0000A353A0 /* APIKey.swift */,
 				8B6FA1C42B4FC1B500D23188 /* Router.swift */,
 				8B56A3C32B512DAC004A6C38 /* APIManager.swift */,
@@ -459,6 +484,14 @@
 				8B59241C2B8DC4EA0039D8EC /* ChannelChatRepository.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		8B5924212B8F6DD70039D8EC /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				8B5924222B8F6DE30039D8EC /* SocketIOManager.swift */,
+			);
+			path = Socket;
 			sourceTree = "<group>";
 		};
 		8B764B222B5522640066AF07 /* EmailLogInView */ = {
@@ -605,6 +638,26 @@
 			path = "Channel Chatting";
 			sourceTree = "<group>";
 		};
+		8BDBD1252B906BD9004C78E5 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				8BDBD12E2B9073C7004C78E5 /* CoinPayment */,
+				8BDBD1262B906BEB004C78E5 /* MyProfileViewController.swift */,
+				8BDBD12C2B907179004C78E5 /* MyProfileTableViewCell.swift */,
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
+		8BDBD12E2B9073C7004C78E5 /* CoinPayment */ = {
+			isa = PBXGroup;
+			children = (
+				8BDBD12F2B9073E7004C78E5 /* CoinPaymentViewController.swift */,
+				8BDBD1312B907D64004C78E5 /* CoinPaymentViewModel.swift */,
+				8BDBD1332B907DDA004C78E5 /* CoinPaymentTableViewCell.swift */,
+			);
+			path = CoinPayment;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -640,7 +693,10 @@
 				8BC842DA2B83B8C2000A2C59 /* RxDataSources */,
 				8B59240D2B8CC8250039D8EC /* Realm */,
 				8B59240F2B8CC8250039D8EC /* RealmSwift */,
-				8B59241F2B8F38FC0039D8EC /* SocketIO */,
+				8B5924252B8F96650039D8EC /* SocketIO */,
+				8B59242A2B9014660039D8EC /* FirebaseMessaging */,
+				8B59242C2B90149B0039D8EC /* FirebaseAnalytics */,
+				8BDBD1362B90B2DC004C78E5 /* iamport-ios */,
 			);
 			productName = SeSACTalk;
 			productReference = 8B3B6C9E2B43D6CD00B5B486 /* SeSACTalk.app */;
@@ -726,7 +782,9 @@
 				8B52B80F2B637F9000284550 /* XCRemoteSwiftPackageReference "SideMenu" */,
 				8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				8B59240C2B8CC8250039D8EC /* XCRemoteSwiftPackageReference "realm-swift" */,
-				8B59241E2B8F38FC0039D8EC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				8B5924242B8F96650039D8EC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				8B5924292B9014660039D8EC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8BDBD1352B90B2DC004C78E5 /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = 8B3B6C9F2B43D6CD00B5B486 /* Products */;
 			projectDirPath = "";
@@ -746,6 +804,7 @@
 			files = (
 				8B3B6CAE2B43D6CE00B5B486 /* LaunchScreen.storyboard in Resources */,
 				8B3B6CAB2B43D6CE00B5B486 /* Assets.xcassets in Resources */,
+				8BDBD12B2B90707C004C78E5 /* GoogleService-Info.plist in Resources */,
 				8B3B6CA92B43D6CD00B5B486 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,15 +843,18 @@
 				8B5048CC2B5912EE00E8A8A0 /* AddWorkspaceViewController.swift in Sources */,
 				8BAFF9A12B4412ED005713EA /* Colors.swift in Sources */,
 				8B4E926E2B68E0E900ABFEB9 /* LeftImageButton.swift in Sources */,
+				8BDBD1342B907DDA004C78E5 /* CoinPaymentTableViewCell.swift in Sources */,
 				8BC842E22B849A03000A2C59 /* DMTableViewCell.swift in Sources */,
 				8B5924172B8DC1550039D8EC /* UserInfoTable.swift in Sources */,
 				8B764B242B5522840066AF07 /* LoginViewController.swift in Sources */,
 				8B6FA1C72B4FD66F00D23188 /* Request.swift in Sources */,
+				8BDBD12D2B907179004C78E5 /* MyProfileTableViewCell.swift in Sources */,
 				8B52B8042B62567700284550 /* ChannelTableViewCell.swift in Sources */,
 				8B430C602B74B40B0050FA63 /* WorkspaceEditViewController.swift in Sources */,
 				8B52B80E2B62670600284550 /* ReusableViewProtocol.swift in Sources */,
 				8B5048D42B597D9100E8A8A0 /* HomeHeaderView.swift in Sources */,
 				8B64DD722B6B933A00062AB4 /* Extension + UIImageView.swift in Sources */,
+				8B5924232B8F6DE30039D8EC /* SocketIOManager.swift in Sources */,
 				8B5924022B8B846D0039D8EC /* ChannelChattingViewModel.swift in Sources */,
 				8B64DD762B70BD7300062AB4 /* PopUpView.swift in Sources */,
 				8B56A3BD2B5030C1004A6C38 /* APIError.swift in Sources */,
@@ -815,6 +877,7 @@
 				8B764B262B5522A20066AF07 /* LogInViewModel.swift in Sources */,
 				8B3B6CFF2B43E5E300B5B486 /* BaseViewController.swift in Sources */,
 				8B5048CE2B5915CB00E8A8A0 /* CustomTextFieldView.swift in Sources */,
+				8BDBD1322B907D64004C78E5 /* CoinPaymentViewModel.swift in Sources */,
 				8B9506522B467A9F00A353A0 /* AuthViewModel.swift in Sources */,
 				8B52B8182B63817200284550 /* SideMenuNavigation.swift in Sources */,
 				8B5048D72B5981BD00E8A8A0 /* AddWorkspaceViewModel.swift in Sources */,
@@ -825,6 +888,7 @@
 				8B64DD742B6CC3CB00062AB4 /* Extension+CALayer.swift in Sources */,
 				8BC842EE2B874914000A2C59 /* ChattingCell.swift in Sources */,
 				8BC842E92B8736F0000A2C59 /* AddMemberHeaderView.swift in Sources */,
+				8BDBD1272B906BEB004C78E5 /* MyProfileViewController.swift in Sources */,
 				8B64DD702B6B8AB800062AB4 /* WorkspaceListViewModel.swift in Sources */,
 				8B430C682B7C95390050FA63 /* NotificationCenter.swift in Sources */,
 				8B52B8242B67FF6C00284550 /* HomeViewModel.swift in Sources */,
@@ -846,6 +910,7 @@
 				8B3B6D012B43E63900B5B486 /* SplashViewController.swift in Sources */,
 				8B56A3BB2B4FECA0004A6C38 /* Response.swift in Sources */,
 				8B52B7FB2B60FB1D00284550 /* Interceptor.swift in Sources */,
+				8BDBD1302B9073E7004C78E5 /* CoinPaymentViewController.swift in Sources */,
 				8BC842EC2B87466E000A2C59 /* ChannelChattingViewController.swift in Sources */,
 				8B9506562B4691FD00A353A0 /* ViewModelType.swift in Sources */,
 			);
@@ -1030,9 +1095,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = SeSACTalk/SeSACTalk.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZB66AY8DJC;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = VYC9A4SEQS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACTalk/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1040,13 +1109,16 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SoomanHong.SeSACTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sesac.SeSACTalkSLP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SeSACTalkSLP;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1059,9 +1131,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = SeSACTalk/SeSACTalk.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZB66AY8DJC;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = VYC9A4SEQS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACTalk/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1069,13 +1145,16 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SoomanHong.SeSACTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sesac.SeSACTalkSLP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SeSACTalkSLP;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1276,12 +1355,20 @@
 				minimumVersion = 10.47.0;
 			};
 		};
-		8B59241E2B8F38FC0039D8EC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		8B5924242B8F96650039D8EC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.0;
+				minimumVersion = 16.1.0;
+			};
+		};
+		8B5924292B9014660039D8EC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.0;
 			};
 		};
 		8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
@@ -1290,6 +1377,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.2;
+			};
+		};
+		8BDBD1352B90B2DC004C78E5 /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1375,10 +1470,20 @@
 			package = 8B59240C2B8CC8250039D8EC /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		8B59241F2B8F38FC0039D8EC /* SocketIO */ = {
+		8B5924252B8F96650039D8EC /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B59241E2B8F38FC0039D8EC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = 8B5924242B8F96650039D8EC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
+		};
+		8B59242A2B9014660039D8EC /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B5924292B9014660039D8EC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8B59242C2B90149B0039D8EC /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B5924292B9014660039D8EC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 		8BC842D82B83B8C2000A2C59 /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1389,6 +1494,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8BC842D72B83B8C2000A2C59 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		8BDBD1362B90B2DC004C78E5 /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BDBD1352B90B2DC004C78E5 /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

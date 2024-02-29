@@ -63,6 +63,18 @@ final class HomeViewController: BaseViewController {
         print("HomeView Didload", KeychainManager.shared.read(account: .workspaceID))
 //        APIManager.shared.singleRequest(type: <#T##Decodable.Protocol#>, api: <#T##Router#>)
         
+        print(KeychainManager.shared.read(account: .deviceToken))
+        APIManager.shared.emailValidationRequest(api: .postDeviceToken(token: KeychainManager.shared.read(account: .deviceToken) ?? ""))
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    print("Post DeviceToken Success")
+                case .failure(let error):
+                    print("Post DeviceToken Failure", error)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         print(homeState)
     }
     

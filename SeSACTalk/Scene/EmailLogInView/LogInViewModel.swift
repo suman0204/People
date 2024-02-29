@@ -76,7 +76,7 @@ final class LogInViewModel: ViewModelType {
             }
             .withLatestFrom(logInData)
             .flatMap { email, passwrd in
-                APIManager.shared.singleRequest(type: LogInResponse.self, api: .logIn(model: LogInRequest(email: email, password: passwrd, deviceToken: "")))
+                APIManager.shared.singleRequest(type: LogInResponse.self, api: .logIn(model: LogInRequest(email: email, password: passwrd, deviceToken: KeychainManager.shared.read(account: .deviceToken) ?? "")))
             }
             .subscribe(with: self) { owner, result in
                 switch result {

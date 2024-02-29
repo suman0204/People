@@ -25,7 +25,7 @@ final class TabBarController: UITabBarController {
         let searchVC = UINavigationController(rootViewController: UIViewController())
         searchVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(named: "search"), selectedImage: UIImage(named: "searchSelected"))
         
-        let settingVC = UINavigationController(rootViewController: UIViewController())
+        let settingVC = UINavigationController(rootViewController: CoinPaymentViewController())
         settingVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(named: "setting"), selectedImage: UIImage(named: "settingSelected"))
         
         self.viewControllers = [homeVC, dmVC, searchVC, settingVC]

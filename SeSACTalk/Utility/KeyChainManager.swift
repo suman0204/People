@@ -14,6 +14,7 @@ enum KeyChainAccount: String {
     case userID
     case channelName
     case channelID
+    case deviceToken
 }
 
 final class KeychainManager {
