@@ -11,7 +11,7 @@ class ChannelFooterView: UITableViewHeaderFooterView {
     
     let plusImage = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "plus")
+        imageView.image = UIImage(named: "plus")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -20,6 +20,7 @@ class ChannelFooterView: UITableViewHeaderFooterView {
         let label = UILabel()
         label.text = "채널추가"
         label.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
+        label.textColor = Colors.TextColor.secondary
         return label
     }()
     

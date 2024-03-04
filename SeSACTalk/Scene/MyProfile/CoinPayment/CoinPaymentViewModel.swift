@@ -18,7 +18,7 @@ final class CoinPaymentViewModel: ViewModelType {
                                        CoinData(title: "🌱 100 Coin", attribute: false, accessoryView: true, coinPrice: 1000)]
     )
     
-    var coin: Int = 0
+    var coin: Int = 50
     
     struct Input {
         

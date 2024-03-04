@@ -18,7 +18,7 @@ class ChannelHeaderView: UITableViewHeaderFooterView {
     
     let chevronImage = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "ChevronRight")
+        imageView.image = UIImage(named: "ChevronDown")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

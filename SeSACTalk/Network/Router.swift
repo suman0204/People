@@ -81,6 +81,9 @@ enum Router: URLRequestConvertible {
     case postChannelChat(name: String, id: Int, model: ChannelChattingRequest)
     case getChannelChattings(name: String, id: Int, cursorDate: String?)
     case postDeviceToken(token: String)
+    case postPayValid(model: PayValidRequest)
+    case appleLogin(model: AppleLogInRequest)
+
 
     private var baseURL: URL {
         return URL(string: APIKey.baseURL)!
@@ -120,12 +123,16 @@ enum Router: URLRequestConvertible {
             return "/v1/workspaces/\(id)/channels/\(name)/chats"
         case .postDeviceToken:
             return "/v1/users/deviceToken"
+        case .postPayValid:
+            return "/v1/store/pay/validation"
+        case .appleLogin:
+            return "/v1/users/login/apple"
         }
     }
 
     private var header: HTTPHeaders {
         switch self {
-        case .emailValidation, .signUp, .logIn:
+        case .emailValidation, .signUp, .logIn, .appleLogin:
             return ["Content-Type" : "application/json",
                     "SesacKey": APIKey.SeSACKey]
         case .refresh:
@@ -137,7 +144,7 @@ enum Router: URLRequestConvertible {
             return ["Content-Type" : "multipart/form-data",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
-        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings, .postDeviceToken:
+        case .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings, .postDeviceToken, .postPayValid:
             return ["Content-Type" : "application/json",
                     "Authorization": KeychainManager.shared.read(account: .accessToken) ?? "",
                     "SesacKey": APIKey.SeSACKey]
@@ -146,7 +153,7 @@ enum Router: URLRequestConvertible {
 
     private var method: HTTPMethod {
         switch self {
-        case .emailValidation, .signUp, .logIn, .addWorkspace, .postChannelChat, .postDeviceToken:
+        case .emailValidation, .signUp, .logIn, .addWorkspace, .postChannelChat, .postDeviceToken, .postPayValid, .appleLogin:
             return .post
         case .refresh, .getWorkspaceList, .getMyProfile, .getMyChannels, .getWorkspaceDMList, .getOneWorkspace, .getWorkspaceMember, .leaveWorkspace, .getChannelChattings:
             return .get
@@ -167,6 +174,10 @@ enum Router: URLRequestConvertible {
             return ["cursor_date": cursorDate, "name": name, "workspace_id": id]
         case .postDeviceToken(let token):
             return ["deviceToken": token]
+        case .postPayValid(let model):
+            return ["imp_uid": model.imp_uid, "merchant_uid": model.merchant_uid]
+        case .appleLogin(let model):
+            return ["idToken": model.idToken, "nickname": model.nickname, "deviceToken": model.deviceToken]
         default:
             return nil
         }

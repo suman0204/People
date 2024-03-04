@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import WebKit
 import RxSwift
 import RxCocoa
+import iamport_ios
 
 final class CoinPaymentViewController: BaseViewController {
     
@@ -26,6 +28,12 @@ final class CoinPaymentViewController: BaseViewController {
         
         return tableView
     }()
+    
+    lazy var wkWebView: WKWebView = {
+        var view = WKWebView()
+        view.backgroundColor = UIColor.clear
+        return view
+     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,5 +91,95 @@ extension CoinPaymentViewController {
     @objc
     func payButtonClicked(_ sender: UIButton) {
         print("payButton")
+        
+        //WebView
+        setupWebView()
+        
+        //결제 데이터 구성
+        let paymentData = createPaymentData(buttonTitle: sender.titleLabel?.text)
+        
+        //결제 요청
+        Iamport.shared.paymentWebView(webViewMode: wkWebView,
+                                      userCode: "imp57573124", payment: paymentData) { [weak self] iamportResponse in
+            print("결제 요청!!")
+            print(String(describing: iamportResponse))
+            
+            self?.removeWkWebView()
+            
+            if iamportResponse?.success == true {
+                print("결제 성공")
+                self?.endPaymend(response: iamportResponse)
+            }
+            
+        }
     }
 }
+
+extension CoinPaymentViewController {
+    
+    //Payment WebView
+    private func setupWebView() {
+        view.addSubview(wkWebView)
+        
+        wkWebView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        
+    }
+    
+    // 결제 요청 데이터 생성
+    private func createPaymentData(buttonTitle: String?) -> IamportPayment {
+        
+        var amount = ""
+        var coin = 10
+        
+        if let buttonTitle {
+            amount = buttonTitle.replacingOccurrences(of: "₩", with: "")
+            coin = (Int(amount) ?? 10) / 10
+            print("Amount Coin", amount)
+        } else {
+            print("NOOO ButtonTitle")
+        }
+        
+        let payment = IamportPayment(
+            pg: PG.html5_inicis.makePgRawName(pgId: "INIpayTest"),
+            merchant_uid: "ios_\(APIKey.SeSACKey)_\(Int(Date().timeIntervalSince1970))",
+            amount: amount).then {
+                $0.pay_method = PayMethod.card.rawValue
+                                $0.name = "\(coin) Coin"
+                                $0.buyer_name = "홍수만"
+                                $0.app_scheme = "sesac"
+            }
+        
+        return payment
+    }
+    
+    //결제 종료 콜백
+    private func endPaymend(response: IamportResponse?) {
+        
+        //서버에 유효성 검증
+        guard let response = response else {return}
+        
+        APIManager.shared.request(type: PayValid.self, api: .postPayValid(model: PayValidRequest(imp_uid: response.imp_uid ?? "", merchant_uid: response.merchant_uid ?? ""))) { result in
+            switch result {
+            case .success(let response):
+                print("PayValid Success")
+                print(response)
+                
+                self.showToast(message: "\(response.sesacCoin) Coin이 결제되었습니다")
+            case .failure(let error):
+                print("PayValid Faliure")
+                print(error)
+            }
+        }
+    }
+    
+    //웹뷰 종료
+    private func removeWkWebView() {
+        view.willRemoveSubview(wkWebView)
+        wkWebView.stopLoading()
+        wkWebView.removeFromSuperview()
+    }
+}
+

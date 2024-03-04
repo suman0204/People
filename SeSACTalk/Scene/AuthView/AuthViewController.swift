@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 import RxSwift
 
 
@@ -15,11 +16,12 @@ final class AuthViewController: BaseViewController {
     
     let disposeBag = DisposeBag()
     
-    let appleLoginButton = {
+    lazy var appleLoginButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "AppleIDLogin"), for: .normal)
 //        button.imageView?.contentMode = .scaleAspectFill
 //        button.backgroundColor = .lightGray
+        button.addTarget(self, action: #selector(appleLoginButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -94,6 +96,18 @@ final class AuthViewController: BaseViewController {
         present(nav, animated: true)
     }
     
+    @objc
+    func appleLoginButtonClicked() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.email, .fullName]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
     override func configureView() {
         view.backgroundColor = .white
         
@@ -129,4 +143,91 @@ final class AuthViewController: BaseViewController {
         }
     }
     
+}
+
+
+extension AuthViewController: ASAuthorizationControllerDelegate {
+    
+    //애플 로그인 실패
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple Login Falied", error.localizedDescription)
+    }
+    
+    //애플 로그인 성공
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        
+        switch authorization.credential {
+            
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            print(appleIDCredential)
+            
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            guard let token = appleIDCredential.identityToken, let tokenToString = String(data: token, encoding: .utf8) else {
+                print("Token Error")
+                return
+            }
+            
+            print(userIdentifier)
+            print(fullName ?? "NO FullName")
+            print(email ?? "No Email")
+            print(tokenToString)
+            
+            KeychainManager.shared.create(account: .appleLogInEmail, value: email ?? "")
+            KeychainManager.shared.create(account: .appleLogInName, value: fullName?.givenName ?? "")
+            KeychainManager.shared.create(account: .appleLogInidToken, value: tokenToString)
+            
+            APIManager.shared.request(type: LogInResponse.self, api: .appleLogin(model: AppleLogInRequest(idToken: tokenToString, nickname: fullName?.givenName ?? "", deviceToken: ""))) { result in
+                switch result {
+                case .success(let success):
+                    print(success)
+                    KeychainManager.shared.create(account: .accessToken, value: success.token.accessToken)
+                    KeychainManager.shared.create(account: .refreshToken, value: success.token.refreshToken)
+                    KeychainManager.shared.create(account: .userID, value: "\(success.user_id)")
+                    self.switchMain()
+                case .failure(let failure):
+                    print(failure)
+                }
+            }
+            
+        case let passwordCredential as ASPasswordCredential:
+            
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            
+            print(username, password)
+            
+        default: break
+        }
+        
+    }
+}
+
+extension AuthViewController: ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+}
+
+extension AuthViewController {
+    
+    func switchMain() {
+        APIManager.shared.request(type: Workspaces.self, api: .getWorkspaceList) { result in
+            switch result {
+            case .success(let response):
+                print("LoginViewModel Get Workspace Succes", response)
+                if response.count > 0 {
+                    SwitchView.shared.switchView(viewController: TabBarController())
+                } else {
+                    SwitchView.shared.switchView(viewController: HomeViewController(homeState: .empty))
+                }
+            case .failure(let error):
+                print("LoginViewModel Get Workspace Failure", error)
+                SwitchView.shared.switchView(viewController: OnboardingViewController())
+            }
+        }
+    }
 }

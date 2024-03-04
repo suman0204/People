@@ -117,6 +117,12 @@ final class HomeViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.myProfile
+            .subscribe(with: self) { owner, myProfile in
+                owner.headerView.profileImage.loadImage(from: myProfile.profileImage ?? "")
+            }
+            .disposed(by: disposeBag)
+        
 //        // MARK: TableView DataSource
         let dataSource = HomeViewController.dataSource()
 

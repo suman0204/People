@@ -11,7 +11,7 @@ final class SplashViewController: BaseViewController {
     
     let splashTextLabel = {
         let label = UILabel()
-        label.text = "새싹톡을 사용하면 어디서나 \n 팀을 모을 수 있습니다"
+        label.text = "People을 사용하면 어디서나 \n 팀을 모을 수 있습니다"
         label.font = .boldSystemFont(ofSize: 22)
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -28,7 +28,7 @@ final class SplashViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        
+
         let accessToken = KeychainManager.shared.read(account: .accessToken)
         let refreshToken = KeychainManager.shared.read(account: .refreshToken)
         print(accessToken, refreshToken)

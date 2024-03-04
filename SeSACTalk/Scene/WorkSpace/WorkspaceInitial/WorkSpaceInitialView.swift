@@ -25,7 +25,7 @@ final class WorkSpaceInitialView: BaseViewController {
     
     let bodyLabel = {
         let label = UILabel()
-        label.text = "xxx님의 조직을 위해 새로운 새싹톡 워크스페이스를 시작할 준비가 완료되었어요!"
+        label.text = "Entrance님의 조직을 위해 새로운 People의 워크스페이스를 시작할 준비가 완료되었어요!"
         label.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
         label.textColor = Colors.BrandColor.black
         label.textAlignment = .center

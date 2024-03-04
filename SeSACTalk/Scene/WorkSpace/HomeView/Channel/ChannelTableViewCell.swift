@@ -22,6 +22,7 @@ class ChannelTableViewCell: BaseTableViewCell {
     let titleLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
+        label.textColor = Colors.TextColor.primary
         label.numberOfLines = 1
         return label
     }()
@@ -29,7 +30,7 @@ class ChannelTableViewCell: BaseTableViewCell {
     //24 18 caption
     private let unreadCount = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Typography.Caption.size, weight: Typography.Caption.weight)
+        label.font = .systemFont(ofSize: Typography.BodyBlod.size, weight: Typography.BodyBlod.weight)
         label.textColor = Colors.BrandColor.white
         label.layer.cornerRadius = 8
         label.layer.masksToBounds = true

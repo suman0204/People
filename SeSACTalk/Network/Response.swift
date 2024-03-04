@@ -194,3 +194,13 @@ struct ChannelChatting: Decodable {
 }
 // MARK: - ChannelChattings
 typealias ChannelChattings = [ChannelChatting]
+
+// MARK: - PayValid
+struct PayValid: Decodable {
+    let billing_id: Int
+    let merchant_uid: String
+    let amount: Int
+    let sesacCoin: Int
+    let success: Bool
+    let createdAt: String
+}

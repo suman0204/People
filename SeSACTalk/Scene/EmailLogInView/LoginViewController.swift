@@ -26,6 +26,7 @@ final class LoginViewController: BaseViewController {
         let view = CustomTextFieldView(type: .normal)
         view.labelText = "비밀번호"
         view.placeholder = "비밀번호를 입력하세요"
+        view.inputTextField.isSecureTextEntry = true
         view.validButton.isEnabled = false
         return view
     }()

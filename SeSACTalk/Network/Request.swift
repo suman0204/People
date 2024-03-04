@@ -35,3 +35,14 @@ struct ChannelChattingRequest: Encodable {
     let content: String
     let files: [Data]
 }
+
+struct PayValidRequest: Encodable {
+    let imp_uid: String
+    let merchant_uid: String
+}
+
+struct AppleLogInRequest: Encodable {
+    let idToken: String
+    let nickname: String
+    let deviceToken: String
+}

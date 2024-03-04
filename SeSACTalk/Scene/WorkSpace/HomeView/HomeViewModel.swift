@@ -31,6 +31,7 @@ final class HomeViewModel: ViewModelType {
         let workspace: BehaviorSubject<Workspace>
         let channels: BehaviorSubject<[Channel]>
         let sections: BehaviorRelay<[SectionModel]>
+        let myProfile: BehaviorSubject<MyProfile>
     }
     
     func transform(input: Input) -> Output {
@@ -39,7 +40,7 @@ final class HomeViewModel: ViewModelType {
         let channels: BehaviorSubject<[Channel]> = BehaviorSubject(value: [])
         let dms: BehaviorSubject<DMs> = BehaviorSubject(value: [])
         let sections: BehaviorRelay<[SectionModel]> = BehaviorRelay(value: [])
-        
+        let myProfile: BehaviorSubject<MyProfile> = BehaviorSubject(value: MyProfile(userID: "", email: "", nickname: "", createdAt: "", profileImage: "", phone: "", vendor: "", sesacCoin: 0))
         // MARK: 화면 진입 시
         //화면 진입 상태
         let viewEnter = Observable.combineLatest(input.homeState, enterFlag)
@@ -71,7 +72,7 @@ final class HomeViewModel: ViewModelType {
         
         guard let workspaceID = KeychainManager.shared.read(account: .workspaceID), let intID = Int(workspaceID) else {
             print("WorkspaceID Nil")
-            return Output(workspaceList: workspaceList, workspace: workspace, channels: channels, sections: BehaviorRelay(value: []))
+            return Output(workspaceList: workspaceList, workspace: workspace, channels: channels, sections: BehaviorRelay(value: []), myProfile: myProfile)
         }
         print("HomeView INT ID", intID)
         
@@ -134,6 +135,24 @@ final class HomeViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        //나의 프로필
+        viewEnter
+            .filter { homestate, enterFlag in
+                homestate == .nonempty && enterFlag == true
+            }
+            .flatMapLatest { _ in
+                APIManager.shared.singleRequest(type: MyProfile.self, api: .getMyProfile)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print("HomeView Get MyProfile Success", response)
+                    myProfile.onNext(response)
+                case .failure(let error):
+                    print("HomeView Get MyProfile failure", error)
+                }
+            }
+            .disposed(by: disposeBag)
         //MARK: 워크스페이스 변경 시
         //워크스페이스 변경 시 워크스페이스 정보 리로드
         changeWorkspaceNoti
@@ -201,6 +220,6 @@ final class HomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         
-        return Output(workspaceList: workspaceList, workspace: workspace, channels: channels, sections: sections)
+        return Output(workspaceList: workspaceList, workspace: workspace, channels: channels, sections: sections, myProfile: myProfile)
     }
 }

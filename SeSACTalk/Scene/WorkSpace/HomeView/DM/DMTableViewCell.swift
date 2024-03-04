@@ -16,12 +16,15 @@ class DmTableViewCell: BaseTableViewCell {
         let imageView = UIImageView(frame: .zero)
 //        imageView.image = UIImage(named: "hashtag")
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 4
+        imageView.clipsToBounds = true
         return imageView
     }()
     
     private let nameLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
+        label.textColor = Colors.TextColor.primary
         label.numberOfLines = 1
         return label
     }()

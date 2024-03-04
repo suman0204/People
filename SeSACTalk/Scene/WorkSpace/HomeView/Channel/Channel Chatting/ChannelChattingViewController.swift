@@ -70,8 +70,8 @@ class ChannelChattingViewController: BaseViewController {
     
     private lazy var textView = {
         let textView = UITextView()
-//        textView.backgroundColor = Colors.BackgroundColor.primary
-        textView.backgroundColor = .yellow
+        textView.backgroundColor = Colors.BackgroundColor.primary
+//        textView.backgroundColor = .yellow
         textView.text = textViewPlaceHolder
         textView.textColor = Colors.TextColor.secondary
         textView.font = .systemFont(ofSize: Typography.Body.size, weight: Typography.Body.weight)
@@ -105,7 +105,7 @@ class ChannelChattingViewController: BaseViewController {
         super.viewDidLoad()
 
         print("ChannelChattingView DidLoad")
-        self.navigationItem.title = "그냥 떠들고 싶을 때"
+        self.navigationItem.title = "ARC가 뭐예요?"
         viewModel.enterFlag.onNext(true)
 //        view.backgroundColor = Colors.BrandColor.green
         
@@ -426,8 +426,8 @@ extension ChannelChattingViewController: UITableViewDelegate, UITableViewDataSou
         
         cell.nameLabel.text = data.user?.nickname
         cell.chatTextLabel.text = data.content
-        cell.profileImage.image = UIImage(systemName: "heart")
-        cell.timeLabel.text = data.createdAt
+        cell.profileImage.loadImage(from: data.user?.profileImage ?? "")
+        cell.timeLabel.text = formatDate(dateString: data.createdAt)
         
         return cell
     }
@@ -436,25 +436,38 @@ extension ChannelChattingViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 extension ChannelChattingViewController {
-    func formatDate(isoString: String) -> String {
-        let dateFormatter = ISO8601DateFormatter()
-        guard let date = dateFormatter.date(from: isoString) else {
-            return "Invalid Date"
-        }
+    func formatDate(dateString: String) -> String {
+//        let dateFormatter = ISO8601DateFormatter()
+//        guard let date = dateFormatter.date(from: isoString) else {
+//            return "Invalid Date"
+//        }
+//        
+//        let calendar = Calendar.current
+//        let now = Date()
+//        
+//        if calendar.isDateInToday(date) {
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "hh:mm a"
+//            let timeString = formatter.string(from: date)
+//            return timeString
+//        } else {
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "M/d hh:mm a"
+//            let dateString = formatter.string(from: date)
+//            return dateString
+//        }
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "hh:mm a"
         
-        let calendar = Calendar.current
-        let now = Date()
-        
-        if calendar.isDateInToday(date) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "hh:mm a"
-            let timeString = formatter.string(from: date)
-            return timeString
+        if let date = isoDateFormatter.date(from: dateString) {
+            return dateFormatter.string(from: date)
         } else {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "M/d hh:mm a"
-            let dateString = formatter.string(from: date)
-            return dateString
+            return ""
         }
     }
     

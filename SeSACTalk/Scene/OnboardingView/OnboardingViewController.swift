@@ -12,7 +12,7 @@ final class OnboardingViewController: BaseViewController {
     // 뷰로 따로 빼기..
     let splashTextLabel = {
         let label = UILabel()
-        label.text = "새싹톡을 사용하면 어디서나 \n 팀을 모을 수 있습니다"
+        label.text = "People을 사용하면 어디서나 \n 팀을 모을 수 있습니다"
         label.font = .systemFont(ofSize: Typography.Title1.size, weight: Typography.Title1.weight)
         label.numberOfLines = 2
         label.textAlignment = .center

@@ -15,6 +15,9 @@ enum KeyChainAccount: String {
     case channelName
     case channelID
     case deviceToken
+    case appleLogInEmail
+    case appleLogInName
+    case appleLogInidToken
 }
 
 final class KeychainManager {

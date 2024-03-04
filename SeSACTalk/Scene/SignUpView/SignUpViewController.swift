@@ -46,6 +46,7 @@ final class SignUpViewController: BaseViewController {
         view.type = .normal
         view.labelText = "비밀번호"
         view.placeholder = "비밀번호를 입력하세요"
+        view.inputTextField.isSecureTextEntry = true
         return view
     }()
     
@@ -54,6 +55,7 @@ final class SignUpViewController: BaseViewController {
         view.type = .normal
         view.labelText = "비밀번호 확인"
         view.placeholder = "비밀번호를 한 번 더 입력하세요"
+        view.inputTextField.isSecureTextEntry = true
         return view
     }()
     

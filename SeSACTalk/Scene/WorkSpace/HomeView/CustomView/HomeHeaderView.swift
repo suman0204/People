@@ -13,7 +13,7 @@ final class HomeHeaderView: BaseView {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(named: "workspace")
         imageView.backgroundColor = Colors.BrandColor.green
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         return imageView
