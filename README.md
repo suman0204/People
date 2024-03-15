@@ -1,6 +1,7 @@
 <p align="left">
-  <img width="100" alt="image" src="https://github.com/suman0204/SeSAC_2ndRecap/assets/18048754/2ce73bbc-c558-40aa-aa67-3337eab0c526">
+  <img width="100" alt="image" src="https://github.com/suman0204/People/assets/18048754/f7b94215-c9b8-4478-8c47-1a70c27991c2">
 </p>
+
 # People
 
 ---
