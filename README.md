@@ -242,7 +242,7 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 <p align="center">
 <img src="https://github.com/suman0204/People/assets/18048754/45d7aa11-52c0-4461-821b-c64c4aaacebf" width="50%" height="50%">
 &nbsp&nbsp&nbsp 
-<img src="https://github.com/suman0204/People/assets/18048754/517f1525-b97b-41b0-b5ea-15ffea2af9b1">
+<img src="https://github.com/suman0204/People/assets/18048754/517f1525-b97b-41b0-b5ea-15ffea2af9b1" width="50%" height="50%">
 </p>
 
 최신 버전으로 다시 설치한 후 정상적으로 동작
