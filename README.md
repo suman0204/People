@@ -17,7 +17,6 @@
 
 ## 프로젝트 소개
 
----
 
 > 앱 소개
 > 
@@ -60,13 +59,14 @@
 
 ---
 
+<br/>
+
 ## 트러블 슈팅
 
----
 
 ### 1. CustomView 생성시 init 시점에 따른 뷰 변경점
 
-**문제**
+**문제점**
 
 텍스트필드와 버튼을 가진 커스텀뷰 구성 후 **enum을 활용**하여 케이스에 따라서 **다른 UI**를 보여주도록 구성
 → **ViewController**에서 인스턴스 생성 시 **뷰의 타입을 할당**하였으나 타입이 적용되지 않는 문제
@@ -160,11 +160,13 @@ final class SignUpViewController: BaseViewController {
     }()
 ```
 
+<br/>
+
 ---
 
 ### 2. **Generic**을 활용한 네트워크 호출 코드 추상화 및 재사용성 증진
 
-**문제**
+**문제점**
 
 서버에 요청해야하는 API 종류가 많음에 따라 각기 다른 요청을 위한 메서드를 만들면 너무 많은 메서드가 필요
 
@@ -219,6 +221,8 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 }
 ```
 
+<br/>
+
 ---
 
 ### 3. socket.io의 버전 오류
@@ -227,7 +231,9 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 
 소켓 연결을 코드를 구성하였지만 연결이 계속 실패하는 이슈
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/666a0781-0169-45ce-8f75-1d7311b00d19/Untitled.png)
+<p align="center">
+<img src="https://github.com/suman0204/People/assets/18048754/1681734b-e913-4b1c-977c-4576ab3425a6" width="19%" height="20%">
+</p>
 
 **해결법**
 
@@ -241,9 +247,13 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 
 ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/8ec8f1e8-c76a-4837-9931-d64478155d27/Untitled.png)
 
+<br/>
+
+---
+
 ### 4. RxSwift를 활용한 NotificationCenter
 
-**문제**
+**문제점**
 
 워크스페이스 정보 변경시 워크스페이스 리스트의 정보 업데이트를 위해 **NotificationCenter**를 활용하기로 함
 하지만 **NotificationCenter** 구성을 위해서 **add, remove, post** 과정을 거쳐여하는 번거로움이 존재
