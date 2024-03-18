@@ -128,6 +128,8 @@ final class SignUpViewController: BaseViewController {
     }()
 ```
 
+<br/>
+
 **해결법**
 
 커스텀뷰의 **인스턴스 생성시** **초기화**를 통해 버튼의 타입을 지정해주어서 원하는 타입의 뷰가 화면에 보여질 수 있게 만듦
@@ -169,6 +171,8 @@ final class SignUpViewController: BaseViewController {
 **문제점**
 
 서버에 요청해야하는 API 종류가 많음에 따라 각기 다른 요청을 위한 메서드를 만들면 너무 많은 메서드가 필요
+
+<br/>
 
 **해결법**
 
@@ -235,6 +239,8 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 <img src="https://github.com/suman0204/People/assets/18048754/1681734b-e913-4b1c-977c-4576ab3425a6" width="60%" height="60%">
 </p>
 
+<br/>
+
 **해결법**
 
 공식 깃허브의 다운 절차를 따라하였으나, 최신 버전이 아닌 이전 버전이 예시로 나와 있음을 인지하지 못하고 그대로 다운함이 원인
@@ -261,6 +267,8 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 
 워크스페이스 정보 변경시 워크스페이스 리스트의 정보 업데이트를 위해 **NotificationCenter**를 활용하기로 함
 하지만 **NotificationCenter** 구성을 위해서 **add, remove, post** 과정을 거쳐여하는 번거로움이 존재
+
+<br/>
 
 **해결법**
 
