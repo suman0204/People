@@ -232,7 +232,7 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 소켓 연결을 코드를 구성하였지만 연결이 계속 실패하는 이슈
 
 <p align="center">
-<img src="https://github.com/suman0204/People/assets/18048754/1681734b-e913-4b1c-977c-4576ab3425a6" width="80%" height="80%">
+<img src="https://github.com/suman0204/People/assets/18048754/1681734b-e913-4b1c-977c-4576ab3425a6" width="60%" height="60%">
 </p>
 
 **해결법**
