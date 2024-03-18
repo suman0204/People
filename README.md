@@ -240,14 +240,16 @@ func singleMultipartRequset<T: Decodable>(type: T.Type, api: Router) -> Single<R
 공식 깃허브의 다운 절차를 따라하였으나, 최신 버전이 아닌 이전 버전이 예시로 나와 있음을 인지하지 못하고 그대로 다운함이 원인
 
 <p align="center">
-<img src="https://github.com/suman0204/People/assets/18048754/45d7aa11-52c0-4461-821b-c64c4aaacebf" width="50%" height="50%">
+<img src="https://github.com/suman0204/People/assets/18048754/45d7aa11-52c0-4461-821b-c64c4aaacebf" width="40%" height="40%">
 &nbsp&nbsp&nbsp 
-<img src="https://github.com/suman0204/People/assets/18048754/517f1525-b97b-41b0-b5ea-15ffea2af9b1" width="50%" height="50%">
+<img src="https://github.com/suman0204/People/assets/18048754/517f1525-b97b-41b0-b5ea-15ffea2af9b1" width="40%" height="40%">
 </p>
 
 최신 버전으로 다시 설치한 후 정상적으로 동작
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2e59db1b-691d-487c-9eca-b5f25e2289b1/8ec8f1e8-c76a-4837-9931-d64478155d27/Untitled.png)
+<p align="center">
+<img src="https://github.com/suman0204/People/assets/18048754/b6bb79ac-3c08-4efe-b80c-b3b66a5d4bbd" width="60%" height="60%">
+</p>
 
 <br/>
 
