@@ -39,7 +39,7 @@
 - **Realm DB**에 과거 채팅 내역 저장을 통한 채팅 **네트워크 요청 최소화**
 - **RxDataSource**를 활용한 **다중 섹션** 테이블뷰 구성
 - **Firebase Cloud Messaging**을 통한 **Remote Push Notification** 수신
-- **PG(Payment Gateway)**를 활용한 **WebView** 기반 결제 시스템 구현 및 **결제 영수증 검증**을 통한 **유효성 확인**
+- **PG(Payment Gateway)를** 활용한 **WebView** 기반 결제 시스템 구현 및 **결제 영수증 검증**을 통한 **유효성 확인**
 
 ---
 
@@ -53,7 +53,7 @@
 
 > 기술 스택
 > 
-- UIKit, WebKit, PhotosUI
+- UIKit, WebKit, PhotosUI, AuthenticationServices
 - SnapKit, Alamofire, Kingfisher, RxSwift,  RxDataSource, IQKeyboardManagerSwift, KakaoOpenSDK, SideMenu, Realm, SocketIO, Firebase(FCM), iamport-ios,
 - MVVM, Input/Output, Singleton, Repository, DTO
 
