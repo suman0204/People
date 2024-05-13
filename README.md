@@ -28,6 +28,22 @@
 
 ---
 
+> 개발 환경
+> 
+- 최소 버전 : iOS 16.0
+- 개발 인원: 1인
+- 개발 기간: 2024.01.02 ~ 2024.02.28
+
+---
+
+> 기술 스택
+> 
+- UIKit, WebKit, PhotosUI, AuthenticationServices
+- MVVM, Input/Output, Singleton, Repository, DTO
+- SnapKit, Alamofire, Kingfisher, RxSwift,  RxDataSource, IQKeyboardManagerSwift, KakaoOpenSDK, SideMenu, Realm, SocketIO, Firebase(FCM), iamport-ios,
+
+---
+
 > 주요 기능
 > 
 - **RxSwift** 기반 **MVVM** **Input/Output** 패턴 적용을 통한 비즈니스 로직 분리 및 가독성 개선
@@ -43,21 +59,6 @@
 
 ---
 
-> 개발 환경
-> 
-- 최소 버전 : iOS 16.0
-- 개발 인원: 1인
-- 개발 기간: 2024.01.02 ~ 2024.02.28
-
----
-
-> 기술 스택
-> 
-- UIKit, WebKit, PhotosUI, AuthenticationServices
-- SnapKit, Alamofire, Kingfisher, RxSwift,  RxDataSource, IQKeyboardManagerSwift, KakaoOpenSDK, SideMenu, Realm, SocketIO, Firebase(FCM), iamport-ios,
-- MVVM, Input/Output, Singleton, Repository, DTO
-
----
 
 <br/>
 
