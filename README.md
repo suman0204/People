@@ -17,6 +17,13 @@
 
 ## 프로젝트 소개
 
+> 개발 환경
+> 
+- 최소 버전 : iOS 16.0
+- 개발 인원: 1인
+- 개발 기간: 2024.01.02 ~ 2024.02.28
+
+---
 
 > 앱 소개
 > 
@@ -28,17 +35,9 @@
 
 ---
 
-> 개발 환경
-> 
-- 최소 버전 : iOS 16.0
-- 개발 인원: 1인
-- 개발 기간: 2024.01.02 ~ 2024.02.28
-
----
-
 > 기술 스택
 > 
-- UIKit, WebKit, PhotosUI, AuthenticationServices
+- UIKit(CodeBase), WebKit, PhotosUI, AuthenticationServices
 - MVVM, Input/Output, Singleton, Repository, DTO
 - SnapKit, Alamofire, Kingfisher, RxSwift,  RxDataSource, IQKeyboardManagerSwift, KakaoOpenSDK, SideMenu, Realm, SocketIO, Firebase(FCM), iamport-ios,
 
